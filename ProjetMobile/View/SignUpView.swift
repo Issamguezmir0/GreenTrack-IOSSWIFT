@@ -8,69 +8,65 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @State private var fullname = ""
-    @State private var email = ""
-    @State private var password = ""
-    @State private var VerifyPassword = ""
-    
+    @ObservedObject var userViewModel1: userViewModel1
 
+    init(userViewModel1: userViewModel1) {
+        self.userViewModel1 = userViewModel1
+    }
 
-    
     var body: some View {
         ZStack {
-            VStack(alignment: .leading){
+            VStack(alignment: .leading) {
                 Text("Create an account")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                
-                
-                Text("Connect with your friends today ! 👋")
+
+                Text("Connect with your friends today! 👋")
                     .font(.title3)
                     .foregroundColor(.gray)
                     .frame(alignment: .leading)
-                
+
                 Text("Full Name")
                     .font(.title3)
                     .foregroundColor(.green)
                     .frame(alignment: .leading)
-                
-                VStack{
-                    TextField("Enter your fullname", text: $fullname)
+
+                VStack {
+                    TextField("Enter your fullname", text: $userViewModel1.fullname)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
-                
-                Text("Email Adress")
+
+                Text("Email Address")
                     .font(.title3)
                     .foregroundColor(.green)
                     .frame(alignment: .leading)
-                VStack{
-                    TextField("Enter your Email adress" , text: $email)
+
+                VStack {
+                    TextField("Enter your Email address", text: $userViewModel1.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 }
-               
-                
-                VStack{
-                
-                    Text("password")
-                                      .font(.title3)
-                                      .foregroundColor(.green)
-                                      .frame(alignment: .leading)
-                                      .padding(.leading , -180)
-                                  
-                    SecureField("Please Enter your Password", text: $password)
+
+                VStack {
+                    Text("Password")
+                        .font(.title3)
+                        .foregroundColor(.green)
+                        .frame(alignment: .leading)
+                        .padding(.leading, -180)
+
+                    SecureField("Please Enter your Password", text: $userViewModel1.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
+
                     Text("Verify password")
                         .font(.title3)
                         .foregroundColor(.green)
                         .frame(alignment: .leading)
-                        .padding(.leading , -180)
-                    SecureField("Please Enter your Password", text: $VerifyPassword)
+                        .padding(.leading, -180)
+
+                    SecureField("Please Enter your Password", text: $userViewModel1.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                   
-                    Button("Sign Up"){
-                        
+
+                    Button("Sign Up") {
+                        self.userViewModel1.signup()
                     }
                     .font(.title2)
                     .fontWeight(.bold)
@@ -79,21 +75,20 @@ struct SignUpView: View {
                     .background(Color.green)
                     .foregroundColor(.white)
                     .cornerRadius(10)
+
                     Text("Or With")
-                        
                         .foregroundColor(.gray)
                         .frame(alignment: .leading)
-                    
+
                     HStack {
                         Button(action: {
-                            // Action à effectuer lorsque le bouton Facebook est pressé
+                            // Action to perform when the Facebook button is pressed
                         }) {
                             HStack {
-                                Image("facebook") // Remplacez "facebook_icon" par le nom de votre image Facebook
+                                Image("facebook")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 20, height: 20) // Ajustez la taille de l'image selon vos besoins
-                                
+                                    .frame(width: 20, height: 20)
                                 Text("Facebook")
                             }
                         }
@@ -101,16 +96,15 @@ struct SignUpView: View {
                         .background(Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
-                        
+
                         Button(action: {
-                            
+                            // Action to perform when the Gmail button is pressed
                         }) {
                             HStack {
-                                Image("Gmail") // Remplacez "email_icon" par le nom de votre image Gmail ou Email
+                                Image("Gmail")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 20, height: 20) // Ajustez la taille de l'image selon vos besoins
-                                
+                                    .frame(width: 20, height: 20)
                                 Text("Gmail")
                             }
                         }
@@ -119,29 +113,26 @@ struct SignUpView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                     }
-
                 }
-            }.padding()
-            VStack{
+            }
+            .padding()
+
+            VStack {
                 Spacer()
-                HStack{
+                HStack {
                     Text("Already have an account ?")
-                        
+
                     Text("Login")
                         .font(.title3)
                         .foregroundColor(.green)
-                    
                 }
             }
         }
-        
     }
 }
 
-    
-
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(userViewModel1: userViewModel1())
     }
 }

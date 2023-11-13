@@ -11,6 +11,8 @@
 		224C49252AFA9E5E00DB4175 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C49242AFA9E5E00DB4175 /* ProfileView.swift */; };
 		224C49292AFAB35000DB4175 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C49282AFAB35000DB4175 /* ForgotPasswordView.swift */; };
 		224C492B2AFAB7D700DB4175 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224C492A2AFAB7D700DB4175 /* User.swift */; };
+		DB10498F2B02B3EA004337E9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB10498E2B02B3EA004337E9 /* APIManager.swift */; };
+		DB1049962B02BAFD004337E9 /* userViewModel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1049952B02BAFD004337E9 /* userViewModel1.swift */; };
 		DB3442882B028A16002A7E2F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3442872B028A16002A7E2F /* MessageView.swift */; };
 		DB34428A2B028C4C002A7E2F /* MailChangingPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3442892B028C4C002A7E2F /* MailChangingPasswordView.swift */; };
 		DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */; };
@@ -47,6 +49,8 @@
 		224C49242AFA9E5E00DB4175 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		224C49282AFAB35000DB4175 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		224C492A2AFAB7D700DB4175 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = ProjetMobile/model/User.swift; sourceTree = SOURCE_ROOT; };
+		DB10498E2B02B3EA004337E9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		DB1049952B02BAFD004337E9 /* userViewModel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userViewModel1.swift; sourceTree = "<group>"; };
 		DB3442872B028A16002A7E2F /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DB3442892B028C4C002A7E2F /* MailChangingPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailChangingPasswordView.swift; sourceTree = "<group>"; };
 		DB8A59C92AF962A300D97E35 /* ProjetMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjetMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,9 +94,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		224C49212AFA794600DB4175 /* ViewModel */ = {
+		DB1049902B02B97A004337E9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DB1049952B02BAFD004337E9 /* userViewModel1.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -120,7 +125,7 @@
 		DB8A59CB2AF962A300D97E35 /* ProjetMobile */ = {
 			isa = PBXGroup;
 			children = (
-				224C49212AFA794600DB4175 /* ViewModel */,
+				DB1049902B02B97A004337E9 /* ViewModel */,
 				DB8A59FE2AF9686E00D97E35 /* Model */,
 				DB8A59FC2AF9685A00D97E35 /* View */,
 				DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */,
@@ -129,6 +134,7 @@
 				DB8A59D72AF962A400D97E35 /* ProjetMobile.entitlements */,
 				DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */,
 				DB8A59D82AF962A400D97E35 /* Preview Content */,
+				DB10498E2B02B3EA004337E9 /* APIManager.swift */,
 			);
 			path = ProjetMobile;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB10498F2B02B3EA004337E9 /* APIManager.swift in Sources */,
 				DB34428A2B028C4C002A7E2F /* MailChangingPasswordView.swift in Sources */,
 				224C49252AFA9E5E00DB4175 /* ProfileView.swift in Sources */,
 				DB8A5A102AF99B1200D97E35 /* SignInView.swift in Sources */,
@@ -321,6 +328,7 @@
 				224C49292AFAB35000DB4175 /* ForgotPasswordView.swift in Sources */,
 				224C492B2AFAB7D700DB4175 /* User.swift in Sources */,
 				DB8A5A0E2AF99AA400D97E35 /* GetStartedView.swift in Sources */,
+				DB1049962B02BAFD004337E9 /* userViewModel1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

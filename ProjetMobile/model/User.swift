@@ -9,16 +9,11 @@ import Foundation
 import SwiftUI
 import CoreData
 
-struct User {
+struct User : Codable{
     
-    var idUser : Int
-    var nom : String
-    var prenom : String
-    var adesse : String
+    //var idUser : Int
+    var fullname : String
     var email : String
-    var cin : Int
-    var num_tel : Int
-    var passwrd : String
-    var token : String
-    var date_naiss : String
+    var password : String
+  
 }
