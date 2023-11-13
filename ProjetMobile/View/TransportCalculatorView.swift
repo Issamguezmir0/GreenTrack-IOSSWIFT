@@ -11,7 +11,7 @@ struct TransportCalculatorView: View {
     @State private var distance: Double = 0
     @State private var selectedTransportMode: String = "Car"
     @State private var selectedDurationIndex = 0
-    let transportModes = ["Car", "Bike", "Public Transport", "Walking", "Motorcycle"]
+    let transportModes = ["Care", "Bike", "Public Transport", "Walking", "Motorcycle"]
     let durations = ["1 jour", "1 semaine", "1 mois", "6 mois", "1 an"]
     let daysInMonth: Double = 30.44 // Moyenne de jours dans un mois
     
