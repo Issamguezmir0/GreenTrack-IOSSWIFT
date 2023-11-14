@@ -62,12 +62,12 @@ struct ContentView: View {
                 Spacer()
             }
             .padding()
-            .background(
-                LinearGradient(gradient: Gradient(colors: [Color.green, Color.orange, Color.gray]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-            )
-            .navigationBarTitle(Text("Accueil"), displayMode: .inline)
-            .navigationBarBackButtonHidden(true)
+           // .background(
+              //  LinearGradient(gradient: Gradient(colors: [Color.green, Color.orange, Color.gray]), startPoint: .top, endPoint: .bottom)
+                //    .edgesIgnoringSafeArea(.all)
+           // )
+         //   .navigationBarTitle(Text("Accueil"), displayMode: .inline)
+           // .navigationBarBackButtonHidden(true)
         }.navigationBarBackButtonHidden(true)
     }
 }

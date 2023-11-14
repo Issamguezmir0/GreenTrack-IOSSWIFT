@@ -32,7 +32,7 @@ struct WasteCalculatorView: View {
                             }
                         }
                     ))
-                    .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
+                //    .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
                     .padding()
                     .background(Color.white.opacity(0.4))
                     .cornerRadius(10)
@@ -84,10 +84,10 @@ struct WasteCalculatorView: View {
                 .padding()
             }
             .padding()
-            .background(
-                LinearGradient(gradient: Gradient(colors: [Color.green, Color.red]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-            )
+           // .background(
+              //  LinearGradient(gradient: Gradient(colors: [Color.green, Color.red]), startPoint: .top, endPoint: .bottom)
+                 //   .edgesIgnoringSafeArea(.all)
+          //  )
            // .navigationBarTitle(Text("Calculateur d'Empreinte Carbone - Déchets"), displayMode: .inline)
             
         }.navigationBarBackButtonHidden(true)

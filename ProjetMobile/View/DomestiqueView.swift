@@ -33,7 +33,7 @@ struct EnergyCalculatorView: View {
                             }
                         }
                     ))
-                    .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
+                  //  .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
                     .padding()
                     .background(Color.white.opacity(0.4))
                     .cornerRadius(10)
@@ -50,7 +50,7 @@ struct EnergyCalculatorView: View {
                             }
                         }
                     ))
-                    .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
+                 //   .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
                     .padding()
                     .background(Color.white.opacity(0.4))
                     .cornerRadius(10)
@@ -100,10 +100,10 @@ struct EnergyCalculatorView: View {
                 .padding()
             }
             .padding()
-            .background(
-                LinearGradient(gradient: Gradient(colors: [Color.orange, Color.green]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-            )
+           // .background(
+             //   LinearGradient(gradient: Gradient(colors: [Color.orange, Color.green]), startPoint: .top, endPoint: .bottom)
+               //     .edgesIgnoringSafeArea(.all)
+          //  )
           //  .navigationBarTitle(Text("Calculateur d'Empreinte Carbone"), displayMode: .inline)
             .navigationBarBackButtonHidden(true)
         }

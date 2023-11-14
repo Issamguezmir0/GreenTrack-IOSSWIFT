@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221987482AF9944500375ED2 /* Calcul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221987472AF9944500375ED2 /* Calcul.swift */; };
-		2219874A2AF9954200375ED2 /* EnergieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221987492AF9954200375ED2 /* EnergieView.swift */; };
 		DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */; };
 		DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CE2AF962A300D97E35 /* Persistence.swift */; };
 		DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */; };
@@ -42,8 +40,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		221987472AF9944500375ED2 /* Calcul.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calcul.swift; sourceTree = "<group>"; };
-		221987492AF9954200375ED2 /* EnergieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergieView.swift; sourceTree = "<group>"; };
 		DB8A59C92AF962A300D97E35 /* ProjetMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjetMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjetMobileApp.swift; sourceTree = "<group>"; };
 		DB8A59CE2AF962A300D97E35 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -92,8 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				DB8A59D32AF962A300D97E35 /* ContentView.swift */,
-				221987472AF9944500375ED2 /* Calcul.swift */,
-				221987492AF9954200375ED2 /* EnergieView.swift */,
 				F0D0236B2AFAA2C300E3FFEE /* DomestiqueView.swift */,
 				F0D0236F2AFAA36E00E3FFEE /* TransportCalculatorView.swift */,
 				F0D023732AFAAE6B00E3FFEE /* WasteCalculatorView.swift */,
@@ -304,9 +298,7 @@
 				F0D023702AFAA36E00E3FFEE /* TransportCalculatorView.swift in Sources */,
 				DB8A59D42AF962A300D97E35 /* ContentView.swift in Sources */,
 				F0D023742AFAAE6B00E3FFEE /* WasteCalculatorView.swift in Sources */,
-				221987482AF9944500375ED2 /* Calcul.swift in Sources */,
 				F0D0236C2AFAA2C300E3FFEE /* DomestiqueView.swift in Sources */,
-				2219874A2AF9954200375ED2 /* EnergieView.swift in Sources */,
 				DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */,
 				F0D0237A2AFAC15400E3FFEE /* ConsumptionData.swift in Sources */,
 			);

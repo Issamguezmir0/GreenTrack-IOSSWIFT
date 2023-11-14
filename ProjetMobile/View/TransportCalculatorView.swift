@@ -32,7 +32,7 @@ struct TransportCalculatorView: View {
                             }
                         }
                     ))
-                    .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
+                   // .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
                     .padding()
                     .background(Color.white.opacity(0.4))
                     .cornerRadius(10)
@@ -87,10 +87,10 @@ struct TransportCalculatorView: View {
                 .padding()
             }
             .padding()
-            .background(
-                LinearGradient(gradient: Gradient(colors: [Color.gray, Color.green]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-            )
+          //  .background(
+             //   LinearGradient(gradient: Gradient(colors: [Color.gray, Color.green]), startPoint: .top, endPoint: .bottom)
+                  //  .edgesIgnoringSafeArea(.all)
+       //     )
           //  .navigationBarTitle(Text("Calculateur d'Empreinte Carbone - Transport"), displayMode: .inline)
             .navigationBarBackButtonHidden(true)
         }.navigationBarBackButtonHidden(true)
