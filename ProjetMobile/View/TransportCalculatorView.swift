@@ -10,9 +10,7 @@ import SwiftUI
 struct TransportCalculatorView: View {
     @State private var distance: Double = 0
     @State private var selectedTransportMode: String = "Car"
-    @State private var selectedDurationIndex = 0
     let transportModes = ["Car", "Bike", "Public Transport", "Walking", "Motorcycle"]
-    let durations = ["1 jour", "1 semaine", "1 mois", "6 mois", "1 an"]
     let daysInMonth: Double = 30.44 // Moyenne de jours dans un mois
     
     var body: some View {
@@ -32,7 +30,6 @@ struct TransportCalculatorView: View {
                             }
                         }
                     ))
-                   // .keyboardType(.decimalPad) // Permet d'entrer uniquement des chiffres décimaux
                     .padding()
                     .background(Color.white.opacity(0.4))
                     .cornerRadius(10)
@@ -49,26 +46,11 @@ struct TransportCalculatorView: View {
                 .background(Color.white.opacity(0.4))
                 .cornerRadius(10)
                 
-                Picker("Durée :", selection: $selectedDurationIndex) {
-                    ForEach(0..<durations.count, id: \.self) {
-                        Text(durations[$0])
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                .background(Color.white.opacity(0.4))
-                .cornerRadius(10)
-                
-                
                 Image("transport") // Utilisez le nom du fichier d'image sans l'extension
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                 .frame(width: 250, height: 250)
+                    .frame(width: 250, height: 250)
                     .padding()
-              //  Image(systemName: "bolt.car")
-                 //   .resizable()
-                 //   .aspectRatio(contentMode: .fit)
-                  //  .padding(.vertical, 50)
                 
                 Spacer()
                 
@@ -76,22 +58,35 @@ struct TransportCalculatorView: View {
                     .font(.headline)
                     .padding()
                 
-                NavigationLink(destination: ContentView()) {
-                    Text("Back")
-                        .font(.headline)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                HStack {
+                    NavigationLink(destination: ContentView()) {
+                        Text("Back")
+                            .font(.headline)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    Button(action: {
+                        // Enregistrez le calcul dans la base de données ici
+                        saveToDatabase()
+                        
+                        // Remettez les valeurs à zéro
+                        resetValues()
+                    }) {
+                        Text("Save")
+                            .font(.headline)
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    
+                  
                 }
                 .padding()
             }
             .padding()
-          //  .background(
-             //   LinearGradient(gradient: Gradient(colors: [Color.gray, Color.green]), startPoint: .top, endPoint: .bottom)
-                  //  .edgesIgnoringSafeArea(.all)
-       //     )
-          //  .navigationBarTitle(Text("Calculateur d'Empreinte Carbone - Transport"), displayMode: .inline)
             .navigationBarBackButtonHidden(true)
         }.navigationBarBackButtonHidden(true)
     }
@@ -123,20 +118,20 @@ struct TransportCalculatorView: View {
     }
     
     func getDaysInSelectedDuration() -> Double {
-        switch selectedDurationIndex {
-        case 0: // 1 jour
-            return 1
-        case 1: // 1 semaine
-            return 7
-        case 2: // 1 mois
-            return daysInMonth
-        case 3: // 6 mois
-            return daysInMonth * 6
-        case 4: // 1 an
-            return daysInMonth * 12
-        default:
-            return 1
-        }
+        return 1 // Retourne une valeur par défaut, car la durée a été supprimée
+    }
+    
+    func saveToDatabase() {
+        // Implémentez la logique pour enregistrer les données dans la base de données
+        // Cette fonction sera appelée lorsque l'utilisateur appuie sur le bouton "Save"
+        // Ajoutez ici le code pour interagir avec votre base de données
+        print("Données enregistrées dans la base de données !")
+    }
+    
+    func resetValues() {
+        // Remettez les valeurs à zéro
+        distance = 0
+        selectedTransportMode = "Car"
     }
 }
 
@@ -145,4 +140,3 @@ struct TransportCalculatorView_Previews: PreviewProvider {
         TransportCalculatorView()
     }
 }
-

@@ -118,7 +118,7 @@ struct ContentView: View {
             }
             .padding()
             .navigationBarBackButtonHidden(true)
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 
     var shareableContent: String {
@@ -167,7 +167,7 @@ struct BarChartView: View {
                 }
             }
         }
-        .padding(.bottom, 20)
+        .padding(.bottom, 10)
         .background(Color.gray.opacity(0.1))
         .cornerRadius(10)
         .padding()
