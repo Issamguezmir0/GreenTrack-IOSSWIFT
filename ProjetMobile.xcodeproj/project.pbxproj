@@ -102,6 +102,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		DB346BD72B039C5500584FEA /* service */ = {
+			isa = PBXGroup;
+			children = (
+				DB10498E2B02B3EA004337E9 /* APIManager.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
 		DB8A59C02AF962A300D97E35 = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +133,7 @@
 		DB8A59CB2AF962A300D97E35 /* ProjetMobile */ = {
 			isa = PBXGroup;
 			children = (
+				DB346BD72B039C5500584FEA /* service */,
 				DB1049902B02B97A004337E9 /* ViewModel */,
 				DB8A59FE2AF9686E00D97E35 /* Model */,
 				DB8A59FC2AF9685A00D97E35 /* View */,
@@ -134,7 +143,6 @@
 				DB8A59D72AF962A400D97E35 /* ProjetMobile.entitlements */,
 				DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */,
 				DB8A59D82AF962A400D97E35 /* Preview Content */,
-				DB10498E2B02B3EA004337E9 /* APIManager.swift */,
 			);
 			path = ProjetMobile;
 			sourceTree = "<group>";

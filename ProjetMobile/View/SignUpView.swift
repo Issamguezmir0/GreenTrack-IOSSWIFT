@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SignUpView: View {
+    
+    
     @ObservedObject var userViewModel1: userViewModel1
 
     init(userViewModel1: userViewModel1) {
@@ -62,7 +64,7 @@ struct SignUpView: View {
                         .frame(alignment: .leading)
                         .padding(.leading, -180)
 
-                    SecureField("Please Enter your Password", text: $userViewModel1.password)
+                    SecureField("Please Enter your Password", text: $userViewModel1.password1)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
 
                     Button("Sign Up") {

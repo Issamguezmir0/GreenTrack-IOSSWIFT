@@ -11,6 +11,7 @@ class userViewModel1: ObservableObject {
     
     @Published var fullname = ""
     @Published var password = ""
+    @Published var password1 = ""
     @Published var email = ""
     @Published var registrationStatus: registrationStatus?
     
