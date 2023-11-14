@@ -106,7 +106,7 @@ struct ContentView: View {
                         Image(systemName: "square.and.arrow.up")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
+                            .frame(width: 60, height: 50)
                             .foregroundColor(Color.green)
                             .background(
                                 RoundedRectangle(cornerRadius: 10)
