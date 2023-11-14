@@ -2,34 +2,39 @@
 //  AddChallengeView.swift
 //  ProjetMobile
 //
-//  Created by Bechir Kefi on 8/11/2023.
+//  Created by manel zaabi on 7/11/2023.
 //
 
 import SwiftUI
 
 
 struct AddChallengeView: View {
-    @State private var title = ""
+        @State private var title = ""
         @State private var description = ""
-        @State private var date = Date()
+        @State private var details = ""
+        @State private var location = ""
+    @State private var orgeniser = ""
+    @State private var date = Date()
         @State private var selectedImage: Image?
-       @State private var showImagePicker = false
+        @State private var showImagePicker = false
     var body: some View {
         NavigationView {
-            
                    Form {
-                       Section(header: Text("Informations du défi")) {
+                       Section(header: Text("Informations")) {
                            TextField("Titre", text: $title)
                            TextField("Description", text: $description)
+                           TextField("Add more details..", text: $details)
+                           TextField("Insert location", text: $location)
+                           TextField("who's the orgenisers?", text: $orgeniser)
                            DatePicker("Date", selection: $date, in: Date()...)
-                     Text("Image du défi")
+                     Text("event image")
                                           if selectedImage != nil {
                                               selectedImage?
                                                   .resizable()
                                                   .scaledToFit()
                                                   .frame(height: 150) // Ajustez la taille de l'aperçu selon vos besoins
                                           }
-                                          Button("Sélectionner une image") {
+                                          Button("Select image") {
                                               self.showImagePicker = true
                                           }
                                           .sheet(isPresented: $showImagePicker) {
@@ -40,25 +45,23 @@ struct AddChallengeView: View {
                        Button(action: {
                            // Ajoutez ici la logique pour enregistrer le défi dans la base de données
                        }) {
-                           Text("Enregistrer")
+                           Text("Save")
                            
                                
                        }
                            NavigationLink(destination: ChallengeView()) {
-                               Text("Consulter liste des defis")
+                               Text("All events ")
                                   
                            }
-                       NavigationLink(destination: ViewDetailsD()) {
-                           Text("Consulter details Challenge")
-                              
-                       }
+                       
                            
 
                    }
             
-                   .navigationTitle("Ajouter un défi")
+                   .navigationTitle("Add new event")
+                  
             
-               }
+        }
     }
 }
 
@@ -67,7 +70,6 @@ struct AddChallengeView_Previews: PreviewProvider {
         AddChallengeView()
     }
 }
-
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: Image?
     @Environment(\.presentationMode) var presentationMode
@@ -99,3 +101,4 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
+					

@@ -5,84 +5,226 @@
 //  Created by manel zaabi on 7/11/2023.
 //
 
+
 import SwiftUI
 
+enum Tab {
+    case details , comments
+}
+
+
+
+struct Event: Identifiable {
+    var id = UUID()
+    var title: String
+    var date: String
+    var location: String
+    var description: String
+    var isFree: Bool  // Ajout de la propriété isFree
+    var participants : [String]
+    var organisateur : [String]
+    var details : String
+   
+}
+
+
+
 struct ViewDetailsD: View {
-    @State private var isEditing = false
-    @State private var description = ""
-    @State private var date = ""
-    @State private var phone = ""
-    @State private var dates = Date()
-    @State private var dateText = ""
-
+    @State private var showCommentView = false
+    
+    @State private var isDetailsExpanded = false
+    
+    
+    var event: Event
+    
     var body: some View {
-        VStack {
-            Image("Rectangle 33")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 200, height: 200)
-                .clipShape(Circle())
-                .padding()
-            
-            Text("Eco Green")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-            
-            
-            
-            if isEditing {
-                
-                TextField("Edit Title", text: $description)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-             
-                TextField("Edit Description", text: $date)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-             
-            } else {
-                Text("No Description")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                    .padding()
-                
-                Text("Date")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                    .padding()
-             
-            }
-            
-            if isEditing {
-                            DatePicker("Date of event", selection: $dates, displayedComponents: .date)
-                                .datePickerStyle(DefaultDatePickerStyle())
+       
+            ScrollView{
+                VStack(alignment: .leading, spacing: 20) {
+                    Rectangle()
+                        .frame(width: 360, height: 210)
+                        .foregroundColor(.clear)
+                        .background(Image("Rectangle 33"))
+                        .cornerRadius(30)
+                        .offset(x: 0, y: 0)
+                    Text(event.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Text(event.description)
+                        .font(.body)
+                        .multilineTextAlignment(.leading)
+                    HStack{
+                        Image(systemName: "person")
+                            .foregroundColor(.green)
+                        
+                        Text("Orgoniser: \(event.organisateur.joined(separator: ", "))")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                    }
+                    HStack {
+                        Image(systemName: "calendar")
+                            .foregroundColor(.green)
+                        Text("Date: \(event.date)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    HStack {
+                        Image(systemName: "location")
+                            .foregroundColor(.green)
+                        Text("Location: \(event.location)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    HStack{
+                        Image(systemName: "person.3")
+                            .foregroundColor(.green)
+                        Text("Participants: \(event.participants.joined(separator: ", "))")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                    }
+                    
+                    if event.isFree {
+                        Text("Free Event")
+                            .font(.subheadline)
+                            .foregroundColor(.green)
+                    } else {
+                        Text("Paid Event")
+                            .font(.subheadline)
+                            .foregroundColor(.red)
+                    }
+                    
+                    
+                    
+                    
+                    HStack {
+                        
+                        Button(action: {
+                            self.isDetailsExpanded.toggle()
+                        }){
+                            Text("Join")
+                                .frame(maxWidth: .infinity)
                                 .padding()
-                                .foregroundColor(.gray)
-                        } else {
-                            Text("Date \(dateText)")
-                                .font(.title3)
-                                .foregroundColor(.gray)
-                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(5)
                         }
+                        .padding(.horizontal)
+                        
+                        Button(action: {
+                            self.showCommentView = true
+                        }){
+                            Text("Comments")
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.white)
+                                .foregroundColor(.gray)
+                                .cornerRadius(5)
+                                .shadow(radius: 1 )
+                                
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .sheet(isPresented: $showCommentView) {
+                            CommentView()  }
+                        
+                        
+                        
+                        
+                        
+                        Spacer()
+                        
+                            .padding()
+                            .navigationBarTitle("Event Details", displayMode: .inline)
+                    }
+                    VStack{
+                        DisclosureGroup("Details", isExpanded: $isDetailsExpanded) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("A propos")
+                                    .font(.headline)
+                                    
+                                Text(event.details)
+                                    .font(.body)
+                            }
+                            
+                        }}
+                   
+                }
+                .padding(.leading,30)// Details Section
+                
+            }}}
+        
+        struct DetailsView: View {
+            var event: Event
             
-            
-
-            Button(action: {
-                isEditing.toggle()
-            }) {
-                Text(isEditing ? "Save" : "Edit Event")
-                    .font(.title2)
-                    .padding()
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            var body: some View {
+                VStack {
+                    // Add details specific to the DetailsView
+                    Text("Details View")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding()
+                    Text("Event Description :\(event.description)")
+                        .font(.body)
+                        .padding()
+                }
             }
-        }.padding()
-    }
-}
+        }
+        
+        
+        struct CommentView: View {
+            
+            var comments: [String] = ["Great event!", "Looking forward to it!", "Awesome opportunity!","Great event!", "Looking forward to it!", "Awesome opportunity!"]
+            
+            var body: some View {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Comments")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.green)
 
-struct ViewDetailsD_Previews: PreviewProvider {
-    static var previews: some View {
-        ViewDetailsD()
-    }
-}
+                    List(comments, id: \.self) { comment in
+                        CommentRow(comment: comment)
+                    }
+                    
+                    Spacer()
+                }
+                .padding()
+                .navigationBarTitle("Commentaires", displayMode: .inline)
+            }
+        }
+        struct CommentRow: View {
+            var comment: String
+            
+            var body: some View {
+                HStack {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .clipShape(Circle())
+                        .aspectRatio(contentMode: .fill)
+                    
+                    Text(comment)
+                        .padding(.leading, 8)
+                    
+                    Spacer()
+                }
+            }
+        }
+        
+        
+        struct ViewDetailsD_Previews: PreviewProvider {
+            static var previews: some View {
+                let sampleFreeEvent = Event(title: "Green Wear", date: "November 30, 2023", location: "123 Main St, Cityville", description: "Join us Join Join us for a networking event to connect with professionals in the industry. ", isFree: true, participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"],details: "Join us Join Join us for a networking event to connect!!!!! with professionals")
+                let samplePaidEvent = Event(title: "Conference", date: "December 15, 2023", location: "456 Park Ave, Townsville", description: "A conference on the latest industry trends.", isFree: false,participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"], details: "Join us Join Join us for a networking event to connect with professionals in")
+                
+                return Group {
+                    ViewDetailsD(event: sampleFreeEvent)
+                    ViewDetailsD(event: samplePaidEvent)
+                }
+                
+                
+            }
+        }
+    
