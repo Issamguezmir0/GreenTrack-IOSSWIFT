@@ -22,21 +22,21 @@ struct ContentView: View {
         return energyConsumption + transportEmissions + wasteEmissions
     }
 
+    @State private var isShareSheetPresented = false
+
     var body: some View {
         NavigationView {
             VStack {
-                // Affichage de la date d'aujourd'hui
                 Text(formattedDate)
                     .font(.title)
                     .padding()
 
-                // Affichage du total de l'empreinte de manière plus esthétique
                 VStack {
                     Text("Total empreinte")
                         .font(.headline)
                         .foregroundColor(Color.green)
 
-                    Text("\(totalEmissions, specifier: "%.2f") kg CO2")
+                    Text(String(format: "%.2f kg CO2", totalEmissions))
                         .font(.title)
                         .foregroundColor(.white)
                         .padding()
@@ -92,14 +92,51 @@ struct ContentView: View {
                                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
                             )
                     }
+
+               
+                }
+                .padding()
+
+                HStack(spacing: 20) {
+                    Spacer() // Ajout d'un espace flexible pour centrer le bouton "Partager"
+
+                    Button(action: {
+                        self.isShareSheetPresented.toggle()
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(Color.green)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.white)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )
+                        Text("Partager")
+                            .font(.caption)
+                    }
+                    .sheet(isPresented: $isShareSheetPresented) {
+                        ShareSheet(activityItems: [shareableContent])
+                    }
                 }
                 .padding()
 
                 Spacer()
             }
             .padding()
-           
+
         } .navigationBarBackButtonHidden(true)
+    }
+
+    var shareableContent: String {
+        """
+        Date: \(formattedDate)
+        Total empreinte: \(String(format: "%.2f", totalEmissions)) kg CO2
+        Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2
+        Transport: \(String(format: "%.2f", transportEmissions)) kg CO2
+        Déchets: \(String(format: "%.2f", wasteEmissions)) kg CO2
+        """
     }
 }
 
@@ -117,7 +154,7 @@ struct BarChartView: View {
     init(values: [Double], labels: [String]) {
         self.values = values
         self.labels = labels
-        self.maxValue = values.max() ?? 1 // Éviter la division par zéro
+        self.maxValue = values.max() ?? 1
     }
 
     var body: some View {
@@ -140,6 +177,22 @@ struct BarChartView: View {
         }
     }
 }
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let activityItems: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        // Do nothing
+    }
+}
+
+
+
 
 /*
 struct EnergyCalculatorView: View {
