@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SignUpView: View {
     
-    
+    @State private var navigateToLocation = false
+
     @ObservedObject var userViewModel1: userViewModel1
 
     init(userViewModel1: userViewModel1) {
@@ -17,6 +18,7 @@ struct SignUpView: View {
     }
 
     var body: some View {
+        NavigationStack{
         ZStack {
             VStack(alignment: .leading) {
                 Text("Create an account")
@@ -66,10 +68,15 @@ struct SignUpView: View {
 
                     SecureField("Please Enter your Password", text: $userViewModel1.password1)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-
+                    
+                    NavigationLink(destination: SignInView(), isActive: $navigateToLocation) {
+                        
+                    }
                     Button("Sign Up") {
                         self.userViewModel1.signup()
-                    }
+                    action: do {
+                        navigateToLocation = true
+                    }}
                     .font(.title2)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
@@ -123,12 +130,15 @@ struct SignUpView: View {
                 Spacer()
                 HStack {
                     Text("Already have an account ?")
-
-                    Text("Login")
-                        .font(.title3)
-                        .foregroundColor(.green)
+                    
+                    NavigationLink(destination: SignInView()){ Text("Login")
+                            .font(.title3)
+                            .foregroundColor(.green)
+                    }
+                    
                 }
             }
+        }
         }
     }
 }

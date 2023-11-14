@@ -10,11 +10,15 @@ import Foundation
 class APIManager {
     
     static let shared = APIManager()
-    private let baseURL = "localhost:3000"
+    private let baseURL = "http://localhost:3000"
     
     func signup(fullname: String, password: String, email: String, completion: @escaping(Result<User, Error>) -> Void) {
-        let signupURL = baseURL + "/auth/signup"
-        var request = URLRequest(url: URL(string: signupURL)!)
+        guard let signupURL = URL(string: baseURL + "/auth/signup") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+
+        var request = URLRequest(url: signupURL)
         request.httpMethod = "PUT"
         
         let body: [String: Any] = ["fullname": fullname, "password": password, "email": email]
@@ -34,4 +38,3 @@ class APIManager {
         }.resume()
     }
 }
-

@@ -13,7 +13,7 @@ struct ProjetMobileApp: App {
 
     var body: some Scene {
         WindowGroup {
-          SignUpView(userViewModel1: userViewModel1() )
+          GetStartedView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
