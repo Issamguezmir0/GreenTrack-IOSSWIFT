@@ -7,17 +7,29 @@
 
 import Foundation
 
-struct ConsumptionData: Identifiable {
-    var id = UUID()
+struct CarbonFootprintData {
     var selectedDate: Date
     var energyConsumption: Double
     var transportEmissions: Double
     var wasteEmissions: Double
-    var electricityConsumption: Double = 0
-    var gasConsumption: Double = 0
-    var selectedEnergySource: String = "Renewable"
-    var distance: Double = 0
-    var selectedTransportMode: String = "Car"
-    var wasteWeight: Double = 0
-    var selectedWasteType: String = "General"
+
+    var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        return formatter.string(from: selectedDate)
+    }
+
+    var totalEmissions: Double {
+        return energyConsumption + transportEmissions + wasteEmissions
+    }
+
+    var shareableContent: String {
+        """
+        Date: \(formattedDate)
+        Total empreinte: \(String(format: "%.2f", totalEmissions)) kg CO2
+        Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2
+        Transport: \(String(format: "%.2f", transportEmissions)) kg CO2
+        Déchets: \(String(format: "%.2f", wasteEmissions)) kg CO2
+        """
+    }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13B4F5392B0446D400A29E30 /* metier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B4F5382B0446D400A29E30 /* metier.swift */; };
 		DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */; };
 		DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CE2AF962A300D97E35 /* Persistence.swift */; };
 		DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13B4F5382B0446D400A29E30 /* metier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = metier.swift; sourceTree = "<group>"; };
 		DB8A59C92AF962A300D97E35 /* ProjetMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjetMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjetMobileApp.swift; sourceTree = "<group>"; };
 		DB8A59CE2AF962A300D97E35 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -84,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13B4F5372B04469600A29E30 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				13B4F5382B0446D400A29E30 /* metier.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		221987412AF98CEE00375ED2 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 		DB8A59CB2AF962A300D97E35 /* ProjetMobile */ = {
 			isa = PBXGroup;
 			children = (
+				13B4F5372B04469600A29E30 /* ViewModel */,
 				F0D023782AFAC11D00E3FFEE /* Model */,
 				221987412AF98CEE00375ED2 /* View */,
 				DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */,
@@ -294,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */,
+				13B4F5392B0446D400A29E30 /* metier.swift in Sources */,
 				DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */,
 				F0D023702AFAA36E00E3FFEE /* TransportCalculatorView.swift in Sources */,
 				DB8A59D42AF962A300D97E35 /* ContentView.swift in Sources */,
