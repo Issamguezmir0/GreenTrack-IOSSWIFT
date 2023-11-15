@@ -69,7 +69,7 @@ struct WasteCalculatorView: View {
                     }
                     Button(action: {
                         // Enregistrez le calcul dans la base de données ici
-                        saveToDatabase()
+                        createConsommation()
 
                         // Remettez les valeurs à zéro
                         resetValues()
@@ -114,11 +114,13 @@ struct WasteCalculatorView: View {
         return carbonFootprint
     }
 
-    func saveToDatabase() {
-        // Implémentez la logique pour enregistrer les données dans la base de données
-        // Cette fonction sera appelée lorsque l'utilisateur appuie sur le bouton "Save"
-        // Ajoutez ici le code pour interagir avec votre base de données
+    func createConsommation() {
+       
+        
+        
+        
         print("Données enregistrées dans la base de données !")
+        
     }
 
     func resetValues() {
