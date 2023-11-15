@@ -11,6 +11,8 @@ struct ContentView: View {
     @ObservedObject var viewModel: HomeVideoViewModel
         
     var body: some View {
+        
+        
         let persistenceController = PersistenceController()
         TabView {
             HomeUIView()

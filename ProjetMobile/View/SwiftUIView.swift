@@ -41,7 +41,7 @@ struct ContentsView: View {
                         }
                     }
                 }
-                .navigationBarHidden(true)
+                .navigationBarHidden(false)
             }
 
             func performSearch() {

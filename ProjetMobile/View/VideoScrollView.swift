@@ -21,7 +21,7 @@ import AVKit
             case videoScrollView
         }
         var body: some View {
-            
+                        
             ZStack {
                 if currentView == .playerScrollView {
                     PlayerScrollView(viewModel: HomeVideoViewModel(), data: $viewModel.data)
@@ -405,9 +405,9 @@ struct VideoSheetView: View {
 }
 
 
-
+//
 //struct VideoScrollView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        VideoScrollView()
+//        contenttView(viewModel: HomeVideoViewModel())
 //    }
 //}
