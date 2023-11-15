@@ -11,6 +11,8 @@
 		7206C0212B052DBF00EEC925 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C01D2B052DBF00EEC925 /* PostsView.swift */; };
 		7206C0222B052DBF00EEC925 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C01E2B052DBF00EEC925 /* StoryView.swift */; };
 		7206C0232B052DBF00EEC925 /* TrandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7206C01F2B052DBF00EEC925 /* TrandView.swift */; };
+		7264DC6E2B05675600166ED0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264DC6D2B05675600166ED0 /* Home.swift */; };
+		7264DC702B05676300166ED0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7264DC6F2B05676300166ED0 /* HomeViewModel.swift */; };
 		A8B302512AFADE300052C33E /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B3024F2AFADE300052C33E /* Video.swift */; };
 		A8B302522AFADE300052C33E /* VideoSc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B302502AFADE300052C33E /* VideoSc.swift */; };
 		A8B302542AFADE350052C33E /* VideoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B302532AFADE350052C33E /* VideoScrollView.swift */; };
@@ -75,6 +77,8 @@
 		7206C01D2B052DBF00EEC925 /* PostsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostsView.swift; path = "../../../../../Downloads/ProjetPDM-main/ProjetMobile/View/PostsView.swift"; sourceTree = "<group>"; };
 		7206C01E2B052DBF00EEC925 /* StoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoryView.swift; path = "../../../../../Downloads/ProjetPDM-main/ProjetMobile/View/StoryView.swift"; sourceTree = "<group>"; };
 		7206C01F2B052DBF00EEC925 /* TrandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrandView.swift; path = "../../../../../Downloads/ProjetPDM-main/ProjetMobile/View/TrandView.swift"; sourceTree = "<group>"; };
+		7264DC6D2B05675600166ED0 /* Home.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Home.swift; path = "../../../../../Downloads/ProjetPDM-main/ProjetMobile/Model/Home.swift"; sourceTree = "<group>"; };
+		7264DC6F2B05676300166ED0 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "../../../../../Downloads/ProjetPDM-main/ProjetMobile/ViewModel/HomeViewModel.swift"; sourceTree = "<group>"; };
 		A8B3024F2AFADE300052C33E /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		A8B302502AFADE300052C33E /* VideoSc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoSc.swift; sourceTree = "<group>"; };
 		A8B302532AFADE350052C33E /* VideoScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoScrollView.swift; sourceTree = "<group>"; };
@@ -256,10 +260,12 @@
 		DB8A59FE2AF9686E00D97E35 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7264DC6D2B05675600166ED0 /* Home.swift */,
 				A8B3024F2AFADE300052C33E /* Video.swift */,
 				A8B302502AFADE300052C33E /* VideoSc.swift */,
 				A8F254FE2AFC33B0005E24D5 /* BotResponse.swift */,
 				A8CF7CA92AFC4B3C00F8EAA1 /* ConsumptionData.swift */,
+				7264DC6F2B05676300166ED0 /* HomeViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,6 +412,7 @@
 				A8F255012AFC33C9005E24D5 /* SwiftUIView.swift in Sources */,
 				A8B302582AFADE3B0052C33E /* HomeVideoViewModel.swift in Sources */,
 				A8F255032AFC33D7005E24D5 /* ChatView.swift in Sources */,
+				7264DC6E2B05675600166ED0 /* Home.swift in Sources */,
 				A8F254F32AFC2D3B005E24D5 /* HomeUIView.swift in Sources */,
 				DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */,
 				A8F254C82AFC2123005E24D5 /* AddChallengeView.swift in Sources */,
@@ -422,6 +429,7 @@
 				A8CF7CB42AFC4BA000F8EAA1 /* WasteCalculatorView.swift in Sources */,
 				DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */,
 				A8CF7CB82AFC4EE500F8EAA1 /* SignInView.swift in Sources */,
+				7264DC702B05676300166ED0 /* HomeViewModel.swift in Sources */,
 				A8CF7CAC2AFC4B5200F8EAA1 /* Calcul.swift in Sources */,
 				A8CF7CB22AFC4B8B00F8EAA1 /* TransportCalculatorView.swift in Sources */,
 				A8B302572AFADE3B0052C33E /* VideosViewModel.swift in Sources */,
