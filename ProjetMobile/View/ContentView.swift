@@ -21,7 +21,8 @@ struct ContentView: View {
                     Text("Home")
                 }
 
-            contenttView(data: $viewModel.data, currentVideoIndex: $viewModel.currentVideoIndex, viewModel: viewModel)
+//            contenttView(data: $viewModel.data, currentVideoIndex: $viewModel.currentVideoIndex, viewModel: viewModel)
+            contenttView()
 
                 .environment(\.managedObjectContext, persistenceController.container.viewContext )
 

@@ -174,7 +174,7 @@ struct ReelView: View {
 
 struct ReelView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        contenttView()
     }
 }
 

@@ -11,69 +11,139 @@ import AVKit
 
 
     struct contenttView: View{
-        @Binding var data: [Videosc]
-        @Binding var currentVideoIndex: Int
-        @ObservedObject var viewModel: HomeVideoViewModel
-        @State private var currentView: ContentViewType = .playerScrollView
         
-        enum ContentViewType {
-            case playerScrollView
-            case videoScrollView
-        }
-        var body: some View {
-                        
-            ZStack {
-                if currentView == .playerScrollView {
-                    PlayerScrollView(viewModel: HomeVideoViewModel(), data: $viewModel.data)
-                } else {
-                    VideoHomeView()
-                }
-                
-                
-                VStack {
-                    HStack {
-                        Rectangle()
-                            .frame(width: 210, height: 44)
-                            .foregroundColor(Color("AccentColor"))
-                            .cornerRadius(10)
-                            .shadow(radius: 3)
-                            .overlay(
-                                HStack {
-                                    Spacer()
-                                    Button(action: {
-                                        currentView = .playerScrollView
-                                    }) {
-                                        Text("For You")
-                                            .font(currentView == .playerScrollView ? .headline : .body)
-                                            .foregroundColor(Color.white)
-                                        
-                                    }
-                                    Spacer()
-                                    Text("|")
-                                        .font(.body)
-                                        .foregroundColor(Color.white)
-                                    Spacer()
-                                    Button(action: {
-                                        currentView = .videoScrollView
-                                    }) {
-                                        Text("Following")
-                                            .font(currentView == .videoScrollView ? .headline : .body)
-                                            .foregroundColor(Color.white)
-                                    }
-                                    Spacer()
-                                }
-                            )
-                    }
-                    .padding(EdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0))
-                    Spacer()
-                }
-            }
-            .background(Color.black.edgesIgnoringSafeArea(.all))
-            .edgesIgnoringSafeArea(.all)
-            .onAppear {
-                viewModel.playVideo()
-            }
-        }
+        @State private var activeView: String = "Home"
+          let size: CGSize
+          let safeArea: EdgeInsets
+          
+          init() {
+              // Initialize size and safeArea here based on your requirements
+              self.size = CGSize(width: 100, height: 300)  // Replace with your actual size
+              self.safeArea = EdgeInsets()  // Replace with your actual safeAreaInsets
+          }
+          
+          var body: some View {
+              ZStack {
+                  if activeView == "Home" {
+                      Feed(size: size, safeArea: safeArea)
+                          .background(Color.clear)
+                  } else if activeView == "HomeCam" {
+                      HomeCam()
+                          .background(Color.clear)
+                  } else if activeView == "VideoHome" {
+                      VideoHomeView() // Add the VideoHomeView here
+                          .background(Color.clear)
+                  }
+                  
+                  VStack {
+                      HStack {
+                          Spacer()
+                          
+                          Button(action: {
+                              activeView = "Home"
+                          }) {
+                              Image(systemName: "film")
+                                  .padding()
+                                  .background(Color.clear)
+                                  .foregroundColor(activeView == "Home" ? .green : .white) // Highlight if active
+                          }
+                          
+                          Spacer()
+                          
+                          Button(action: {
+                              activeView = "HomeCam"
+                          }) {
+                              Image(systemName: "camera")
+                                  .padding()
+                                  .background(Color.clear)
+                                  .foregroundColor(activeView == "HomeCam" ? .green : .white) // Highlight if active
+                          }
+                          
+                          Spacer()
+                          
+                          Button(action: {
+                              activeView = "VideoHome"
+                          }) {
+                              Image(systemName: "video")
+                                  .padding()
+                                  .background(Color.clear)
+                                  .foregroundColor(activeView == "VideoHome" ? .green : .white) // Highlight if active
+                          }
+                          
+                          Spacer()
+                          
+                          // Add more buttons for additional views if needed
+                      }
+                      .padding()
+                      .background(Color.white.opacity(0)) // Set the background of the button container
+                      
+                      Spacer()
+                  }
+              }
+          }
+//        @Binding var data: [Videosc]
+//        @Binding var currentVideoIndex: Int
+//        @ObservedObject var viewModel: HomeVideoViewModel
+//        @State private var currentView: ContentViewType = .playerScrollView
+//
+//        enum ContentViewType {
+//            case playerScrollView
+//            case videoScrollView
+//        }
+//        var body: some View {
+//
+//            ZStack {
+//                if currentView == .playerScrollView {
+//                    PlayerScrollView(viewModel: HomeVideoViewModel(), data: $viewModel.data)
+//                } else {
+//                    VideoHomeView()
+//                }
+//
+//
+//                VStack {
+//                    HStack {
+//                        Rectangle()
+//                            .frame(width: 210, height: 44)
+//                            .foregroundColor(Color("AccentColor"))
+//                            .cornerRadius(10)
+//                            .shadow(radius: 3)
+//                            .overlay(
+//                                HStack {
+//                                    Spacer()
+//                                    Button(action: {
+//                                        currentView = .playerScrollView
+//                                    }) {
+//                                        Text("For You")
+//                                            .font(currentView == .playerScrollView ? .headline : .body)
+//                                            .foregroundColor(Color.white)
+//
+//                                    }
+//                                    Spacer()
+//                                    Text("|")
+//                                        .font(.body)
+//                                        .foregroundColor(Color.white)
+//                                    Spacer()
+//                                    Button(action: {
+//                                        currentView = .videoScrollView
+//                                    }) {
+//                                        Text("Following")
+//                                            .font(currentView == .videoScrollView ? .headline : .body)
+//                                            .foregroundColor(Color.white)
+//                                    }
+//                                    Spacer()
+//                                }
+//                            )
+//                    }
+//                    .padding(EdgeInsets(top: 60, leading: 0, bottom: 0, trailing: 0))
+//                    Spacer()
+//                }
+//            }
+//            .background(Color.black.edgesIgnoringSafeArea(.all))
+//            .edgesIgnoringSafeArea(.all)
+//            .onAppear {
+//                viewModel.playVideo()
+//            }
+//        }
     }
 
 
@@ -411,3 +481,9 @@ struct VideoSheetView: View {
 //        contenttView(viewModel: HomeVideoViewModel())
 //    }
 //}
+
+struct contenttViewProvider_Previews: PreviewProvider {
+    static var previews: some View {
+        contenttView()
+    }
+}

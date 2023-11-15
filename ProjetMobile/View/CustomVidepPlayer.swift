@@ -1,20 +1,25 @@
 //
-//  CustomVidepPlayer.swift
-//  ProjetMobile
+//  CustomVideoPlayer.swift
+//  InstaFeed
 //
-//  Created by Bechir Kefi on 15/11/2023.
+//  Created by Bechir Kefi on 14/11/2023.
 //
 
 import SwiftUI
+import AVKit
 
-struct CustomVidepPlayer: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct CustomVideoPlayer: UIViewControllerRepresentable {
+    @Binding var player: AVPlayer?
+
+    func makeUIViewController(context: Context) ->  AVPlayerViewController {
+        let controller = AVPlayerViewController()
+        controller.player = player
+        controller.videoGravity = .resizeAspectFill
+        controller.showsPlaybackControls = false
+        return controller
     }
-}
 
-struct CustomVidepPlayer_Previews: PreviewProvider {
-    static var previews: some View {
-        CustomVidepPlayer()
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+        uiViewController.player = player
     }
 }
