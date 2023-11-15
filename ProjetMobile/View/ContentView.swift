@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         let persistenceController = PersistenceController()
         TabView {
-            HomeUIView()
+            HomeUIView(viewModel: HomeVideoViewModel())
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Home")
