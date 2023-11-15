@@ -108,6 +108,7 @@
 		A8D661A12B050C40009CFBD9 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		A8D661A32B050C4C009CFBD9 /* Heart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heart.swift; sourceTree = "<group>"; };
 		A8D661A62B050C5D009CFBD9 /* OffsetKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffsetKey.swift; sourceTree = "<group>"; };
+		A8D661A82B05176B009CFBD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A8F254C52AFC20AD005E24D5 /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
 		A8F254C72AFC2123005E24D5 /* AddChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeView.swift; sourceTree = "<group>"; };
 		A8F254C92AFC2153005E24D5 /* ViewDetailsD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDetailsD.swift; sourceTree = "<group>"; };
@@ -195,6 +196,7 @@
 		DB8A59CB2AF962A300D97E35 /* ProjetMobile */ = {
 			isa = PBXGroup;
 			children = (
+				A8D661A82B05176B009CFBD9 /* Info.plist */,
 				A8D661A52B050C51009CFBD9 /* Keys */,
 				DB8A59FE2AF9686E00D97E35 /* Model */,
 				DB8A59FD2AF9686200D97E35 /* ViewModel */,
@@ -621,6 +623,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ProjetMobile/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProjetMobile/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -657,6 +660,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ProjetMobile/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProjetMobile/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

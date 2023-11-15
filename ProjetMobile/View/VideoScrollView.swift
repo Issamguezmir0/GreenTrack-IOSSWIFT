@@ -367,7 +367,7 @@ struct VideoCardView: View {
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 .cornerRadius(0) // No corner radius to fill the screen
                 .onAppear {
-                    if let videoURL = URL(string: video.url) {
+                    if let videoURL = URL(string: video.url ?? "") {
                         self.player = AVPlayer(url: videoURL)
                     }
                 }
@@ -375,7 +375,7 @@ struct VideoCardView: View {
             VStack {
                 Spacer()
                 HStack {
-                    Text("\(video.title)")
+                    Text("\(video.title ?? "")")
                         .font(.title) // Use a larger font
                         .foregroundColor(.white)
                         .shadow(radius: 20)
@@ -434,8 +434,8 @@ struct VideoSheetView: View {
 
     init(video: VideoPlayers, player: Binding<AVPlayer?>, showError: Binding<Bool>, onSave: @escaping (String, String, DismissAction) -> Void) {
         self._showError = showError
-        self._title = State(initialValue: video.title)
-        self._url = State(initialValue: video.url)
+        self._title = State(initialValue: video.title ?? "")
+        self._url = State(initialValue: video.url ?? "")
         self._player = player
         self.onSave = onSave
     }

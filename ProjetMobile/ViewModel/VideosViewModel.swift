@@ -38,7 +38,7 @@ class VideosViewModel: ObservableObject {
    }
    
     func getVideosFromAssets() {
-        guard let url = URL(string: "http://localhost:8000/video/videos/assets/") else { return }
+        guard let url = URL(string: "http://localhost:8000/video/videos/names/") else { return }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"

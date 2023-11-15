@@ -28,8 +28,8 @@ struct Videos: Codable {
 
 struct VideoPlayers: Identifiable, Codable {
     var id: String?
-    var title: String
-    var url: String
+    var title: String? // Change to optional String
+    var url: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,3 +37,4 @@ struct VideoPlayers: Identifiable, Codable {
         case url
     }
 }
+
