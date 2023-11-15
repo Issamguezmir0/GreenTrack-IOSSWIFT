@@ -12,42 +12,45 @@ struct SignUpView: View {
     @State private var navigateToLocation = false
 
     @ObservedObject var userViewModel1: userViewModel1
-
-    init(userViewModel1: userViewModel1) {
-        self.userViewModel1 = userViewModel1
-    }
-
     var body: some View {
         NavigationStack{
         ZStack {
-            VStack(alignment: .leading) {
-                Text("Create an account")
+            VStack(alignment: .leading ) {
+                Text("Create an account😀")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-
+                    
                 Text("Connect with your friends today! 👋")
                     .font(.title3)
                     .foregroundColor(.gray)
                     .frame(alignment: .leading)
+                    
 
-                Text("Full Name")
+                Text("Full Name : ")
                     .font(.title3)
                     .foregroundColor(.green)
                     .frame(alignment: .leading)
+                    
+                    .fontWeight(.bold)
+                
 
                 VStack {
                     TextField("Enter your fullname", text: $userViewModel1.fullname)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
                 }
 
-                Text("Email Address")
+                Text("Email Address :")
                     .font(.title3)
                     .foregroundColor(.green)
                     .frame(alignment: .leading)
+                    
+                    .fontWeight(.bold)
 
                 VStack {
                     TextField("Enter your Email address", text: $userViewModel1.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                       
                 }
 
                 VStack {
@@ -56,25 +59,33 @@ struct SignUpView: View {
                         .foregroundColor(.green)
                         .frame(alignment: .leading)
                         .padding(.leading, -180)
+                        .fontWeight(.bold)
 
                     SecureField("Please Enter your Password", text: $userViewModel1.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
 
                     Text("Verify password")
                         .font(.title3)
                         .foregroundColor(.green)
                         .frame(alignment: .leading)
                         .padding(.leading, -180)
-
-                    SecureField("Please Enter your Password", text: $userViewModel1.password1)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .fontWeight(.bold)
                     
-                    NavigationLink(destination: SignInView(), isActive: $navigateToLocation) {
+
+                    SecureField("Please Enter your Password", text: $userViewModel1.password)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        
+                        
+                    
+                    NavigationLink(destination: SignInView(LoginViewModel: LoginViewModel()), isActive: $navigateToLocation) {
                         
                     }
+                    Divider()
                     Button("Sign Up") {
-                        self.userViewModel1.signup()
+                       
                     action: do {
+                        userViewModel1.signup()
                         navigateToLocation = true
                     }}
                     .font(.title2)
@@ -84,6 +95,23 @@ struct SignUpView: View {
                     .background(Color.green)
                     .foregroundColor(.white)
                     .cornerRadius(10)
+                    
+                   /* Button(action: {
+                        userViewModel1.signup()
+                                        }) {
+                                            Text("Sign Up")
+                                                .font(.title2)
+                                                .fontWeight(.bold)
+                                                .frame(maxWidth: .infinity)
+                                                .padding()
+                                                .background(Color.green)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(10)
+                                                .frame(width: 402, height: 50)
+                                            
+                                          
+                                        }*/
+
 
                     Text("Or With")
                         .foregroundColor(.gray)
@@ -105,9 +133,10 @@ struct SignUpView: View {
                         .background(Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
+                        .padding()
 
                         Button(action: {
-                            // Action to perform when the Gmail button is pressed
+                           
                         }) {
                             HStack {
                                 Image("Gmail")
@@ -121,17 +150,18 @@ struct SignUpView: View {
                         .background(Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
+                        .padding()
                     }
                 }
-            }
-            .padding()
+            }.padding()
+            
 
             VStack {
                 Spacer()
                 HStack {
                     Text("Already have an account ?")
                     
-                    NavigationLink(destination: SignInView()){ Text("Login")
+                    NavigationLink(destination: SignInView(LoginViewModel: LoginViewModel())){ Text("Login")
                             .font(.title3)
                             .foregroundColor(.green)
                     }

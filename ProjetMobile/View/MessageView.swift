@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MessageView: View {
     var body: some View {
-        Text("Check your mail ")
+        Text("Check your phone , SMS  ")
             .font(.largeTitle)
             .fontWeight(.bold)
             .foregroundColor(.green)

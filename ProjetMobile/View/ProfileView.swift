@@ -9,108 +9,70 @@ struct ProfileView: View {
     @State private var phone = ""
     @State private var dateOfBirth = Date()
     @State private var dateOfBirthText = ""
-
+    
     var body: some View {
-        VStack {
-            Image("profile 1")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 120, height: 120)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.green, lineWidth: 4))
-                .shadow(radius: 10)
-                .padding()
-
-            Text("Username")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.green)
-
-            if isEditing {
-                TextField("Edit your description", text: $description)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .foregroundColor(.green)
-                TextField("First Name", text: $firstname)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .foregroundColor(.green)
-                TextField("Last Name", text: $lastname)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .foregroundColor(.green)
-                TextField("Email Address", text: $datebirth)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .foregroundColor(.green)
-                TextField("Phone Number", text: $phone)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                    .foregroundColor(.green)
-            } else {
-           
-                Text("First Name")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
-                        .cornerRadius(10)
-                Text("Last Name")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
-                        .cornerRadius(10)
-                Text("Date of Birth")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
-                        .cornerRadius(10)
-                Text("Phone Number")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
-                        .cornerRadius(10)
-            }
-                
-
-            if isEditing {
-                DatePicker("Date of Birth", selection: $dateOfBirth, displayedComponents: .date)
-                    .datePickerStyle(DefaultDatePickerStyle())
-                    .padding()
-                    .foregroundColor(.green)
-            } else {
-                Text("Date of Birth \(dateOfBirthText)")
-                    .font(.title3)
-                    .foregroundColor(.gray)
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
-                        .cornerRadius(10)
-            }
-
-            Button(action: {
-                isEditing.toggle()
-            }) {
-                Text(isEditing ? "Save" : "Edit Profile")
-                    .font(.title2)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding()
+        VStack{
+            Spacer(minLength: 400)
+            ZStack{ RoundedRectangle(cornerRadius: 50).fill(Color(red: 0.19,green: 0.71,blue:0.29)).frame(height: 9000)
+                ZStack{
+                    RoundedRectangle(cornerRadius: 50).fill(Color(red: 1,green: 1,blue:1)).frame(height: 700)
+                    VStack{
+                        Circle()
+                            .frame(width: 200,height: 200)
+                            .overlay(
+                                Image("profile 1")
+                                    .resizable()
+                                    .aspectRatio( contentMode: .fit)
+                                    .frame(width: 195,height: 200)
+                                    .clipShape(Circle())
+                            )
+                        
+                        Text("Fullname")
+                        
+                    }.offset(y:-340)
+                    
+                    
+                    Text("Account Details :")
+                        .font(Font.custom("Inter", size: 16).weight(.semibold))
+                        .lineSpacing(14)
+                        .foregroundColor(.black)
+                        .offset(x: -130, y: -210)
+                        .fontWeight(.bold)
+                    
+                    VStack{
+                        Text("      Fullname")
+                            .font(Font.custom("Inter", size: 16).weight(.semibold))
+                            .lineSpacing(14)
+                            .foregroundColor(.black)
+                            .offset(x: -160, y: -160)
+                            .fontWeight(.bold)
+                        
+                        Text("email")
+                            .font(Font.custom("Inter", size: 16).weight(.semibold))
+                            .lineSpacing(14)
+                            .foregroundColor(.black)
+                            .offset(x: -160, y: -160)
+                            .fontWeight(.bold)
+                        Text("          Date of birth")
+                            .font(Font.custom("Inter", size: 16).weight(.semibold))
+                            .lineSpacing(14)
+                            .foregroundColor(.black)
+                            .offset(x: -160, y: -160)
+                            .fontWeight(.bold)
+                    }
+                    
+                    
+                    
+                    
+                    
+                }
             }
         }
-        .padding()
-        .background(Color(.systemBackground))
-        .edgesIgnoringSafeArea(.all)
     }
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
+    
+    struct ProfileView_Previews: PreviewProvider {
+        static var previews: some View {
+            ProfileView()
+        }
     }
 }

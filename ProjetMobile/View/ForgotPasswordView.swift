@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
-    @State private var email = ""
+    @State private var num_tel = ""
     @State private var isPasswordResetSent = false
     @State private var password = ""
     @State private var isEmailValid = true
@@ -16,7 +16,7 @@ struct ForgotPasswordView: View {
     var body: some View {
         VStack {
             VStack{
-                Text("Enter your email ")
+                Text("Enter your phone number please ")
                     .font(.title3)
                     .foregroundColor(.green)
                     .fontWeight(.bold)
@@ -24,9 +24,9 @@ struct ForgotPasswordView: View {
             }
             
             VStack{
-                TextField("Enter Your Email", text: $email)
+                TextField("Enter Your phone", text: $num_tel)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .onChange(of: email, perform: { newValue in
+                    .onChange(of: num_tel, perform: { newValue in
                         isEmailValid = isValidEmail(newValue)
                                            })
             }

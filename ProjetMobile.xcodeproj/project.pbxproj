@@ -15,6 +15,7 @@
 		DB1049962B02BAFD004337E9 /* userViewModel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1049952B02BAFD004337E9 /* userViewModel1.swift */; };
 		DB3442882B028A16002A7E2F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3442872B028A16002A7E2F /* MessageView.swift */; };
 		DB34428A2B028C4C002A7E2F /* MailChangingPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3442892B028C4C002A7E2F /* MailChangingPasswordView.swift */; };
+		DB5C789B2B0531B1002AE4A0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C789A2B0531B1002AE4A0 /* LoginViewModel.swift */; };
 		DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */; };
 		DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CE2AF962A300D97E35 /* Persistence.swift */; };
 		DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */; };
@@ -53,6 +54,7 @@
 		DB1049952B02BAFD004337E9 /* userViewModel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userViewModel1.swift; sourceTree = "<group>"; };
 		DB3442872B028A16002A7E2F /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		DB3442892B028C4C002A7E2F /* MailChangingPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailChangingPasswordView.swift; sourceTree = "<group>"; };
+		DB5C789A2B0531B1002AE4A0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DB8A59C92AF962A300D97E35 /* ProjetMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjetMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjetMobileApp.swift; sourceTree = "<group>"; };
 		DB8A59CE2AF962A300D97E35 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				DB1049952B02BAFD004337E9 /* userViewModel1.swift */,
+				DB5C789A2B0531B1002AE4A0 /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				DB8A5A102AF99B1200D97E35 /* SignInView.swift in Sources */,
 				DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */,
 				DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */,
+				DB5C789B2B0531B1002AE4A0 /* LoginViewModel.swift in Sources */,
 				DB3442882B028A16002A7E2F /* MessageView.swift in Sources */,
 				224C49232AFA797D00DB4175 /* SignUpView.swift in Sources */,
 				DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */,

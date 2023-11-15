@@ -9,10 +9,8 @@ import SwiftUI
 
 struct SignInView: View {
     @State private var navigateToLocation = false
-    @State private var email = ""
-    @State private var password = ""
-    @State private var isEmailValid = true
-        @State private var isPasswordValid = true
+    @ObservedObject var LoginViewModel: LoginViewModel
+    //LoginViewModel: LoginViewModel()
     var body: some View {
         NavigationStack {
             
@@ -28,8 +26,10 @@ struct SignInView: View {
                         Text("Hello again , you've been missed !")
                             .font(.title3)
                             .foregroundColor(.gray)
+                            
                         
                     }
+                    
                     VStack{
                         Text("Email")
                             .font(.title3)
@@ -39,17 +39,17 @@ struct SignInView: View {
                     }
                     
                     VStack{
-                        TextField("Enter Your Email", text: $email)
+                        TextField("Enter Your Email", text: $LoginViewModel.email)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .onChange(of: email, perform: { newValue in
-                                isEmailValid = isValidEmail(newValue)
-                            })
+                        /*.onChange(of: userViewModel1.email, perform: { newValue in
+                         isEmailValid = isValidEmail(newValue)
+                         })*/
                     }
-                    if !isEmailValid {
-                        Text("Invalid email address")
-                            .foregroundColor(.red)
-                    }
-                    
+                    /*if !isEmailValid {
+                     Text("Invalid email address")
+                     .foregroundColor(.red)
+                     }
+                     */
                     VStack{
                         Text("Password")
                             .font(.title3)
@@ -59,31 +59,33 @@ struct SignInView: View {
                     }
                     
                     VStack{
-                        SecureField("Please Enter your Password", text: $password)
+                        SecureField("Please Enter your Password", text: $LoginViewModel.password)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .onChange(of: password, perform: { newValue in
-                                isPasswordValid = isValidPassword(newValue)
-                            })
+                        /*.onChange(of: password, perform: { newValue in
+                         isPasswordValid = isValidPassword(newValue)
+                         })*/
                     }
                     
-                    if !isPasswordValid {
-                        Text("Password must be at least 8 characters")
-                            .foregroundColor(.red)
-                    }
+                    /*if !isPasswordValid {
+                     Text("Password must be at least 8 characters")
+                     .foregroundColor(.red)
+                     }*/
                     
                     HStack{
                         Spacer()
                         
                         NavigationLink(destination: ForgotPasswordView()){
-                        Text(" Fogot Password ? ")
-                            .font(.callout)
-                            .foregroundColor(.gray)
+                            Text(" Fogot Password ? ")
+                                .font(.callout)
+                                .foregroundColor(.gray)
                         }
                     }
                     VStack{
                         
-                        Button("Login"){
-                            
+                        Button (action :{
+                            LoginViewModel.login()
+                        }){
+                            Text("Login")
                         }
                         .font(.title2)
                         .fontWeight(.bold)
@@ -101,7 +103,7 @@ struct SignInView: View {
                     }
                     HStack {
                         Button(action: {
-                         
+                            
                         }) {
                             HStack {
                                 Image("facebook")
@@ -153,7 +155,7 @@ struct SignInView: View {
             
         }
         
-    }
+    }}
     func isValidEmail(_ email: String) -> Bool {
             let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
             return emailPredicate.evaluate(with: email)
@@ -164,7 +166,7 @@ struct SignInView: View {
         }
     struct SignInView_Previews: PreviewProvider {
         static var previews: some View {
-            SignInView()
+            SignInView(LoginViewModel: LoginViewModel())
         }
     }
-}
+
