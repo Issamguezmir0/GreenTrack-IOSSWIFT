@@ -14,18 +14,6 @@ enum Tab {
 
 
 
-struct Event: Identifiable {
-    var id = UUID()
-    var title: String
-    var date: String
-    var location: String
-    var description: String
-    var isFree: Bool  // Ajout de la propriété isFree
-    var participants : [String]
-    var organisateur : [String]
-    var details : String
-   
-}
 
 
 
@@ -47,55 +35,57 @@ struct ViewDetailsD: View {
                         .background(Image("Rectangle 33"))
                         .cornerRadius(30)
                         .offset(x: 0, y: 0)
-                    Text(event.title)
+                    Text(event.title ?? "")
                         .font(.title)
                         .fontWeight(.bold)
-                    Text(event.description)
+                    Text(event.description ?? "")
                         .font(.body)
                         .multilineTextAlignment(.leading)
-                    HStack{
+                    HStack {
                         Image(systemName: "person")
                             .foregroundColor(.green)
                         
-                        Text("Orgoniser: \(event.organisateur.joined(separator: ", "))")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                        
+//                        Text("Organizers: \(event.organisateur?.joined(separator: ", ") ?? "No organizer specified")")
                     }
-                    HStack {
-                        Image(systemName: "calendar")
-                            .foregroundColor(.green)
-                        Text("Date: \(event.date)")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                    
+
+//                    HStack {
+//                        Image(systemName: "calendar")
+//                            .foregroundColor(.green)
+//                        Text("Date: \(event.date?.description ?? "No date specified")")
+//                    }
+
                     HStack {
                         Image(systemName: "location")
                             .foregroundColor(.green)
-                        Text("Location: \(event.location)")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
+//                        Text("Location: \(event.location ?? "No location specified")")
+//                            .font(.subheadline)
+//                            .foregroundColor(.gray)
                     }
-                    HStack{
+
+                    HStack {
                         Image(systemName: "person.3")
                             .foregroundColor(.green)
-                        Text("Participants: \(event.participants.joined(separator: ", "))")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                        
+//                        Text("Participants: \(event.participants?.joined(separator: ", ") ?? "No participants specified")")
+//                        .font(.subheadline)
+//                        .foregroundColor(.gray)
                     }
+
                     
-                    if event.isFree {
-                        Text("Free Event")
-                            .font(.subheadline)
-                            .foregroundColor(.green)
-                    } else {
-                        Text("Paid Event")
-                            .font(.subheadline)
-                            .foregroundColor(.red)
-                    }
-                    
+//                    if let isFree = event.isFree {
+//                        if isFree {
+//                            Text("Free Event")
+//                                .font(.subheadline)
+//                                .foregroundColor(.green)
+//                        } else {
+//                            Text("Paid Event")
+//                                .font(.subheadline)
+//                                .foregroundColor(.red)
+//                        }
+//                    } else {
+//                        // Handle the case when isFree is nil
+//                        // You might want to provide a default behavior or display an error message
+//                    }
+
                     
                     
                     
@@ -144,8 +134,8 @@ struct ViewDetailsD: View {
                                 Text("A propos")
                                     .font(.headline)
                                     
-                                Text(event.details)
-                                    .font(.body)
+//                                Text(event.details ?? "" )
+//                                    .font(.body)
                             }
                             
                         }}
@@ -165,7 +155,7 @@ struct ViewDetailsD: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding()
-                    Text("Event Description :\(event.description)")
+                    Text("Event Description :\(event.description ?? "")")
                         .font(.body)
                         .padding()
                 }
@@ -214,17 +204,17 @@ struct ViewDetailsD: View {
         }
         
         
-        struct ViewDetailsD_Previews: PreviewProvider {
-            static var previews: some View {
-                let sampleFreeEvent = Event(title: "Green Wear", date: "November 30, 2023", location: "123 Main St, Cityville", description: "Join us Join Join us for a networking event to connect with professionals in the industry. ", isFree: true, participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"],details: "Join us Join Join us for a networking event to connect!!!!! with professionals")
-                let samplePaidEvent = Event(title: "Conference", date: "December 15, 2023", location: "456 Park Ave, Townsville", description: "A conference on the latest industry trends.", isFree: false,participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"], details: "Join us Join Join us for a networking event to connect with professionals in")
-                
-                return Group {
-                    ViewDetailsD(event: sampleFreeEvent)
-                    ViewDetailsD(event: samplePaidEvent)
-                }
-                
-                
-            }
-        }
-    
+//        struct ViewDetailsD_Previews: PreviewProvider {
+//            static var previews: some View {
+//                let sampleFreeEvent = Event(title: "Green Wear", date: "November 30, 2023", location: "123 Main St, Cityville", description: "Join us Join Join us for a networking event to connect with professionals in the industry. ", isFree: true, participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"],details: "Join us Join Join us for a networking event to connect!!!!! with professionals")
+//                let samplePaidEvent = Event(title: "Conference", date: "December 15, 2023", location: "456 Park Ave, Townsville", description: "A conference on the latest industry trends.", isFree: false,participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"], details: "Join us Join Join us for a networking event to connect with professionals in")
+//
+//                return Group {
+//                    ViewDetailsD(event: sampleFreeEvent)
+//                    ViewDetailsD(event: samplePaidEvent)
+//                }
+//
+//
+//            }
+//        }
+//
