@@ -17,21 +17,26 @@ struct ChatView: View {
                 Color.clear
                     .ignoresSafeArea()
                 VStack{
-                    Image("images")
-                        .resizable()
-                        .frame(width: 290, height: 250)
-                        .padding(.bottom, 30)
-                        
-                    
-                    Text("Need help or information? We are just a message away. Feel free to contact us at any time. Your satisfaction is our priority."
-                    )
-                        .multilineTextAlignment(.center)
-                        .font(.headline)
-                        .padding(.horizontal, 30)
-                        .padding(.bottom, 70)
+                   
         
                     
-            
+                    Image("5625")
+                        .resizable()
+                        .frame(width: 400, height: 300)
+
+                    Text("Welcome To EcoTrack")
+                                    .font(.title)
+                                    .padding(.bottom, 20)
+                                    .bold()
+                                
+                                Text("“ Need help or information? We are just a message away. Feel free to contact us at any time. Your satisfaction is our priority “")
+                                    .multilineTextAlignment(.center)
+                                    .font(.headline)
+                                    .padding(.bottom, 80)
+                                    .padding(.horizontal, 30)
+                    
+                    
+                    
                     
                     NavigationLink(
                                         destination: Messagerie(), // Replace 'MessagerieView()' with your actual destination view
@@ -42,18 +47,26 @@ struct ChatView: View {
                                     )
 
                                     Button(action: {
-                                        // Action to be performed when the button is pressed
+                                        
                                         print("Bouton appuyé")
-                                        isNavigationActive = true // Activate the navigation when the button is pressed
+                                        isNavigationActive = true 
                                     }) {
-                                        Text("Let's GO ")
-                                            .fontWeight(.semibold)
-                                            .font(.title)
-                                            .frame(width: 200, height: 50)
-                                            .background(LinearGradient(gradient: Gradient(colors: [Color.green, Color.yellow]), startPoint: .leading, endPoint: .trailing))
-                                            .foregroundColor(.white)
-                                            .cornerRadius(30.0)
+                                        Label(
+                                            title: {
+                                                Text("Let's Go Chat")
+                                                    .fontWeight(.semibold)
+                                                    .font(.title)
+                                            },
+                                            icon: {
+                                                Image(systemName: "message")
+                                                    .font(.title)
+                                            }
+                                        )
                                     }
+                                    .padding()
+                                    .background(LinearGradient(gradient: Gradient(colors: [Color.yellow, Color.green]), startPoint: .leading, endPoint: .trailing))
+                                    .foregroundColor(.white)
+                                    .cornerRadius(30.0)
                 }
             }
             .navigationBarHidden(true)

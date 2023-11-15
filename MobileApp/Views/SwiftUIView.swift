@@ -49,7 +49,7 @@ struct SwiftUIView: View {
                 }) {
                     Label(
                         title: {
-                            Text("Go Maps")
+                            Text("Go Maps Now ")
                                 .fontWeight(.semibold)
                                 .font(.title)
                         },

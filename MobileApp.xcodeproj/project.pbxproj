@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		662401CD2B04161400A520E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662401CC2B04161400A520E9 /* ContentView.swift */; };
 		66B13E442AF9622E0076F346 /* MobileAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B13E432AF9622E0076F346 /* MobileAppApp.swift */; };
-		66B13E462AF9622E0076F346 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B13E452AF9622E0076F346 /* ContentView.swift */; };
 		66B13E482AF9622F0076F346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66B13E472AF9622F0076F346 /* Assets.xcassets */; };
 		66B13E4C2AF9622F0076F346 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66B13E4B2AF9622F0076F346 /* Preview Assets.xcassets */; };
 		66B13E562AF9622F0076F346 /* MobileAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B13E552AF9622F0076F346 /* MobileAppTests.swift */; };
@@ -18,6 +18,7 @@
 		66C865E12AFBB6CE00DEC60D /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C865E02AFBB6CE00DEC60D /* ChatView.swift */; };
 		66C865E52AFBD2E700DEC60D /* Messagerie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C865E42AFBD2E700DEC60D /* Messagerie.swift */; };
 		66C865E72AFBDB8E00DEC60D /* BotResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66C865E62AFBDB8E00DEC60D /* BotResponse.swift */; };
+		66F6F5E02B0390F000A401B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66F6F5DF2B0390F000A401B0 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		662401CC2B04161400A520E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		66B13E402AF9622E0076F346 /* MobileApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B13E432AF9622E0076F346 /* MobileAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileAppApp.swift; sourceTree = "<group>"; };
-		66B13E452AF9622E0076F346 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		66B13E472AF9622F0076F346 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66B13E492AF9622F0076F346 /* MobileApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MobileApp.entitlements; sourceTree = "<group>"; };
 		66B13E4B2AF9622F0076F346 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -53,6 +54,7 @@
 		66C865E02AFBB6CE00DEC60D /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		66C865E42AFBD2E700DEC60D /* Messagerie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messagerie.swift; sourceTree = "<group>"; };
 		66C865E62AFBDB8E00DEC60D /* BotResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotResponse.swift; sourceTree = "<group>"; };
+		66F6F5DF2B0390F000A401B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../Downloads/b6dc374-3b0b-6bdc-3b7f-f7ce4c005a_SwiftfulMapApp-Downloads/Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 		66B13E422AF9622E0076F346 /* MobileApp */ = {
 			isa = PBXGroup;
 			children = (
+				66F6F5DF2B0390F000A401B0 /* Assets.xcassets */,
 				66C865DF2AFBB67100DEC60D /* ViewModels */,
 				66C865DE2AFBB66700DEC60D /* Models */,
 				66C865DD2AFBB65300DEC60D /* Views */,
@@ -142,10 +145,10 @@
 		66C865DD2AFBB65300DEC60D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				66B13E702AF9C6450076F346 /* SwiftUIView.swift */,
-				66B13E452AF9622E0076F346 /* ContentView.swift */,
-				66C865E02AFBB6CE00DEC60D /* ChatView.swift */,
 				66C865E42AFBD2E700DEC60D /* Messagerie.swift */,
+				66C865E02AFBB6CE00DEC60D /* ChatView.swift */,
+				66B13E702AF9C6450076F346 /* SwiftUIView.swift */,
+				662401CC2B04161400A520E9 /* ContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66B13E4C2AF9622F0076F346 /* Preview Assets.xcassets in Resources */,
+				66F6F5E02B0390F000A401B0 /* Assets.xcassets in Resources */,
 				66B13E482AF9622F0076F346 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,8 +300,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				66C865E12AFBB6CE00DEC60D /* ChatView.swift in Sources */,
-				66B13E462AF9622E0076F346 /* ContentView.swift in Sources */,
 				66C865E72AFBDB8E00DEC60D /* BotResponse.swift in Sources */,
+				662401CD2B04161400A520E9 /* ContentView.swift in Sources */,
 				66B13E442AF9622E0076F346 /* MobileAppApp.swift in Sources */,
 				66C865E52AFBD2E700DEC60D /* Messagerie.swift in Sources */,
 				66B13E712AF9C6450076F346 /* SwiftUIView.swift in Sources */,
