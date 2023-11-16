@@ -7,11 +7,11 @@ struct ConsommationsData: Decodable {
 }
 
 struct Consommation: Decodable {
-    var _id: String?
+  
     var type: String?
     var valeur: Double?
     
     enum CodingKeys: String, CodingKey {
-        case _id, type, valeur
+        case type, valeur
     }
 }

@@ -8,9 +8,11 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedDate = Date()
-    @State private var energyConsumption: Double = 100
-    @State private var transportEmissions: Double = 50
-    @State private var wasteEmissions: Double = 20
+    @State  var energyConsumption: Double = 0.0
+    @State  var transportEmissions: Double = 0.0
+    @State  var wasteEmissions: Double = 0.0
+    @State private var isShareSheetPresented = false
+    @State private var isRefreshing = false
 
     var formattedDate: String {
         let formatter = DateFormatter()
@@ -21,8 +23,6 @@ struct ContentView: View {
     var totalEmissions: Double {
         return energyConsumption + transportEmissions + wasteEmissions
     }
-
-    @State private var isShareSheetPresented = false
 
     var body: some View {
         NavigationView {
@@ -47,7 +47,6 @@ struct ContentView: View {
                 }
                 .padding()
 
-                // BarChartView avec une barre de fond
                 BarChartView(
                     values: [energyConsumption, transportEmissions, wasteEmissions],
                     labels: ["Énergie", "Transport", "Déchets"]
@@ -112,6 +111,28 @@ struct ContentView: View {
                     ShareSheet(activityItems: [shareableContent])
                 }
                 .padding()
+
+                Button(action: {
+                    self.refreshData()
+                }) {
+                    HStack {
+                        Image(systemName: isRefreshing ? "arrow.clockwise.circle.fill" : "arrow.clockwise.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(Color.green)
+                        Text("Actualiser")
+                            .foregroundColor(Color.green)
+                            .font(.headline)
+                    }
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.white)
+                            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                    )
+                }
+                .disabled(isRefreshing)
                 .padding()
 
                 Spacer()
@@ -129,6 +150,50 @@ struct ContentView: View {
         Transport: \(String(format: "%.2f", transportEmissions)) kg CO2
         Déchets: \(String(format: "%.2f", wasteEmissions)) kg CO2
         """
+    }
+
+    private func refreshData() {
+        isRefreshing = true
+       
+        // Simulate fetching data for "Waste"
+        ConsommationViewModel().calculateTotalByType(type: "waste" ) { result in
+            switch result {
+            case .success(let total):
+                self.wasteEmissions = total
+            case .failure(let error):
+                print("Error calculating total for waste: \(error)")
+            }        }
+
+        // Simulate fetching data for "Transport"
+        ConsommationViewModel().calculateTotalByType(type: "Transport") { result in
+            switch result {
+            case .success(let total):
+                self.transportEmissions = total
+            case .failure(let error):
+                print("Error calculating total for Transport: \(error)")
+            }
+        }
+
+        // Simulate fetching data for "Domestique"
+        ConsommationViewModel().calculateTotalByType(type: "Domestique") { result in
+            switch result {
+            case .success(let total):
+                self.energyConsumption = total
+            case .failure(let error):
+                print("Error calculating total for Domestique: \(error)")
+            }
+        }
+
+        // Assuming you have a method like this in your ContentView
+        self.refreshTotalEmissions()
+
+        isRefreshing = false
+    }
+
+    // Add your refreshTotalEmissions method here
+    private func refreshTotalEmissions() {
+        // Implement your logic to refresh total emissions here
+        // This method is just a placeholder, replace it with your actual logic
     }
 }
 

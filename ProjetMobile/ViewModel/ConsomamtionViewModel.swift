@@ -15,22 +15,25 @@ extension String {
         return try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
     }
 }
+ 
 
 class ConsommationViewModel: ObservableObject {
     @Published var consommation: Consommation?
     @Published var totalForDay: Double = 0.0
     @Published var totalByType: Double = 0.0
+    
+
 
     func saveToDatabase(type: String, valeur: Double, completion: @escaping (Result<Void, Error>) -> Void) {
-        let endpoint = "http://192.168.181.223:8000/consom/add"
-
+        let endpoint = "http://192.168.161.223:8000/consom/add"
+        
         let parameters: [String: Any] = [
-            "type": type,
-            "valeur": valeur
-        ]
+             "type": type,
+             "valeur": valeur
+         ]
+        
 
-        AF.request(endpoint, method: .post, parameters: parameters)
-            .validate()
+        AF.request(endpoint, method: .post, parameters: parameters,encoding: JSONEncoding.default)
             .response { response in
                 switch response.result {
                 case .success:
@@ -42,7 +45,27 @@ class ConsommationViewModel: ObservableObject {
     }
 
 
-    static func calculateTotalForDay( completion: @escaping (Result<Double, Error>) -> Void) {
+  
+
+    func calculateTotalByType(type: String, completion: @escaping (Result<Double, Error>) -> Void) {
+        let endpoint = "https://192.168.161.223:8000/consom/totalType"
+
+        let parameters: [String: Any] = [
+            "type": type
+        ]
+
+        AF.request(endpoint, method: .get, parameters: parameters, encoding: URLEncoding.default)
+            .validate()
+            .responseDecodable(of: Double.self) { response in
+                switch response.result {
+                case .success(let total):
+                    completion(.success(total))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+   /* static func calculateTotalForDay( completion: @escaping (Result<Double, Error>) -> Void) {
         let endpoint = "https://localhost:8000/concom/total"
 
        
@@ -58,27 +81,8 @@ class ConsommationViewModel: ObservableObject {
                 }
             }
     }
-
-    static func calculateTotalByType(type: String, completion: @escaping (Result<Double, Error>) -> Void) {
-        let endpoint = "https://localhost:8000/concom/totalType"
-
-        let parameters: [String: Any] = [
-            "type": type
-        ]
-
-        AF.request(endpoint, method: .get, parameters: parameters)
-            .validate()
-            .responseDecodable(of: Double.self) { response in
-                switch response.result {
-                case .success(let total):
-                    completion(.success(total))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-    }
 }
-    
+    */
     
     
    /* func createConsommation(type: String, valeur: Double) {
@@ -120,6 +124,6 @@ class ConsommationViewModel: ObservableObject {
                 print("Error calculating total for type \(type): \(error)")
             }
         }
-    }
+    }*/
 }
-*/
+

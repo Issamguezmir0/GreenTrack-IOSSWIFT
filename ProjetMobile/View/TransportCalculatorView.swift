@@ -121,12 +121,20 @@ struct TransportCalculatorView: View {
         return 1 // Retourne une valeur par défaut, car la durée a été supprimée
     }
     
-    func saveToDatabase() {
-        // Implémentez la logique pour enregistrer les données dans la base de données
-        // Cette fonction sera appelée lorsque l'utilisateur appuie sur le bouton "Save"
-        // Ajoutez ici le code pour interagir avec votre base de données
-        print("Données enregistrées dans la base de données !")
-    }
+        func saveToDatabase() {
+            let type = "Transport"
+            let valeur = calculateCarbonFootprint()
+
+            ConsommationViewModel().saveToDatabase(type: type, valeur: valeur) { result in
+                switch result {
+                case .success:
+                    print("Data saved successfully!")
+                case .failure(let error):
+                    print("Error saving data: \(error)")
+                }
+            }
+        }
+    
     
     func resetValues() {
         // Remettez les valeurs à zéro
