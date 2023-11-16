@@ -1,16 +1,16 @@
-//
-//  ContentView.swift
-//  ProjetMobile
-//
-//  Created by IssamGuezmir on 6/11/2023.
-//
+import Foundation
+import Alamofire
 import SwiftUI
 
+// ViewModel
+
+
 struct ContentView: View {
+    @StateObject private var viewModel = ConsommationViewModel()
     @State private var selectedDate = Date()
-    @State  var energyConsumption: Double = 0.0
-    @State  var transportEmissions: Double = 0.0
-    @State  var wasteEmissions: Double = 0.0
+    @State private var energyConsumption: Double = 0.0
+    @State private var transportEmissions: Double = 0.0
+    @State private var wasteEmissions: Double = 0.0
     @State private var isShareSheetPresented = false
     @State private var isRefreshing = false
 
@@ -21,7 +21,7 @@ struct ContentView: View {
     }
 
     var totalEmissions: Double {
-        return energyConsumption + transportEmissions + wasteEmissions
+        return viewModel.totalForDay
     }
 
     var body: some View {
@@ -47,11 +47,14 @@ struct ContentView: View {
                 }
                 .padding()
 
-                BarChartView(
-                    values: [energyConsumption, transportEmissions, wasteEmissions],
+               /* BarChartView(
+                    percentages: [viewModel.energyConsumption / totalEmissions, viewModel.transportEmissions / totalEmissions, viewModel.wasteEmissions / totalEmissions],
                     labels: ["Énergie", "Transport", "Déchets"]
-                )
-
+                )*/
+                BarChartView(
+                            percentages: viewModel.emissionPercentages,
+                            labels: ["Énergie", "Transport", "Déchets"]
+                        )
                 Spacer()
 
                 HStack(spacing: 20) {
@@ -139,88 +142,96 @@ struct ContentView: View {
             }
             .padding()
             .navigationBarBackButtonHidden(true)
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
+        .onAppear {
+            // Fetch initial data when the view appears
+            self.refreshData()
+        }
     }
 
     var shareableContent: String {
         """
         Date: \(formattedDate)
         Total empreinte: \(String(format: "%.2f", totalEmissions)) kg CO2
-        Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2
-        Transport: \(String(format: "%.2f", transportEmissions)) kg CO2
-        Déchets: \(String(format: "%.2f", wasteEmissions)) kg CO2
+        Énergie: \(String(format: "%.2f", viewModel.energyConsumption)) kg CO2
+        Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2
+        Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2
         """
     }
 
     private func refreshData() {
         isRefreshing = true
-       
-        // Simulate fetching data for "Waste"
-        ConsommationViewModel().calculateTotalByType(type: "waste" ) { result in
+
+        viewModel.calculateTotalByType(type: "waste") { result in
             switch result {
             case .success(let total):
-                self.wasteEmissions = total
+                print("Waste total: \(total)")
+                self.viewModel.wasteEmissions = total
+                self.refreshTotalEmissions()
             case .failure(let error):
                 print("Error calculating total for waste: \(error)")
-            }        }
+                self.isRefreshing = false
+            }
+        }
 
-        // Simulate fetching data for "Transport"
-        ConsommationViewModel().calculateTotalByType(type: "Transport") { result in
+        viewModel.calculateTotalByType(type: "Transport") { result in
             switch result {
             case .success(let total):
-                self.transportEmissions = total
+                print("Waste total: \(total)")
+                print("Error calculating total for Transport: ")
+                self.viewModel.transportEmissions = total
+                self.refreshTotalEmissions()
             case .failure(let error):
                 print("Error calculating total for Transport: \(error)")
+                self.isRefreshing = false
             }
         }
 
-        // Simulate fetching data for "Domestique"
-        ConsommationViewModel().calculateTotalByType(type: "Domestique") { result in
+        viewModel.calculateTotalByType(type: "Domestique") { result in
             switch result {
             case .success(let total):
-                self.energyConsumption = total
+                
+                self.viewModel.energyConsumption = total
+                self.refreshTotalEmissions()
+                print("Waste total: \(total)")
             case .failure(let error):
                 print("Error calculating total for Domestique: \(error)")
+                self.isRefreshing = false
             }
         }
 
-        // Assuming you have a method like this in your ContentView
-        self.refreshTotalEmissions()
-
-        isRefreshing = false
+        viewModel.calculateTotalForDay { result in
+            switch result {
+            case .success(let totalForDay):
+                
+                print("Total empreinte for the day: \(totalForDay)")
+                viewModel.totalForDay = totalForDay
+            case .failure(let error):
+                print("Error calculating total for the day: \(error)")
+            }
+                
+                self.isRefreshing = false
+        }
     }
 
-    // Add your refreshTotalEmissions method here
     private func refreshTotalEmissions() {
-        // Implement your logic to refresh total emissions here
-        // This method is just a placeholder, replace it with your actual logic
+        viewModel.objectWillChange.send()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
+// BarChartView et ShareSheet
 struct BarChartView: View {
-    let values: [Double]
+    let percentages: [Double]
     let labels: [String]
-    let maxValue: Double
-
-    init(values: [Double], labels: [String]) {
-        self.values = values
-        self.labels = labels
-        self.maxValue = values.max() ?? 1
-    }
 
     var body: some View {
         HStack(spacing: 20) {
-            ForEach(0..<values.count, id: \.self) { index in
+            ForEach(0..<percentages.count, id: \.self) { index in
                 VStack {
                     Spacer()
                     Rectangle()
-                        .frame(width: 40, height: CGFloat(values[index]) / CGFloat(maxValue) * 100, alignment: .bottom)
+                        .frame(width: 40, height: CGFloat(percentages[index]) * 100, alignment: .bottom)
                         .foregroundColor(Color.blue)
                         .cornerRadius(10)
                         .overlay(
@@ -249,5 +260,11 @@ struct ShareSheet: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
         // Do nothing
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
