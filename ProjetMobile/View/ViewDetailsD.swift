@@ -18,6 +18,7 @@ enum Tab {
 
 
 struct ViewDetailsD: View {
+    
     @State private var showCommentView = false
     
     @State private var isDetailsExpanded = false
@@ -35,31 +36,31 @@ struct ViewDetailsD: View {
                         .background(Image("Rectangle 33"))
                         .cornerRadius(30)
                         .offset(x: 0, y: 0)
-                    Text(event.title ?? "")
+                    Text(event.title )
                         .font(.title)
                         .fontWeight(.bold)
-                    Text(event.description ?? "")
+                    Text(event.description )
                         .font(.body)
                         .multilineTextAlignment(.leading)
                     HStack {
                         Image(systemName: "person")
                             .foregroundColor(.green)
                         
-//                        Text("Organizers: \(event.organisateur?.joined(separator: ", ") ?? "No organizer specified")")
+//                        Text("Organizers: \(event.organiser.joined(separator: ", ") ?? "No organizer specified")")
                     }
 
-//                    HStack {
-//                        Image(systemName: "calendar")
-//                            .foregroundColor(.green)
-//                        Text("Date: \(event.date?.description ?? "No date specified")")
-//                    }
+                    HStack {
+                        Image(systemName: "calendar")
+                            .foregroundColor(.green)
+                        Text("Planned : \(event.date?.formatted() ?? "")")
+                    }
 
                     HStack {
                         Image(systemName: "location")
                             .foregroundColor(.green)
-//                        Text("Location: \(event.location ?? "No location specified")")
-//                            .font(.subheadline)
-//                            .foregroundColor(.gray)
+                        Text("Location: \(event.location ?? "No location specified")")
+                        .font(.subheadline)
+                           .foregroundColor(.gray)
                     }
 
                     HStack {
@@ -71,20 +72,20 @@ struct ViewDetailsD: View {
                     }
 
                     
-//                    if let isFree = event.isFree {
-//                        if isFree {
-//                            Text("Free Event")
-//                                .font(.subheadline)
-//                                .foregroundColor(.green)
-//                        } else {
-//                            Text("Paid Event")
-//                                .font(.subheadline)
-//                                .foregroundColor(.red)
-//                        }
-//                    } else {
-//                        // Handle the case when isFree is nil
-//                        // You might want to provide a default behavior or display an error message
-//                    }
+                    if let isFree = event.isFree {
+                        if isFree {
+                            Text("Free Event")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                        } else {
+                            Text("Paid Event")
+                                .font(.subheadline)
+                                .foregroundColor(.red)
+                        }
+                    } else {
+                        // Handle the case when isFree is nil
+                        // You might want to provide a default behavior or display an error message
+                    }
 
                     
                     
@@ -134,8 +135,8 @@ struct ViewDetailsD: View {
                                 Text("A propos")
                                     .font(.headline)
                                     
-//                                Text(event.details ?? "" )
-//                                    .font(.body)
+                                Text(event.details)
+                                    .font(.body)
                             }
                             
                         }}
@@ -155,9 +156,16 @@ struct ViewDetailsD: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding()
-                    Text("Event Description :\(event.description ?? "")")
+                    Text("Event Description :\(event.description )")
                         .font(.body)
                         .padding()
+                    Image(systemName: "calendar")
+                        .foregroundColor(.green)
+                    Text("Date: \(event.date?.formatted() ?? "" )")
+                    Text(event.details)
+                        .font(.body)
+                    
+                    
                 }
             }
         }
@@ -202,7 +210,7 @@ struct ViewDetailsD: View {
                 }
             }
         }
-        
+
         
 //        struct ViewDetailsD_Previews: PreviewProvider {
 //            static var previews: some View {

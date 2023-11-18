@@ -25,6 +25,7 @@ class EventViewModel: ObservableObject {
                 do {
                     let jsonData = try JSONDecoder().decode(Events.self, from: data)
                     DispatchQueue.main.async {
+                        // Mettre à jour events sur le thread principal
                         self.events = jsonData.events
                     }
                 } catch {
@@ -37,6 +38,7 @@ class EventViewModel: ObservableObject {
             }
         }.resume()
     }
+
 
 
 

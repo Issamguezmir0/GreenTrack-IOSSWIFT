@@ -1,11 +1,11 @@
 import SwiftUI
 
-extension Image {
-    func toData() -> Data? {
-        guard let uiImage = UIImage(named: "yourImageName") else { return nil }
-              return uiImage.jpegData(compressionQuality: 1.0)
-    }
-}
+//extension Image {
+//    func toData() -> Data? {
+//        guard let uiImage = UIImage(named: "yourImageName") else { return nil }
+//              return uiImage.jpegData(compressionQuality: 1.0)
+//    }
+//}
 
 struct AddChallengeView: View {
     @State private var title = ""
@@ -65,10 +65,10 @@ struct AddChallengeView: View {
     
     func saveEvent() {
         // Vérifiez si une image a été sélectionnée
-        guard let selectedImageData = selectedImage?.toData() else {
-            print("No image selected")
-            return
-        }
+//        guard let selectedImageData = selectedImage?.toData() else {
+//            print("No image selected")
+//            return
+//        }
         
         // Convertissez l'URL de votre API
         guard let apiUrl = URL(string: "http://172.20.10.5:8000/challenge/events") else {
@@ -89,7 +89,7 @@ struct AddChallengeView: View {
             "organiser": organiser,
             "details": details,
             "priceInDinars": priceInDinars, // Incluez le prix en dinars s'il ne s'agit pas d'un événement gratuit
-            "image": selectedImageData // Incluez les données de l'image
+            //"image": selectedImageData // Incluez les données de l'image
         ]
         
         do {
