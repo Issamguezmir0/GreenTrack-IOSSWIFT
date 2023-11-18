@@ -10,7 +10,7 @@ import Foundation
 class APIManager {
     
     static let shared = APIManager()
-    private let baseURL = "http://localhost:3000"
+    private let baseURL = "http://localhost:3002"
     /*
     func signup(fullname: String, password: String, email: String, completion: @escaping(Result<User, Error>) -> Void) {
         guard let signupURL = URL(string: baseURL + "/auth/signup") else {
@@ -41,10 +41,10 @@ class APIManager {
     }*/
     func signup(data: Data, completion: @escaping (Result<Void, Error>) -> Void) {
             // Replace the placeholder URL with your actual signup endpoint
-            let url = URL(string: "http://localhost:3000/auth/signup")!
+            let url = URL(string: "http://localhost:3002/auth/signup")!
             
             var request = URLRequest(url: url)
-            request.httpMethod = "POST"
+            request.httpMethod = "PUT"
             request.httpBody = data
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
@@ -59,7 +59,7 @@ class APIManager {
         }
     
     func login(data: Data, completion: @escaping (Result<Data, Error>) -> Void) {
-        let url = URL(string: "http://localhost:3000/auth/signin")!
+        let url = URL(string: "http://localhost:3002/auth/signin")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

@@ -66,6 +66,7 @@ class userViewModel1: ObservableObject {
                     // Handle successful signup
                     //self.signupError = "Signup Success"
                     print("Signup successful")
+                    
                 case .failure(let error):
                     // Handle signup failure
                     //self.signupError = "Signup failed: \(error.localizedDescription)"
@@ -79,7 +80,7 @@ class userViewModel1: ObservableObject {
     func login() {
         
         // Create a JSON body with the user's credentials
-        let apiUrl = URL(string: "http://localhost:3000/auth/signin")!
+        let apiUrl = URL(string: "http://localhost:3002/auth/signin")!
         
         let requestBody: [String: Any] = [
             "email": email,

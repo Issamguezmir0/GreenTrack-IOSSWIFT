@@ -10,8 +10,17 @@ import SwiftUI
 struct SignUpView: View {
     
     @State private var navigateToLocation = false
+    @State private var verifyPass = ""
+    @ObservedObject var ViewModel1: userViewModel1
+    @State private var isFullNameValid = true
+    @State private var isEmailValid = true
+    @State private var isPasswordValid = true
+    @State private var isPasswordMatch = true
+    
+    var isFormValid: Bool {
+           return isFullNameValid && isEmailValid && isPasswordValid && isPasswordMatch
+       }
 
-    @ObservedObject var userViewModel1: userViewModel1
     var body: some View {
         NavigationStack{
         ZStack {
@@ -19,11 +28,14 @@ struct SignUpView: View {
                 Text("Create an account😀")
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .padding(.bottom, 5)
                     
                 Text("Connect with your friends today! 👋")
                     .font(.title3)
                     .foregroundColor(.gray)
                     .frame(alignment: .leading)
+                    .padding(.bottom, 20)
+                    
                     
 
                 Text("Full Name : ")
@@ -35,9 +47,17 @@ struct SignUpView: View {
                 
 
                 VStack {
-                    TextField("Enter your fullname", text: $userViewModel1.fullname)
+                    TextField("", text: $ViewModel1.fullname)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
+                    
+                        .onChange(of: ViewModel1.fullname) { newValue in
+                                    isFullNameValid = newValue.count >= 8
+                                }
+
+                            if !isFullNameValid {
+                                Text("Full name must be at least 8 characters.")
+                                    .foregroundColor(.red)
+                            }
                 }
 
                 Text("Email Address :")
@@ -48,24 +68,40 @@ struct SignUpView: View {
                     .fontWeight(.bold)
 
                 VStack {
-                    TextField("Enter your Email address", text: $userViewModel1.email)
+                    TextField("", text: $ViewModel1.email)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .onChange(of: ViewModel1.email) { newValue in
+                                   isEmailValid = isValidEmail(newValue)
+                               }
+
+                           if !isEmailValid {
+                               Text("Invalid email address.")
+                                   .foregroundColor(.red)
+                           }
                        
                 }
 
                 VStack {
-                    Text("Password")
+                    Text("Password :")
                         .font(.title3)
                         .foregroundColor(.green)
                         .frame(alignment: .leading)
                         .padding(.leading, -180)
                         .fontWeight(.bold)
 
-                    SecureField("Please Enter your Password", text: $userViewModel1.password)
+                    SecureField("", text: $ViewModel1.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .onChange(of: ViewModel1.password) { newValue in
+                                   isPasswordValid = newValue.count >= 8
+                               }
+
+                           if !isPasswordValid {
+                               Text("Password must be at least 8 characters.")
+                                   .foregroundColor(.red)
+                           }
                         
 
-                    Text("Verify password")
+                    Text("Verify password :")
                         .font(.title3)
                         .foregroundColor(.green)
                         .frame(alignment: .leading)
@@ -73,19 +109,32 @@ struct SignUpView: View {
                         .fontWeight(.bold)
                     
 
-                    SecureField("Please Enter your Password", text: $userViewModel1.password)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    VStack {
+                        SecureField("", text: $verifyPass)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .background(Color.red.opacity(isPasswordMatch ? 0 : 0.3))
+                            .onChange(of: verifyPass) { newValue in
+                                isPasswordMatch = newValue == ViewModel1.password
+                            }
+
+                        if !isPasswordMatch {
+                            Text("Passwords do not match.")
+                                .foregroundColor(.red)
+                        }
+                    }
+                    
+                        
                         
                         
                     
-                    NavigationLink(destination: SignInView(LoginViewModel: LoginViewModel()), isActive: $navigateToLocation) {
+                    NavigationLink(destination: SignInView(ViewModel: LoginViewModel()), isActive: $navigateToLocation) {
                         
                     }
                     Divider()
                     Button("Sign Up") {
                        
                     action: do {
-                        userViewModel1.signup()
+                        ViewModel1.signup()
                         navigateToLocation = true
                     }}
                     .font(.title2)
@@ -94,25 +143,11 @@ struct SignUpView: View {
                     .padding()
                     .background(Color.green)
                     .foregroundColor(.white)
-                    .cornerRadius(10)
+                    .cornerRadius(50)
                     
-                   /* Button(action: {
-                        userViewModel1.signup()
-                                        }) {
-                                            Text("Sign Up")
-                                                .font(.title2)
-                                                .fontWeight(.bold)
-                                                .frame(maxWidth: .infinity)
-                                                .padding()
-                                                .background(Color.green)
-                                                .foregroundColor(.white)
-                                                .cornerRadius(10)
-                                                .frame(width: 402, height: 50)
-                                            
-                                          
-                                        }*/
+             
 
-
+                    
                     Text("Or With")
                         .foregroundColor(.gray)
                         .frame(alignment: .leading)
@@ -161,7 +196,7 @@ struct SignUpView: View {
                 HStack {
                     Text("Already have an account ?")
                     
-                    NavigationLink(destination: SignInView(LoginViewModel: LoginViewModel())){ Text("Login")
+                    NavigationLink(destination: SignInView(ViewModel: LoginViewModel())){ Text("Login")
                             .font(.title3)
                             .foregroundColor(.green)
                     }
@@ -171,10 +206,14 @@ struct SignUpView: View {
         }
         }
     }
+    func isValidEmail(_ email: String) -> Bool {
+           let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+           return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+       }
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(userViewModel1: userViewModel1())
+        SignUpView(ViewModel1: userViewModel1())
     }
 }

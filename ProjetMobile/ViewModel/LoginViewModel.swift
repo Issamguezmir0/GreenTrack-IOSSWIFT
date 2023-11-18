@@ -11,10 +11,13 @@ class LoginViewModel: ObservableObject {
     
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var isNavigationActive: Bool = false
     func login() {
-        
+        DispatchQueue.main.async {
+                   //// Show loading view
+                         }
         // Create a JSON body with the user's credentials
-        let apiUrl = URL(string: "http://localhost:3000/auth/signin")!
+        let apiUrl = URL(string: "http://localhost:3002/auth/signin")!
         
         let requestBody: [String: Any] = [
             "email": email,
@@ -47,7 +50,10 @@ class LoginViewModel: ObservableObject {
                         print("Error parsing JSON: \(error.localizedDescription)")
                     }
                 }
-                
+                DispatchQueue.main.async {
+                                   // self.isLoading = false
+                                    self.isNavigationActive = true
+                                }
             }.resume()
             
         } catch {

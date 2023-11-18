@@ -18,7 +18,7 @@ struct GetStartedView: View {
                     .frame(height: 300)
                 
               VStack {
-                   NavigationLink(destination: SignInView(LoginViewModel: LoginViewModel()), isActive: $navigateToLocation) {
+                   NavigationLink(destination: SignInView(ViewModel: LoginViewModel()), isActive: $navigateToLocation) {
                         
                     }
                     

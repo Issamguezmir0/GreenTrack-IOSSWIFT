@@ -19,7 +19,7 @@ struct MailChangingPasswordView: View {
 
         ZStack {
                    VStack(alignment: .leading) {
-                       // ... (autres éléments)
+                   
 
                        VStack {
                            SecureField("Please Enter your new Password", text: $password)
@@ -67,7 +67,6 @@ struct MailChangingPasswordView: View {
                }.padding()
            }
            
-           // ... (autres fonctions)
 
            func checkIfPasswordsEqual() -> Bool {
                return password == verifyPassword

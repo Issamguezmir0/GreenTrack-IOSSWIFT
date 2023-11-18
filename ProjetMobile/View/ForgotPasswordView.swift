@@ -11,11 +11,13 @@ struct ForgotPasswordView: View {
     @State private var num_tel = ""
     @State private var isPasswordResetSent = false
     @State private var password = ""
-    @State private var isEmailValid = true
+    @State private var isPhoneNumberValid = true
+    @State private var navigateToLocation = false
+
     
     var body: some View {
         VStack {
-            VStack{
+            VStack {
                 Text("Enter your phone number please ")
                     .font(.title3)
                     .foregroundColor(.green)
@@ -23,22 +25,25 @@ struct ForgotPasswordView: View {
                     .frame(alignment: .leading)
             }
             
-            VStack{
-                TextField("Enter Your phone", text: $num_tel)
+            VStack {
+                TextField("+216", text: $num_tel)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .onChange(of: num_tel, perform: { newValue in
-                        isEmailValid = isValidEmail(newValue)
-                                           })
-            }
-            if !isEmailValid {
-                                Text("Invalid email address")
-                                    .foregroundColor(.red)
-                            }
-            
-            VStack{
+                        isPhoneNumberValid = isValidPhoneNumber(newValue)
+                    })
                 
-                Button("Send"){
-                    
+                if !isPhoneNumberValid {
+                    Text("Invalid phone number , should start with +216")
+                        .foregroundColor(.red)
+                }
+            }
+            
+            VStack {
+                NavigationLink( destination: CheckCodeView(), isActive: $navigateToLocation){
+                    
+                }
+                Button("Send") {
+                    // Implement the action to send the password reset request
                 }
                 .font(.title2)
                 .fontWeight(.bold)
@@ -50,18 +55,17 @@ struct ForgotPasswordView: View {
             }
             
         }.padding()
-        
     }
     
-    func isValidEmail(_ email: String) -> Bool {
-            let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}")
-            return emailPredicate.evaluate(with: email)
-        }
-    
-    struct ForgotPasswordView_Previews: PreviewProvider {
-        static var previews: some View {
-            ForgotPasswordView()
-        }
+    func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
+        // Check if the phoneNumber starts with "+216"
+        return phoneNumber.hasPrefix("+216") && phoneNumber.count >= 5
     }
-    
 }
+
+struct ForgotPasswordView_Previews: PreviewProvider {
+    static var previews: some View {
+        ForgotPasswordView()
+    }
+}
+
