@@ -20,10 +20,15 @@ class ConsommationViewModel: ObservableObject {
     @Published var consommation: Consommation?
     @Published var totalForDay: Double = 0.0
     @Published var totalByType: Double = 0.0
+    
+    
+      
+        @Published var wasteEmissions: Double = 0.0
+        @Published var transportEmissions: Double = 0.0
+        @Published var energyConsumption: Double = 0.0
 
-    @Published var energyConsumption: Double = 0.0
-    @Published var transportEmissions: Double = 0.0
-    @Published var wasteEmissions: Double = 0.0
+
+   
     
     var emissionPercentages: [Double] {
         let total = totalForDay
