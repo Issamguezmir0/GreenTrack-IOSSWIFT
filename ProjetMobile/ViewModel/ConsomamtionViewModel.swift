@@ -35,7 +35,7 @@ class ConsommationViewModel: ObservableObject {
     }
 
     func saveToDatabase(type: String, valeur: Double, completion: @escaping (Result<Void, Error>) -> Void) {
-        let endpoint = "http://192.168.246.223:8000/consom/add"
+        let endpoint = "http://192.168.224.223:8000/consom/add"
         
         let parameters: [String: Any] = [
             "type": type,
@@ -54,26 +54,38 @@ class ConsommationViewModel: ObservableObject {
     }
 
     func calculateTotalByType(type: String, completion: @escaping (Result<Double, Error>) -> Void) {
-            let endpoint = "http://192.168.246.223:8000/consom/totalType"
+        let endpoint = "http://192.168.224.223:8000/consom/totalType"
 
-            let parameters: [String: Any] = [
-                "type": type
-            ]
+        let parameters: [String: Any] = [
+            "type": type
+        ]
 
-            AF.request(endpoint, method: .get, parameters: parameters, encoding: JSONEncoding.default)
-                .validate()
-                .responseDecodable(of: Double.self) { response in
-                    switch response.result {
-                    case .success(let total):
-                        completion(.success(total))
-                    case .failure(let error):
-                        completion(.failure(error))
+        AF.request(endpoint, method: .get, parameters: parameters, encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodable(of: Double.self) { response in
+                switch response.result {
+                case .success(let total):
+                    // Mettez à jour les propriétés appropriées
+                    if type.lowercased() == "waste" {
+                        self.wasteEmissions = total
+                    } else if type.lowercased() == "Transport" {
+                        self.transportEmissions = total
+                    } else if type.lowercased() == "Domestique" {
+                        self.energyConsumption = total
                     }
+
+                    // Imprimez le total pour vous assurer qu'il est correct
+                    print("\(type) total: \(total)")
+
+                    completion(.success(total))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-        }
+            }
+    }
 
         func calculateTotalForDay(completion: @escaping (Result<Double, Error>) -> Void) {
-            let endpoint = "http://192.168.246.223:8000/consom/total"
+            let endpoint = "http://192.168.224.223:8000/consom/total"
 
             AF.request(endpoint, method: .get, encoding: JSONEncoding.default)
                 .validate()

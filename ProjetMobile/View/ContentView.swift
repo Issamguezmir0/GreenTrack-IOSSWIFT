@@ -2,9 +2,6 @@ import Foundation
 import Alamofire
 import SwiftUI
 
-// ViewModel
-
-
 struct ContentView: View {
     @StateObject private var viewModel = ConsommationViewModel()
     @State private var selectedDate = Date()
@@ -47,15 +44,12 @@ struct ContentView: View {
                 }
                 .padding()
 
-               /* BarChartView(
-                    percentages: [viewModel.energyConsumption / totalEmissions, viewModel.transportEmissions / totalEmissions, viewModel.wasteEmissions / totalEmissions],
-                    labels: ["Énergie", "Transport", "Déchets"]
-                )*/
-                BarChartView(
-                            percentages: viewModel.emissionPercentages,
-                            labels: ["Énergie", "Transport", "Déchets"]
-                        )
-                Spacer()
+                Text("Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2")
+                    .padding()
+                Text("Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
+                    .padding()
+                Text("Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
+                    .padding()
 
                 HStack(spacing: 20) {
                     NavigationLink(destination: EnergyCalculatorView()) {
@@ -115,29 +109,6 @@ struct ContentView: View {
                 }
                 .padding()
 
-                Button(action: {
-                    self.refreshData()
-                }) {
-                    HStack {
-                        Image(systemName: isRefreshing ? "arrow.clockwise.circle.fill" : "arrow.clockwise.circle")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(Color.green)
-                        Text("Actualiser")
-                            .foregroundColor(Color.green)
-                            .font(.headline)
-                    }
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white)
-                            .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                    )
-                }
-                .disabled(isRefreshing)
-                .padding()
-
                 Spacer()
             }
             .padding()
@@ -154,7 +125,7 @@ struct ContentView: View {
         """
         Date: \(formattedDate)
         Total empreinte: \(String(format: "%.2f", totalEmissions)) kg CO2
-        Énergie: \(String(format: "%.2f", viewModel.energyConsumption)) kg CO2
+        Énergie: \(String(format: "%.2f", energyConsumption))45 kg CO2
         Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2
         Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2
         """
@@ -163,64 +134,56 @@ struct ContentView: View {
     private func refreshData() {
         isRefreshing = true
 
-        viewModel.calculateTotalByType(type: "waste") { result in
-            switch result {
-            case .success(let total):
-                print("Waste total: \(total)")
-                self.viewModel.wasteEmissions = total
-                self.refreshTotalEmissions()
-            case .failure(let error):
-                print("Error calculating total for waste: \(error)")
-                self.isRefreshing = false
-            }
-        }
+        let types = ["Waste", "Transport", "Domestique"]
 
-        viewModel.calculateTotalByType(type: "Transport") { result in
-            switch result {
-            case .success(let total):
-                print("Waste total: \(total)")
-                print("Error calculating total for Transport: ")
-                self.viewModel.transportEmissions = total
-                self.refreshTotalEmissions()
-            case .failure(let error):
-                print("Error calculating total for Transport: \(error)")
-                self.isRefreshing = false
-            }
-        }
+        for type in types {
+            viewModel.calculateTotalByType(type: type) { result in
+                switch result {
+                case .success(let total):
+                    // Mettez à jour les valeurs appropriées dans votre modèle ou ailleurs
+                    if type.lowercased() == "Waste" {
+                        self.viewModel.wasteEmissions = total
+                    } else if type.lowercased() == "transport" {
+                        self.viewModel.transportEmissions = total
+                    } else if type.lowercased() == "domestique" {
+                        self.energyConsumption = total
+                        self.viewModel.energyConsumption = total
+                    }
 
-        viewModel.calculateTotalByType(type: "Domestique") { result in
-            switch result {
-            case .success(let total):
-                
-                self.viewModel.energyConsumption = total
-                self.refreshTotalEmissions()
-                print("Waste total: \(total)")
-            case .failure(let error):
-                print("Error calculating total for Domestique: \(error)")
-                self.isRefreshing = false
+                    // Imprimez pour vous assurer que les valeurs sont correctes
+                    print("\(type) total: \(total)")
+                    
+                    self.refreshTotalEmissions()
+                case .failure(let error):
+                    print("Error calculating total for \(type): \(error)")
+                    self.isRefreshing = false
+                }
             }
         }
+        
 
         viewModel.calculateTotalForDay { result in
             switch result {
             case .success(let totalForDay):
-                
                 print("Total empreinte for the day: \(totalForDay)")
+                print("energy  \(energyConsumption)" )
+                print("energy  \(viewModel.transportEmissions )" )
+                print("energy  \(self.viewModel.wasteEmissions)" )
                 viewModel.totalForDay = totalForDay
             case .failure(let error):
                 print("Error calculating total for the day: \(error)")
             }
-                
-                self.isRefreshing = false
+
+            self.isRefreshing = false
         }
     }
 
     private func refreshTotalEmissions() {
         viewModel.objectWillChange.send()
+        print("azeffaaerf")
     }
 }
 
-// BarChartView et ShareSheet
 struct BarChartView: View {
     let percentages: [Double]
     let labels: [String]
