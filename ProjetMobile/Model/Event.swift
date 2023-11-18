@@ -34,7 +34,8 @@ struct Event: Identifiable, Codable {
     let date: Date?
     let location : String
     let isFree : Bool
-    //let organiser : [String]
+    let organisateurs : [String]
+    let participants : [String]
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,8 +45,8 @@ struct Event: Identifiable, Codable {
         case date
         case location
         case isFree
-       // case organiser
-        
+        case organisateurs
+        case participants
 
     }
   
@@ -73,7 +74,8 @@ struct Event: Identifiable, Codable {
         self.details = try container.decode(String.self, forKey: .details)
         self.location = try container.decode(String.self, forKey: .location)
         self.isFree = try container.decode(Bool.self, forKey: .isFree)
-        //self.organiser = try container.decode([String].self, forKey: .organiser)
+        self.organisateurs = try container.decode([String].self, forKey: .organisateurs)
+        self.participants = try container.decode([String].self, forKey: .participants)
         
     }
 }

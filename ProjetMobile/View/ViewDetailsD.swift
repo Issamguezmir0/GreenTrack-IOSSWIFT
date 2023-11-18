@@ -46,7 +46,17 @@ struct ViewDetailsD: View {
                         Image(systemName: "person")
                             .foregroundColor(.green)
                         
-//                        Text("Organizers: \(event.organiser.joined(separator: ", ") ?? "No organizer specified")")
+                        if !event.organisateurs.isEmpty {
+                            ForEach(event.organisateurs, id: \.self) { organisateurs in
+                                Text(organisateurs)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                        } else {
+                            Text("No organizer specified")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
                     }
 
                     HStack {
@@ -58,7 +68,7 @@ struct ViewDetailsD: View {
                     HStack {
                         Image(systemName: "location")
                             .foregroundColor(.green)
-                        Text("Location: \(event.location ?? "No location specified")")
+                        Text("Location: \(event.location )")
                         .font(.subheadline)
                            .foregroundColor(.gray)
                     }
@@ -66,10 +76,20 @@ struct ViewDetailsD: View {
                     HStack {
                         Image(systemName: "person.3")
                             .foregroundColor(.green)
-//                        Text("Participants: \(event.participants?.joined(separator: ", ") ?? "No participants specified")")
-//                        .font(.subheadline)
-//                        .foregroundColor(.gray)
+                        
+                        if !event.participants.isEmpty {
+                            ForEach(event.participants, id: \.self) { participants in
+                                Text(participants)
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                        } else {
+                            Text("No participants specified")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
                     }
+
 
                     
                     if let isFree = event.isFree {

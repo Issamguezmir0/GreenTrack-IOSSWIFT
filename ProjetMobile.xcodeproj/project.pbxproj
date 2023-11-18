@@ -99,7 +99,6 @@
 		A8D604822B053D24002AF406 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				A8D604852B053D48002AF406 /* EventViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -168,6 +167,7 @@
 		DB8A59FC2AF9685A00D97E35 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A8D604852B053D48002AF406 /* EventViewModel.swift */,
 				DB8A59D32AF962A300D97E35 /* ContentView.swift */,
 				B8F72B4F2AFAA57D00388C04 /* ChallengeView.swift */,
 				B8F72B512AFAA5FD00388C04 /* HomeView.swift */,
