@@ -7,7 +7,6 @@ struct ConsommationsData: Decodable {
 }
 
 struct Consommation: Decodable {
-  
     var type: String?
     var valeur: Double?
     
@@ -15,3 +14,4 @@ struct Consommation: Decodable {
         case type, valeur
     }
 }
+

@@ -10,6 +10,9 @@ import SwiftUI
 struct TransportCalculatorView: View {
     @State private var distance: Double = 0
     @State private var selectedTransportMode: String = "Car"
+    @State private var distanceInfoAlert = false
+    @State private var transportModeInfoAlert = false
+    
     let transportModes = ["Car", "Bike", "Public Transport", "Walking", "Motorcycle"]
     let daysInMonth: Double = 30.44 // Moyenne de jours dans un mois
     
@@ -22,20 +25,26 @@ struct TransportCalculatorView: View {
                 
                 HStack {
                     Text("Distance parcourue (km) :")
-                    TextField("Entrez la distance", text: Binding<String>(
-                        get: { String(format: "%.2f", distance) },
-                        set: {
-                            if let value = NumberFormatter().number(from: $0) {
-                                distance = value.doubleValue
-                            }
-                        }
-                    ))
-                    .padding()
-                    .background(Color.white.opacity(0.4))
-                    .cornerRadius(10)
+                    TextField("Entrez la distance", value: $distance, formatter: NumberFormatter())
+                        .padding()
+                        .background(Color.white.opacity(0.4))
+                        .cornerRadius(10)
+
+                    Button(action: {
+                        distanceInfoAlert.toggle()
+                    }) {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .padding(.leading, 5)
+                    }
+                    .alert(isPresented: $distanceInfoAlert) {
+                        Alert(title: Text("Information"),
+                              message: Text("La distance parcourue représente le nombre de kilomètres que vous avez parcourus pendant la période spécifiée."),
+                              dismissButton: .default(Text("OK")))
+                    }
                 }
                 .padding()
-                
+
                 Picker("Mode de transport :", selection: $selectedTransportMode) {
                     ForEach(transportModes, id: \.self) {
                         Text($0)
@@ -81,8 +90,6 @@ struct TransportCalculatorView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-                    
-                  
                 }
                 .padding()
             }
@@ -121,20 +128,19 @@ struct TransportCalculatorView: View {
         return 1 // Retourne une valeur par défaut, car la durée a été supprimée
     }
     
-        func saveToDatabase() {
-            let type = "Transport"
-            let valeur = calculateCarbonFootprint()
+    func saveToDatabase() {
+        let type = "Transport"
+        let valeur = calculateCarbonFootprint()
 
-            ConsommationViewModel().saveToDatabase(type: type, valeur: valeur) { result in
-                switch result {
-                case .success:
-                    print("Data saved successfully!")
-                case .failure(let error):
-                    print("Error saving data: \(error)")
-                }
+        ConsommationViewModel().saveToDatabase(type: type, valeur: valeur) { result in
+            switch result {
+            case .success:
+                print("Data saved successfully!")
+            case .failure(let error):
+                print("Error saving data: \(error)")
             }
         }
-    
+    }
     
     func resetValues() {
         // Remettez les valeurs à zéro

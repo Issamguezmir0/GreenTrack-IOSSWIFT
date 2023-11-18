@@ -10,6 +10,9 @@ import SwiftUI
 struct WasteCalculatorView: View {
     @State private var wasteWeight: Double = 0
     @State private var selectedWasteType: String = "General"
+    @State private var wasteWeightInfoAlert = false
+    @State private var wasteTypeInfoAlert = false
+
     let wasteTypes = ["General", "Recyclable", "Organic", "Hazardous"]
     let daysInMonth: Double = 30.44 // Moyenne de jours dans un mois
 
@@ -22,17 +25,23 @@ struct WasteCalculatorView: View {
 
                 HStack {
                     Text("Poids des déchets (kg) :")
-                    TextField("Entrez le poids", text: Binding<String>(
-                        get: { String(format: "%.2f", wasteWeight) },
-                        set: {
-                            if let value = NumberFormatter().number(from: $0) {
-                                wasteWeight = value.doubleValue
-                            }
-                        }
-                    ))
-                    .padding()
-                    .background(Color.white.opacity(0.4))
-                    .cornerRadius(10)
+                    TextField("Entrez le poids", value: $wasteWeight, formatter: NumberFormatter())
+                        .padding()
+                        .background(Color.white.opacity(0.4))
+                        .cornerRadius(10)
+
+                    Button(action: {
+                        wasteWeightInfoAlert.toggle()
+                    }) {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .padding(.leading, 5)
+                    }
+                    .alert(isPresented: $wasteWeightInfoAlert) {
+                        Alert(title: Text("Information"),
+                              message: Text("Le poids des déchets représente la quantité totale de déchets générés pendant la période spécifiée."),
+                              dismissButton: .default(Text("OK")))
+                    }
                 }
                 .padding()
 
@@ -81,8 +90,6 @@ struct WasteCalculatorView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-
-                
                 }
                 .padding()
             }
@@ -114,25 +121,19 @@ struct WasteCalculatorView: View {
         return carbonFootprint
     }
 
-   
-        func saveToDatabase() {
-            let type = "Waste"
-            let valeur = calculateCarbonFootprint()
+    func saveToDatabase() {
+        let type = "Waste"
+        let valeur = calculateCarbonFootprint()
 
-            ConsommationViewModel().saveToDatabase(type: type, valeur: valeur) { result in
-                switch result {
-                case .success:
-                    print("Data saved successfully!")
-                case .failure(let error):
-                    print("Error saving data: \(error)")
-                }
+        ConsommationViewModel().saveToDatabase(type: type, valeur: valeur) { result in
+            switch result {
+            case .success:
+                print("Data saved successfully!")
+            case .failure(let error):
+                print("Error saving data: \(error)")
             }
         }
-    
-        
-        
-        
-    
+    }
 
     func resetValues() {
         // Remettez les valeurs à zéro

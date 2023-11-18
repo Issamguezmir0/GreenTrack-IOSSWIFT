@@ -1,16 +1,12 @@
-//
-//  DomestiqueView.swift
-//  ProjetMobile
-//
-//  Created by atef on 7/11/2023.
-//
-
 import SwiftUI
 
 struct EnergyCalculatorView: View {
     @State private var electricityConsumption: Double = 0
     @State private var gasConsumption: Double = 0
     @State private var selectedEnergySource: String = "Renewable"
+    @State private var electricityInfoAlert = false
+    @State private var gasInfoAlert = false
+    
     let energySources = ["Renewable", "Natural Gas", "Coal", "Oil"]
     let daysInMonth: Double = 30.44 // Moyenne de jours dans un mois
     
@@ -23,36 +19,48 @@ struct EnergyCalculatorView: View {
                 
                 HStack {
                     Text("Consommation d'électricité (kWh) :")
-                    TextField("Entrez la consommation", text: Binding<String>(
-                        get: { String(format: "%.2f", electricityConsumption) },
-                        set: {
-                            if let value = NumberFormatter().number(from: $0) {
-                                electricityConsumption = value.doubleValue
-                            }
-                        }
-                    ))
-                    .padding()
-                    .background(Color.white.opacity(0.4))
-                    .cornerRadius(10)
+                    TextField("Entrez la consommation", value: $electricityConsumption, formatter: NumberFormatter())
+                        .padding()
+                        .background(Color.white.opacity(0.4))
+                        .cornerRadius(10)
+
+                    Button(action: {
+                        electricityInfoAlert.toggle()
+                    }) {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .padding(.leading, 5)
+                    }
+                    .alert(isPresented: $electricityInfoAlert) {
+                        Alert(title: Text("Information"),
+                              message: Text("La consommation d'électricité représente la quantité d'électricité utilisée en kilowattheures (kWh) pendant la période spécifiée. Utilisez votre facture d'électricité pour obtenir cette information."),
+                              dismissButton: .default(Text("OK")))
+                    }
                 }
                 .padding()
-                
+
                 HStack {
                     Text("Consommation de gaz (m³) :")
-                    TextField("Entrez la consommation", text: Binding<String>(
-                        get: { String(format: "%.2f", gasConsumption) },
-                        set: {
-                            if let value = NumberFormatter().number(from: $0) {
-                                gasConsumption = value.doubleValue
-                            }
-                        }
-                    ))
-                    .padding()
-                    .background(Color.white.opacity(0.4))
-                    .cornerRadius(10)
+                    TextField("Entrez la consommation", value: $gasConsumption, formatter: NumberFormatter())
+                        .padding()
+                        .background(Color.white.opacity(0.4))
+                        .cornerRadius(10)
+
+                    Button(action: {
+                        gasInfoAlert.toggle()
+                    }) {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .padding(.leading, 5)
+                    }
+                    .alert(isPresented: $gasInfoAlert) {
+                        Alert(title: Text("Information"),
+                              message: Text("La consommation de gaz représente la quantité de gaz naturel utilisée en mètres cubes (m³) pendant la période spécifiée. Utilisez votre facture de gaz pour obtenir cette information."),
+                              dismissButton: .default(Text("OK")))
+                    }
                 }
                 .padding()
-                
+
                 Picker("Source d'énergie :", selection: $selectedEnergySource) {
                     ForEach(energySources, id: \.self) {
                         Text($0)
@@ -97,14 +105,13 @@ struct EnergyCalculatorView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-                    
-                 
                 }
                 .padding()
             }
             .padding()
             .navigationBarBackButtonHidden(true)
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
     }
     
     func calculateCarbonFootprint() -> Double {

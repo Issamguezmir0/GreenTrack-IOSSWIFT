@@ -35,7 +35,7 @@ class ConsommationViewModel: ObservableObject {
     }
 
     func saveToDatabase(type: String, valeur: Double, completion: @escaping (Result<Void, Error>) -> Void) {
-        let endpoint = "http://192.168.224.223:8000/consom/add"
+        let endpoint = "http://192.168.222.223:8000/consom/add"
         
         let parameters: [String: Any] = [
             "type": type,
@@ -54,10 +54,10 @@ class ConsommationViewModel: ObservableObject {
     }
 
     func calculateTotalByType(type: String, completion: @escaping (Result<Double, Error>) -> Void) {
-        let endpoint = "http://192.168.224.223:8000/consom/totalType"
+        let endpoint = "http://192.168.222.223:8000/consom/totalType"
 
         let parameters: [String: Any] = [
-            "type": type
+            "type": type.lowercased() // Ensure lowercase here
         ]
 
         AF.request(endpoint, method: .get, parameters: parameters, encoding: JSONEncoding.default)
@@ -85,7 +85,7 @@ class ConsommationViewModel: ObservableObject {
     }
 
         func calculateTotalForDay(completion: @escaping (Result<Double, Error>) -> Void) {
-            let endpoint = "http://192.168.224.223:8000/consom/total"
+            let endpoint = "http://192.168.222.223:8000/consom/total"
 
             AF.request(endpoint, method: .get, encoding: JSONEncoding.default)
                 .validate()

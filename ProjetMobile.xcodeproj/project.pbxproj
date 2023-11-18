@@ -10,6 +10,7 @@
 		88BA3C822B05315100FA63A1 /* Consommation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA3C812B05315100FA63A1 /* Consommation.swift */; };
 		88BA3C852B05332F00FA63A1 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 88BA3C842B05332F00FA63A1 /* Alamofire */; };
 		88BA3C872B0538CE00FA63A1 /* ConsomamtionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BA3C862B0538CE00FA63A1 /* ConsomamtionViewModel.swift */; };
+		B0412CE22B086BA4006EF425 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = B0412CE12B086BA4006EF425 /* SwiftUICharts */; };
 		DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */; };
 		DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CE2AF962A300D97E35 /* Persistence.swift */; };
 		DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */; };
@@ -68,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88BA3C852B05332F00FA63A1 /* Alamofire in Frameworks */,
+				B0412CE22B086BA4006EF425 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +196,7 @@
 			name = ProjetMobile;
 			packageProductDependencies = (
 				88BA3C842B05332F00FA63A1 /* Alamofire */,
+				B0412CE12B086BA4006EF425 /* SwiftUICharts */,
 			);
 			productName = ProjetMobile;
 			productReference = DB8A59C92AF962A300D97E35 /* ProjetMobile.app */;
@@ -269,6 +272,7 @@
 			mainGroup = DB8A59C02AF962A300D97E35;
 			packageReferences = (
 				88BA3C832B05332F00FA63A1 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				B0412CE02B086BA4006EF425 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = DB8A59CA2AF962A300D97E35 /* Products */;
 			projectDirPath = "";
@@ -674,6 +678,14 @@
 				kind = branch;
 			};
 		};
+		B0412CE02B086BA4006EF425 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -681,6 +693,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 88BA3C832B05332F00FA63A1 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		B0412CE12B086BA4006EF425 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0412CE02B086BA4006EF425 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 

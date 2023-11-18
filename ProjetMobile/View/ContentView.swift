@@ -140,8 +140,8 @@ struct ContentView: View {
             viewModel.calculateTotalByType(type: type) { result in
                 switch result {
                 case .success(let total):
-                    // Mettez à jour les valeurs appropriées dans votre modèle ou ailleurs
-                    if type.lowercased() == "Waste" {
+                    // Update the appropriate values in your model or elsewhere
+                    if type.lowercased() == "waste" {
                         self.viewModel.wasteEmissions = total
                     } else if type.lowercased() == "transport" {
                         self.viewModel.transportEmissions = total
