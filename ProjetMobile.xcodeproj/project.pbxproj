@@ -621,6 +621,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ProjetMobile/Preview Content\"";
+				DEVELOPMENT_TEAM = ZYBVJ8VRG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProjetMobile/Info.plist;
@@ -658,6 +659,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ProjetMobile/Preview Content\"";
+				DEVELOPMENT_TEAM = ZYBVJ8VRG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProjetMobile/Info.plist;

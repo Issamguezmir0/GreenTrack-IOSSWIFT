@@ -96,6 +96,31 @@ class VideosViewModel: ObservableObject {
            }
        }.resume()
    }
+    
+    func addLike(videoId: String) {
+        guard let url = URL(string: "http://localhost:8000/video/\(videoId)/like") else { return }
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
+                do {
+                    let jsonData = try JSONDecoder().decode(Videos.self, from: data)
+                    DispatchQueue.main.async {
+                        self.videos = jsonData.videos
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                    self.showError = true
+                }
+            } else {
+                print("Error adding like: \(error?.localizedDescription ?? "Unknown error")")
+                self.showError = true
+            }
+        }.resume()
+    }
+
 
    func patchVideo(video: VideoPlayers) {
        guard let id = video.id, let url = URL(string: "http://localhost:8000/video/\(id)") else { return }
