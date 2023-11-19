@@ -30,11 +30,13 @@ struct VideoPlayers: Identifiable, Codable {
     var id: String?
     var title: String? // Change to optional String
     var url: String?
+    var likes: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case url
+        case likes
     }
 }
 

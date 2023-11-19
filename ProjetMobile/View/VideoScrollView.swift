@@ -353,6 +353,7 @@ struct VideoHomeView: View {
         .onAppear {
             viewModel.getVideos()
         }
+        
     }
 }
 struct VideoCardView: View {
@@ -371,16 +372,37 @@ struct VideoCardView: View {
                         self.player = AVPlayer(url: videoURL)
                     }
                 }
-            
-            VStack {
+
+           
                 Spacer()
-                HStack {
+              
                     Text("\(video.title ?? "")")
-                        .font(.title) // Use a larger font
+                .font(.headline)
                         .foregroundColor(.white)
                         .shadow(radius: 20)
+                
+                        .padding(.top,650)
+                        .padding(.trailing,250)
+           
+            HStack(alignment: .bottom) {
+                
+                Spacer()
+                Button(action: {
+                    // Handle tapping the like button
+                    viewModel.addLike(videoId: video.id!)
+                }) {
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.red)
                 }
+                .padding(.top,600)
+                Text("\(video.likes ?? 0) ")
+                    .foregroundColor(.white)
+                    
             }
+            .padding(.trailing,55)
+           
 
             Image(systemName: "play.fill")
                 .foregroundColor(.white)
