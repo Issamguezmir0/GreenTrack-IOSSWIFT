@@ -120,6 +120,11 @@ class VideosViewModel: ObservableObject {
             }
         }.resume()
     }
+    
+    func getVideosSortedByLikes() {
+           videos = videos.sorted { $0.likes ?? 0 > $1.likes ?? 0 }
+       }
+
 
 
    func patchVideo(video: VideoPlayers) {

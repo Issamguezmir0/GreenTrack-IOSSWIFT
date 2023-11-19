@@ -315,14 +315,13 @@ struct VideoHomeView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
-                    ForEach(viewModel.videos) { video in
+                    ForEach(viewModel.videos.sorted(by: { $0.likes ?? 0 > $1.likes ?? 0 })) { video in
                         VideoCardView(video: video, player: $player, viewModel: viewModel)
                             .frame(maxWidth: .infinity)
                     }
                 }
                 .padding(16)
             }
-       
         }
         .overlay(
             Button(action: {
@@ -337,8 +336,7 @@ struct VideoHomeView: View {
                     .cornerRadius(30)
                     .shadow(radius: 3)
             }
-            .padding()
-            , alignment: .bottomTrailing
+            .padding(), alignment: .bottomTrailing
         )
         .sheet(isPresented: $showSheet) {
             VideoSheetView(player: $player, showError: $viewModel.showError) { title, url, _ in
@@ -347,15 +345,14 @@ struct VideoHomeView: View {
             }
         }
         .alert(isPresented: $viewModel.showError) {
-            Alert(title: Text("Failed to load"), dismissButton: .default(Text("OK"))
-            )
+            Alert(title: Text("Failed to load"), dismissButton: .default(Text("OK")))
         }
         .onAppear {
             viewModel.getVideos()
         }
-        
     }
 }
+
 struct VideoCardView: View {
     let video: VideoPlayers
     @Binding var player: AVPlayer?
