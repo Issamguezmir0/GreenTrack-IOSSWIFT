@@ -40,8 +40,9 @@ struct AddChallengeView: View {
                         self.showImagePicker = true
                     }
                     .sheet(isPresented: $showImagePicker) {
-                        ImagePicker(selectedImage: $selectedImage)
+                        ImagePicker(selectedImage: $selectedImage, isPresented: $showImagePicker)
                     }
+
                     
                     Toggle("Is it a paid event?", isOn: $isFree)
                     if !isFree {
@@ -50,7 +51,7 @@ struct AddChallengeView: View {
                 }
                 
                 Button(action: {
-                    saveEvent()
+                    saveEvent(with: <#Data#>)
                 }) {
                     Text("Save")
                 }
@@ -63,13 +64,22 @@ struct AddChallengeView: View {
         }
     }
     
-    func saveEvent() {
+    func saveEvent(with imageData: Data) {
         // Vérifiez si une image a été sélectionnée
 //        guard let selectedImageData = selectedImage?.toData() else {
 //            print("No image selected")
 //            return
 //        }
-        
+        guard let selectedImage = selectedImage else {
+                 print("No image selected")
+                 return
+             }
+             
+             guard let imageData = selectedImageToData(selectedImage) else {
+                 print("Failed to convert image to data")
+                 return
+             }
+             
         // Convertissez l'URL de votre API
         guard let apiUrl = URL(string: "http://172.20.10.5:8000/challenge/events") else {
             print("Invalid URL")
@@ -88,8 +98,8 @@ struct AddChallengeView: View {
             "participants": "",
             "organiser": organiser,
             "details": details,
-            "priceInDinars": priceInDinars, // Incluez le prix en dinars s'il ne s'agit pas d'un événement gratuit
-            //"image": selectedImageData // Incluez les données de l'image
+            "priceInDinars": priceInDinars,
+            "image": imageData
         ]
         
         do {
@@ -104,10 +114,18 @@ struct AddChallengeView: View {
                     print("Error: \(error.localizedDescription)")
                 } else if let data = data {
                     do {
-                        let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-                        print("Response: \(jsonResponse)")
+                        let decoder = JSONDecoder()
+                        let result = try decoder.decode(Events.self, from: data)
+                        // Update the UI or perform actions based on the response
+                        print("Response: \(result)")
+                        
+                        // Example: If you want to navigate to another view after successful response
+                        DispatchQueue.main.async {
+                            // Navigate to another view or perform an action here...
+                            // For example, dismiss the current view
+                        }
                     } catch {
-                        print("Error parsing JSON: \(error.localizedDescription)")
+                        print("Error decoding JSON: \(error.localizedDescription)")
                     }
                 }
             }.resume()
@@ -116,8 +134,19 @@ struct AddChallengeView: View {
         }
     }
 
-   
+    
+    func uiImageToData(_ uiImage: UIImage) -> Data? {
+           return uiImage.jpegData(compressionQuality: 1.0)
+       }
+    
+    
+    func selectedImageToData(_ selectedImage: Image) -> Data? {
+        guard let uiImage = UIImage(named: "myImage") else {
+            return nil
+        }
 
+        return uiImage.jpegData(compressionQuality: 1.0)
+    }
     
     struct AddChallengeView_Previews: PreviewProvider {
         static var previews: some View {
@@ -127,6 +156,7 @@ struct AddChallengeView: View {
     
     struct ImagePicker: UIViewControllerRepresentable {
         @Binding var selectedImage: Image?
+        @Binding var isPresented: Bool
         @Environment(\.presentationMode) var presentationMode
         
         func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -137,23 +167,27 @@ struct AddChallengeView: View {
         
         func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
         
-        func makeCoordinator() -> Coordinator {
-            Coordinator(self)
-        }
+      
         
         class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
             var parent: ImagePicker
-            
-            init(_ parent: ImagePicker) {
+
+            init(_ parent: AddChallengeView) {
                 self.parent = parent
             }
             
-            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-                if let uiImage = info[.originalImage] as? UIImage {
-                    parent.selectedImage = Image(uiImage: uiImage)
+            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+                    if let uiImage = info[.originalImage] as? UIImage {
+                        if let imageData = parent.uiImageToData(uiImage) {
+                            parent.selectedImage = Image(uiImage: uiImage)
+                            parent.saveEvent(with: imageData)
+                        }
+                    }
+                    parent.isPresented = false // Dismiss the ImagePicker
                 }
-                parent.presentationMode.wrappedValue.dismiss()
-            }
+        }
+        func makeCoordinator() -> Coordinator {
+            Coordinator(self)
         }
     }
 }

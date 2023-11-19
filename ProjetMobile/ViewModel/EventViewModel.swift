@@ -25,16 +25,19 @@ class EventViewModel: ObservableObject {
                 do {
                     let jsonData = try JSONDecoder().decode(Events.self, from: data)
                     DispatchQueue.main.async {
-                        // Mettre à jour events sur le thread principal
                         self.events = jsonData.events
                     }
                 } catch {
                     print("Error decoding JSON: \(error)")
-                    self.showError = true
+                    DispatchQueue.main.async {
+                        self.showError = true
+                    }
                 }
             } else {
                 print("Error fetching events: \(error?.localizedDescription ?? "Unknown error")")
-                self.showError = true
+                DispatchQueue.main.async {
+                    self.showError = true
+                }
             }
         }.resume()
     }

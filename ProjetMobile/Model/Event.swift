@@ -36,6 +36,7 @@ struct Event: Identifiable, Codable {
     let isFree : Bool
     let organisateurs : [String]
     let participants : [String]
+    let image: String
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -47,6 +48,7 @@ struct Event: Identifiable, Codable {
         case isFree
         case organisateurs
         case participants
+        case image
 
     }
   
@@ -76,6 +78,7 @@ struct Event: Identifiable, Codable {
         self.isFree = try container.decode(Bool.self, forKey: .isFree)
         self.organisateurs = try container.decode([String].self, forKey: .organisateurs)
         self.participants = try container.decode([String].self, forKey: .participants)
+        self.image = try container.decode(String.self, forKey: .image)
         
     }
 }
