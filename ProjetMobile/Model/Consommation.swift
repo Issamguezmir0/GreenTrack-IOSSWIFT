@@ -1,8 +1,8 @@
 struct ConsommationsData: Decodable {
-    let consommations: [Consommation]?
+    let value: Double?
     
     enum CodingKeys: String, CodingKey {
-        case consommations = "consommations"
+        case value
     }
 }
 

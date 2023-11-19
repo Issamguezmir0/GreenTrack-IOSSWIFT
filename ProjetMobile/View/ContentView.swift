@@ -141,11 +141,11 @@ struct ContentView: View {
                 switch result {
                 case .success(let total):
                     // Update the appropriate values in your model or elsewhere
-                    if type.lowercased() == "waste" {
+                    if type.lowercased() == "Waste" {
                         self.viewModel.wasteEmissions = total
                     } else if type.lowercased() == "transport" {
                         self.viewModel.transportEmissions = total
-                    } else if type.lowercased() == "domestique" {
+                    } else if type.lowercased() == "Domestique" {
                         self.energyConsumption = total
                         self.viewModel.energyConsumption = total
                     }

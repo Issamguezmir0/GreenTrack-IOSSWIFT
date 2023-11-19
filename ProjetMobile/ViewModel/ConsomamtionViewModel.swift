@@ -40,7 +40,7 @@ class ConsommationViewModel: ObservableObject {
     }
 
     func saveToDatabase(type: String, valeur: Double, completion: @escaping (Result<Void, Error>) -> Void) {
-        let endpoint = "http://192.168.222.223:8000/consom/add"
+        let endpoint = "http://192.168.124.223:8000/consom/add"
         
         let parameters: [String: Any] = [
             "type": type,
@@ -57,29 +57,39 @@ class ConsommationViewModel: ObservableObject {
                 }
             }
     }
+ 
+
+    struct TotalResponse: Decodable {
+        let total: Double
+    }
 
     func calculateTotalByType(type: String, completion: @escaping (Result<Double, Error>) -> Void) {
-        let endpoint = "http://192.168.222.223:8000/consom/totalType"
+        let endpoint = "http://192.168.124.223:8000/consom/totalType"
 
         let parameters: [String: Any] = [
-            "type": type.lowercased() // Ensure lowercase here
+            "type": type.lowercased()
         ]
 
-        AF.request(endpoint, method: .get, parameters: parameters, encoding: JSONEncoding.default)
+        AF.request(endpoint, method: .get, parameters: parameters, encoding: URLEncoding.default)
             .validate()
-            .responseDecodable(of: Double.self) { response in
+            .responseDecodable(of: TotalResponse.self) { response in
                 switch response.result {
-                case .success(let total):
-                    // Mettez à jour les propriétés appropriées
-                    if type.lowercased() == "waste" {
+                case .success(let totalResponse):
+                    // Update the appropriate property
+                    let total = totalResponse.total
+
+                    switch type.lowercased() {
+                    case "waste":
                         self.wasteEmissions = total
-                    } else if type.lowercased() == "Transport" {
+                    case "transport":
                         self.transportEmissions = total
-                    } else if type.lowercased() == "Domestique" {
+                    case "domestique":
                         self.energyConsumption = total
+                    default:
+                        break
                     }
 
-                    // Imprimez le total pour vous assurer qu'il est correct
+                    // Print the total to ensure it's correct
                     print("\(type) total: \(total)")
 
                     completion(.success(total))
@@ -89,8 +99,10 @@ class ConsommationViewModel: ObservableObject {
             }
     }
 
+
+
         func calculateTotalForDay(completion: @escaping (Result<Double, Error>) -> Void) {
-            let endpoint = "http://192.168.222.223:8000/consom/total"
+            let endpoint = "http://192.168.124.223:8000/consom/total"
 
             AF.request(endpoint, method: .get, encoding: JSONEncoding.default)
                 .validate()
