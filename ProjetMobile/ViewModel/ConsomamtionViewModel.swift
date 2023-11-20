@@ -40,7 +40,7 @@ class ConsommationViewModel: ObservableObject {
     }
 
     func saveToDatabase(type: String, valeur: Double, completion: @escaping (Result<Void, Error>) -> Void) {
-        let endpoint = "http://192.168.124.223:8000/consom/add"
+        let endpoint = "http://192.168.37.223:8000/consom/add"
         
         let parameters: [String: Any] = [
             "type": type,
@@ -64,21 +64,21 @@ class ConsommationViewModel: ObservableObject {
     }
 
     func calculateTotalByType(type: String, completion: @escaping (Result<Double, Error>) -> Void) {
-        let endpoint = "http://192.168.124.223:8000/consom/totalType"
+        let endpoint = "http://192.168.37.223:8000/consom/totalType"
 
         let parameters: [String: Any] = [
-            "type": type.lowercased()
+            "type": type
         ]
 
-        AF.request(endpoint, method: .get, parameters: parameters, encoding: URLEncoding.default)
-            .validate()
+        AF.request(endpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .validate()  // Ensures that the response is a success status code
             .responseDecodable(of: TotalResponse.self) { response in
                 switch response.result {
                 case .success(let totalResponse):
-                    // Update the appropriate property
                     let total = totalResponse.total
 
-                    switch type.lowercased() {
+                    // Update properties based on the type of consumption
+                    switch type {
                     case "waste":
                         self.wasteEmissions = total
                     case "transport":
@@ -92,8 +92,10 @@ class ConsommationViewModel: ObservableObject {
                     // Print the total to ensure it's correct
                     print("\(type) total: \(total)")
 
+                    // Call the completion handler with the total
                     completion(.success(total))
                 case .failure(let error):
+                    // Call the completion handler with the error
                     completion(.failure(error))
                 }
             }
@@ -101,8 +103,9 @@ class ConsommationViewModel: ObservableObject {
 
 
 
+
         func calculateTotalForDay(completion: @escaping (Result<Double, Error>) -> Void) {
-            let endpoint = "http://192.168.124.223:8000/consom/total"
+            let endpoint = "http://192.168.37.223:8000/consom/total"
 
             AF.request(endpoint, method: .get, encoding: JSONEncoding.default)
                 .validate()

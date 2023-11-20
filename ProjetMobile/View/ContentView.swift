@@ -125,7 +125,7 @@ struct ContentView: View {
         """
         Date: \(formattedDate)
         Total empreinte: \(String(format: "%.2f", totalEmissions)) kg CO2
-        Énergie: \(String(format: "%.2f", energyConsumption))45 kg CO2
+        Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2
         Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2
         Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2
         """
@@ -141,11 +141,11 @@ struct ContentView: View {
                 switch result {
                 case .success(let total):
                     // Update the appropriate values in your model or elsewhere
-                    if type.lowercased() == "Waste" {
+                    if type == "Waste" {
                         self.viewModel.wasteEmissions = total
-                    } else if type.lowercased() == "transport" {
+                    } else if type == "Transport" {
                         self.viewModel.transportEmissions = total
-                    } else if type.lowercased() == "Domestique" {
+                    } else if type == "Domestique" {
                         self.energyConsumption = total
                         self.viewModel.energyConsumption = total
                     }
@@ -166,9 +166,7 @@ struct ContentView: View {
             switch result {
             case .success(let totalForDay):
                 print("Total empreinte for the day: \(totalForDay)")
-                print("energy  \(energyConsumption)" )
-                print("energy  \(viewModel.transportEmissions )" )
-                print("energy  \(self.viewModel.wasteEmissions)" )
+               
                 viewModel.totalForDay = totalForDay
             case .failure(let error):
                 print("Error calculating total for the day: \(error)")
@@ -180,7 +178,7 @@ struct ContentView: View {
 
     private func refreshTotalEmissions() {
         viewModel.objectWillChange.send()
-        print("azeffaaerf")
+        print("--------------------------------")
     }
 }
 
