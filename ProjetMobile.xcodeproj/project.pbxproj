@@ -29,6 +29,8 @@
 		DB8A59F02AF962A400D97E35 /* ProjetMobileUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59EF2AF962A400D97E35 /* ProjetMobileUITestsLaunchTests.swift */; };
 		DB8A5A0E2AF99AA400D97E35 /* GetStartedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A5A0D2AF99AA400D97E35 /* GetStartedView.swift */; };
 		DB8A5A102AF99B1200D97E35 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A5A0F2AF99B1200D97E35 /* SignInView.swift */; };
+		DBA2252A2B0C040C007B094B /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA225292B0C040C007B094B /* EditProfileViewModel.swift */; };
+		DBA2252C2B0C16F5007B094B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA2252B2B0C16F5007B094B /* ResetPasswordViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		DB8A59EF2AF962A400D97E35 /* ProjetMobileUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjetMobileUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DB8A5A0D2AF99AA400D97E35 /* GetStartedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedView.swift; sourceTree = "<group>"; };
 		DB8A5A0F2AF99B1200D97E35 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		DBA225292B0C040C007B094B /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		DBA2252B2B0C16F5007B094B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		DBF85D602B03D30A004B3C3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +113,8 @@
 				DB1049952B02BAFD004337E9 /* userViewModel1.swift */,
 				DB5C789A2B0531B1002AE4A0 /* LoginViewModel.swift */,
 				DB13153A2B0B7FF900BBCD0D /* ProfileViewModel.swift */,
+				DBA225292B0C040C007B094B /* EditProfileViewModel.swift */,
+				DBA2252B2B0C16F5007B094B /* ResetPasswordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -339,11 +345,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB065ED82B095E8E0013092C /* EditProfileView.swift in Sources */,
+				DBA2252C2B0C16F5007B094B /* ResetPasswordViewModel.swift in Sources */,
 				DB10498F2B02B3EA004337E9 /* APIManager.swift in Sources */,
 				DB34428A2B028C4C002A7E2F /* MailChangingPasswordView.swift in Sources */,
 				224C49252AFA9E5E00DB4175 /* ProfileView.swift in Sources */,
 				DB8A5A102AF99B1200D97E35 /* SignInView.swift in Sources */,
 				DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */,
+				DBA2252A2B0C040C007B094B /* EditProfileViewModel.swift in Sources */,
 				DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */,
 				DB065EDA2B0962590013092C /* ChangePasswordView.swift in Sources */,
 				DB5C789B2B0531B1002AE4A0 /* LoginViewModel.swift in Sources */,

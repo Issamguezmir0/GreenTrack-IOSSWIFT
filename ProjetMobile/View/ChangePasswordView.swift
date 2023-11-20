@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct ChangePasswordView: View {
-    @State private var currentPassword = ""
-    @State private var newPassword = ""
+    @ObservedObject var viewModel : resetPasswordViewModel
     @State private var verifyNewPassword = ""
     @State private var passwordChangeStatus: PasswordChangeStatus? = nil
 
@@ -14,9 +13,8 @@ struct ChangePasswordView: View {
         NavigationView {
             Form {
                 Section(header: Text("Change Password")) {
-                    SecureField("Current Password", text: $currentPassword)
-                    SecureField("New Password", text: $newPassword)
-                    SecureField("Verify New Password", text: $verifyNewPassword)
+                    SecureField("Current Password", text: $viewModel.newPassword)
+                    SecureField("New Password", text: $viewModel.verifyPassword)
                 }
 
                 Section {
@@ -56,22 +54,12 @@ struct ChangePasswordView: View {
         // Update passwordChangeStatus accordingly.
 
         // For illustration purposes, let's assume a simple logic here:
-        if currentPassword == "currentPassword" && newPassword == verifyNewPassword {
-            passwordChangeStatus = .changing
-
-            // Simulate a delay for the password change
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                // Assume the password change was successful
-                passwordChangeStatus = .success
-            }
-        } else {
-            passwordChangeStatus = .failure
-        }
+     
     }
 }
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePasswordView()
+        ChangePasswordView(viewModel: resetPasswordViewModel())
     }
 }

@@ -13,6 +13,14 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var isNavigationActive: Bool = false
     func login() {
+        // Assume you retrieve the token after a successful login
+                let retrievedToken = "your_retrieved_token_value"
+
+                // Store the token in UserDefaults
+                UserDefaults.standard.set(retrievedToken, forKey: "token")
+
+                // Assign the token to the published variable for other view models to observe
+                //token = retrievedToken
         DispatchQueue.main.async {
                    //// Show loading view
                          }
@@ -45,6 +53,13 @@ class LoginViewModel: ObservableObject {
                     do {
                         let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
                         print("Response: \(jsonResponse)")
+                        if let jsonDictionary = jsonResponse as? [String: Any], let token = jsonDictionary["token"] as? String {
+                                                    print("Token: \(token)")
+                                                    // Save the token to your session or any storage mechanism you prefer
+                                                    // Example using UserDefaults:
+                                                    UserDefaults.standard.set(token, forKey: "accessToken")
+                                                   
+                                                }
                         // You can update your UI or perform other actions based on the response
                     } catch {
                         print("Error parsing JSON: \(error.localizedDescription)")

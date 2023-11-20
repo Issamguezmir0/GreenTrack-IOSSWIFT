@@ -15,5 +15,6 @@ struct User : Codable{
     var fullname : String
     var email : String
     var password : String
+    var num_tel : String
   
 }

@@ -2,9 +2,9 @@ import SwiftUI
 import Foundation
 struct EditProfileView: View {
     @State private var selectedImage: Image? = nil
-    @State private var newFullName = ""
-    @State private var newPhoneNumber = ""
-    @State private var newAddress = ""
+    
+    @ObservedObject var viewModel: EditProfileViewModel
+
 
     var body: some View {
         NavigationView {
@@ -26,15 +26,15 @@ struct EditProfileView: View {
                 }
 
                 Section(header: Text("Edit Profile Information")) {
-                    TextField("Full Name", text: $newFullName)
-                    TextField("Phone Number", text: $newPhoneNumber)
-                    TextField("Address", text: $newAddress)
+                    TextField("Full Name", text: $viewModel.fullname)
+                    TextField("Phone Number", text: $viewModel.num_tel)
+                    TextField("Email Address", text: $viewModel.email)
                 }
 
                 Section {
                     Button(action: {
-                        // Implement logic to save changes
-                        saveChanges()
+                        viewModel.updateUser()
+                        
                     }) {
                         Text("Save Changes")
                     }
@@ -44,15 +44,11 @@ struct EditProfileView: View {
         }
     }
 
-    // Function to save changes
-    func saveChanges() {
-        // Implement logic to save changes to the server or update the ViewModel
-        // You can access the edited values using newPassword, newFullName, newPhoneNumber, newAddress
-    }
+   
 }
 
 struct UserProfileEditView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView()
+        EditProfileView(viewModel: EditProfileViewModel())
     }
 }

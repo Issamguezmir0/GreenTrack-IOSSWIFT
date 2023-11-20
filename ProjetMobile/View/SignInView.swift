@@ -10,7 +10,7 @@ import SwiftUI
 struct SignInView: View {
     @State private var navigateToLocation = false
     @ObservedObject var ViewModel: LoginViewModel
-    @ObservedObject var viewModel2 = ProfileViewModel()
+    
     @State private var isEmailValid = true
     @State private var isPasswordValid = true
 
@@ -87,27 +87,30 @@ struct SignInView: View {
 
                     VStack{
                         
-                        NavigationLink(destination: ProfileView(), isActive: $viewModel2.isNavigationActive ){
-                            Button (action :{
-                                ViewModel.login()
-                            }){
-                                Text("Login").font(.title2)
-                                    .fontWeight(.bold)
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.green)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(50)
-                            }
+                        NavigationLink(destination: ProfileView(viewModel2: ProfileViewModel()), isActive: $navigateToLocation) {
                             
-                    
-                    
-
-                        Text("Or With")
-                            .foregroundColor(.gray)
-                            .frame(alignment: .leading)
                         }
+                        
+                        Button("Login") {
+                           
+                        action: do {
+                            ViewModel.login()
+                            //viewModel2.authenticateUserProfile()
+                            navigateToLocation = true
+                        }}
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(50)
                     }
+                    Text("                                  Or With")
+                        .foregroundColor(.gray)
+                        .frame(alignment: .leading)
+                    
+                    
 
                     HStack {
                         Button(action: {
