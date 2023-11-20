@@ -71,8 +71,10 @@ struct AddChallengeView: View {
 //            return
 //        }
         
+        
+        
         // Convertissez l'URL de votre API
-        guard let apiUrl = URL(string: "http://172.20.10.5:8000/challenge/events") else {
+        guard let apiUrl = URL(string: "\(AppConfig.apiUrl)/challenge/events") else {
             print("Invalid URL")
             return
         }
@@ -93,27 +95,46 @@ struct AddChallengeView: View {
         ]
         
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: userData)
             var request = URLRequest(url: apiUrl)
             request.httpMethod = "POST"
-            let boundary = UUID().uuidString
-            request.httpBody = jsonData
-            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             
-            var data = Data()
-            
-            var testImageName = "test.png"
-            
-            var paramName = "image"
 
-               // Add the image data to the raw http request data
-            data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(testImageName)\"\r\n".data(using: .utf8)!)
-               data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
-            data.append(selectedImage!.pngData()!)
+            // Create a boundary for the multipart/form-data
+                let boundary = "Boundary-\(UUID().uuidString)"
+                request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+                // Prepare JSON data
+             
+
+                // Convert JSON data to Data
+                let jsonBodyData = try! JSONSerialization.data(withJSONObject: userData)
+
+                // Create the body of the request
+                var requestBodyData = Data()
+
+                // Append the JSON data to the request body
+                requestBodyData.append("--\(boundary)\r\n".data(using: .utf8)!)
+                requestBodyData.append("Content-Disposition: form-data; name=\"json\"\r\n\r\n".data(using: .utf8)!)
+                requestBodyData.append(jsonBodyData)
+                requestBodyData.append("\r\n".data(using: .utf8)!)
+
+                // Append the image data to the request body
+                requestBodyData.append("--\(boundary)\r\n".data(using: .utf8)!)
+                requestBodyData.append("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+                requestBodyData.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+
+                // Replace this with your image data
+                let imageData = selectedImage!.pngData()
+
+                requestBodyData.append(imageData!)
+                requestBodyData.append("\r\n".data(using: .utf8)!)
+
+                requestBodyData.append("--\(boundary)--\r\n".data(using: .utf8)!)
+
+                // Set the request body
+                request.httpBody = requestBodyData
             
-            request.httpBody = data
-            
+         
             
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if let error = error {

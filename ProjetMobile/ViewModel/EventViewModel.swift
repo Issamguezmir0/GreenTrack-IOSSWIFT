@@ -15,7 +15,7 @@ class EventViewModel: ObservableObject {
    @Published var selectedEventTitle: String?
 
     func getEvents() {
-        guard let url = URL(string: "http://172.20.10.5:8000/challenge/event") else { return }
+        guard let url = URL(string: "\(AppConfig.apiUrl)/challenge/event") else { return }
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
@@ -26,6 +26,8 @@ class EventViewModel: ObservableObject {
                     let jsonData = try JSONDecoder().decode(Events.self, from: data)
                     DispatchQueue.main.async {
                         self.events = jsonData.events
+                        
+                        print(self.events)
                     }
                 } catch {
                     print("Error decoding JSON: \(error)")
@@ -46,7 +48,7 @@ class EventViewModel: ObservableObject {
 
 
    func postEvents(events: Event) {
-       guard let url = URL(string: "http://172.20.10.5:8000/challenge/events") else { return }
+       guard let url = URL(string: "\(AppConfig.apiUrl)/challenge/events") else { return }
        
        var urlRequest = URLRequest(url: url)
        urlRequest.httpMethod = "POST"
@@ -76,7 +78,7 @@ class EventViewModel: ObservableObject {
    }
 
 //   func patchEvent(event: Event) {
-//       guard let id = event.id, let url = URL(string: "http://172.20.10.5:8000/challenge/\(id)") else { return }
+//       guard let id = event.id, let url = URL(string: "\(AppConfig.apiUrl)/challenge/\(id)") else { return }
 //
 //       var urlRequest = URLRequest(url: url)
 //       urlRequest.httpMethod = "PATCH"
@@ -110,7 +112,7 @@ class EventViewModel: ObservableObject {
 //   }
 
 //   func deleteVideo(_ id: String) {
-//       guard let url = URL(string: "http://172.20.10.5:8000/challenge/\(id)") else { return }
+//       guard let url = URL(string: "\(AppConfig.apiUrl)/challenge/\(id)") else { return }
 //       
 //       var urlRequest = URLRequest(url: url)
 //       urlRequest.httpMethod = "DELETE"

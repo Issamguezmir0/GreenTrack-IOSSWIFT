@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8606FB2A2B0C0CE900E8E8C1 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8606FB292B0C0CE900E8E8C1 /* AppConfig.swift */; };
 		A8D604862B053D48002AF406 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D604852B053D48002AF406 /* EventViewModel.swift */; };
 		A8D604882B053D79002AF406 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D604872B053D79002AF406 /* Event.swift */; };
 		B8F72B502AFAA57D00388C04 /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F72B4F2AFAA57D00388C04 /* ChallengeView.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8606FB292B0C0CE900E8E8C1 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		A8D604852B053D48002AF406 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		A8D604872B053D79002AF406 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		B8F72B4F2AFAA57D00388C04 /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				DB8A59D72AF962A400D97E35 /* ProjetMobile.entitlements */,
 				DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */,
 				DB8A59D82AF962A400D97E35 /* Preview Content */,
+				8606FB292B0C0CE900E8E8C1 /* AppConfig.swift */,
 			);
 			path = ProjetMobile;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 			files = (
 				B8F72B542AFAAFB400388C04 /* AddChallengeView.swift in Sources */,
 				A8D604882B053D79002AF406 /* Event.swift in Sources */,
+				8606FB2A2B0C0CE900E8E8C1 /* AppConfig.swift in Sources */,
 				DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */,
 				B8F72B562AFACC0D00388C04 /* ViewDetailsD.swift in Sources */,
 				A8D604862B053D48002AF406 /* EventViewModel.swift in Sources */,

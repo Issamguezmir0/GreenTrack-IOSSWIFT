@@ -349,15 +349,33 @@ struct WideImageView: View {
 
 struct ChallengeCard: View {
     let event: Event
+    
 
     var body: some View {
         NavigationLink(destination: ViewDetailsD(event: event)) {
             VStack(spacing: 2) {
-                Image("Rectangle 56") // Use your image here
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 80, height: 80) // Square card
-                    .cornerRadius(12)
+                
+                if let eventImage = event.image{  AsyncImage(
+                
+                    url: URL(string: "\(AppConfig.apiUrl)\(eventImage)")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(12)
+                        
+
+                } placeholder: {
+                    // Placeholder image while loading
+                    Image("Rectangle 56") // Use your image here
+                                     .resizable()
+                                     .aspectRatio(contentMode: .fill)
+                                     .frame(width: 80, height: 80) // Square card
+                                     .cornerRadius(12)
+                }
+                   
+                }
+                
 
                 Spacer()
 

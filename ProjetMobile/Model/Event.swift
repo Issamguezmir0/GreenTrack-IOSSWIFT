@@ -33,10 +33,10 @@ struct Event: Identifiable, Codable {
     let details: String
     let date: Date?
     let location : String
-    let isFree : Bool
+    let isFree : Bool?
     let organisateurs : [String]
     let participants : [String]
-    let image: String
+    let image: String?
     
     enum CodingKeys: String, CodingKey {
         case id
