@@ -14,10 +14,11 @@ struct AddChallengeView: View {
     @State private var location = ""
     @State private var organiser = ""
     @State private var date = Date()
-    @State private var selectedImage: Image?
+    @State private var selectedImage: UIImage?
     @State private var showImagePicker = false
     @State private var isFree = true // Initially assuming it's a free event
     @State private var priceInDinars = ""
+    @State private var imageUrl :String?
     
     var body: some View {
         NavigationView {
@@ -31,7 +32,7 @@ struct AddChallengeView: View {
                     DatePicker("Date", selection: $date, in: Date()...)
                     
                     if selectedImage != nil {
-                        selectedImage?
+                        Image(uiImage: selectedImage!)
                             .resizable()
                             .scaledToFit()
                             .frame(height: 150)
@@ -40,9 +41,8 @@ struct AddChallengeView: View {
                         self.showImagePicker = true
                     }
                     .sheet(isPresented: $showImagePicker) {
-                        ImagePicker(selectedImage: $selectedImage, isPresented: $showImagePicker)
+                        ImagePicker(selectedImage: $selectedImage,imageUrl:$imageUrl)
                     }
-
                     
                     Toggle("Is it a paid event?", isOn: $isFree)
                     if !isFree {
@@ -51,7 +51,7 @@ struct AddChallengeView: View {
                 }
                 
                 Button(action: {
-                    saveEvent(with: <#Data#>)
+                    saveEvent()
                 }) {
                     Text("Save")
                 }
@@ -64,22 +64,13 @@ struct AddChallengeView: View {
         }
     }
     
-    func saveEvent(with imageData: Data) {
+    func saveEvent() {
         // Vérifiez si une image a été sélectionnée
 //        guard let selectedImageData = selectedImage?.toData() else {
 //            print("No image selected")
 //            return
 //        }
-        guard let selectedImage = selectedImage else {
-                 print("No image selected")
-                 return
-             }
-             
-             guard let imageData = selectedImageToData(selectedImage) else {
-                 print("Failed to convert image to data")
-                 return
-             }
-             
+        
         // Convertissez l'URL de votre API
         guard let apiUrl = URL(string: "http://172.20.10.5:8000/challenge/events") else {
             print("Invalid URL")
@@ -98,34 +89,41 @@ struct AddChallengeView: View {
             "participants": "",
             "organiser": organiser,
             "details": details,
-            "priceInDinars": priceInDinars,
-            "image": imageData
+            "priceInDinars": priceInDinars, // Incluez le prix en dinars s'il ne s'agit pas d'un événement gratuit
         ]
         
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userData)
             var request = URLRequest(url: apiUrl)
             request.httpMethod = "POST"
+            let boundary = UUID().uuidString
             request.httpBody = jsonData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            
+            var data = Data()
+            
+            var testImageName = "test.png"
+            
+            var paramName = "image"
+
+               // Add the image data to the raw http request data
+            data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"\(paramName)\"; filename=\"\(testImageName)\"\r\n".data(using: .utf8)!)
+               data.append("Content-Type: image/png\r\n\r\n".data(using: .utf8)!)
+            data.append(selectedImage!.pngData()!)
+            
+            request.httpBody = data
+            
             
             URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if let error = error {
                     print("Error: \(error.localizedDescription)")
                 } else if let data = data {
                     do {
-                        let decoder = JSONDecoder()
-                        let result = try decoder.decode(Events.self, from: data)
-                        // Update the UI or perform actions based on the response
-                        print("Response: \(result)")
-                        
-                        // Example: If you want to navigate to another view after successful response
-                        DispatchQueue.main.async {
-                            // Navigate to another view or perform an action here...
-                            // For example, dismiss the current view
-                        }
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                        print("Response: \(jsonResponse)")
                     } catch {
-                        print("Error decoding JSON: \(error.localizedDescription)")
+                        print("Error parsing JSON: \(error.localizedDescription)")
                     }
                 }
             }.resume()
@@ -134,19 +132,8 @@ struct AddChallengeView: View {
         }
     }
 
-    
-    func uiImageToData(_ uiImage: UIImage) -> Data? {
-           return uiImage.jpegData(compressionQuality: 1.0)
-       }
-    
-    
-    func selectedImageToData(_ selectedImage: Image) -> Data? {
-        guard let uiImage = UIImage(named: "myImage") else {
-            return nil
-        }
+   
 
-        return uiImage.jpegData(compressionQuality: 1.0)
-    }
     
     struct AddChallengeView_Previews: PreviewProvider {
         static var previews: some View {
@@ -155,8 +142,8 @@ struct AddChallengeView: View {
     }
     
     struct ImagePicker: UIViewControllerRepresentable {
-        @Binding var selectedImage: Image?
-        @Binding var isPresented: Bool
+        @Binding var selectedImage: UIImage?
+        @Binding var imageUrl : String?
         @Environment(\.presentationMode) var presentationMode
         
         func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -167,27 +154,24 @@ struct AddChallengeView: View {
         
         func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
         
-      
+        func makeCoordinator() -> Coordinator {
+            Coordinator(self)
+        }
         
         class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
             var parent: ImagePicker
-
-            init(_ parent: AddChallengeView) {
+            
+            init(_ parent: ImagePicker) {
                 self.parent = parent
             }
             
-            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-                    if let uiImage = info[.originalImage] as? UIImage {
-                        if let imageData = parent.uiImageToData(uiImage) {
-                            parent.selectedImage = Image(uiImage: uiImage)
-                            parent.saveEvent(with: imageData)
-                        }
-                    }
-                    parent.isPresented = false // Dismiss the ImagePicker
+            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                if let uiImage = info[.originalImage] as? UIImage {
+                    parent.selectedImage = uiImage
+                    parent.imageUrl = info[.mediaURL] as? String
                 }
-        }
-        func makeCoordinator() -> Coordinator {
-            Coordinator(self)
+                parent.presentationMode.wrappedValue.dismiss()
+            }
         }
     }
 }
