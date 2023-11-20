@@ -43,7 +43,6 @@ struct SignUpView: View {
                     .foregroundColor(.green)
                     .frame(alignment: .leading)
                     
-                    .fontWeight(.bold)
                 
 
                 VStack {
@@ -65,7 +64,6 @@ struct SignUpView: View {
                     .foregroundColor(.green)
                     .frame(alignment: .leading)
                     
-                    .fontWeight(.bold)
 
                 VStack {
                     TextField("", text: $ViewModel1.email)
@@ -87,7 +85,6 @@ struct SignUpView: View {
                         .foregroundColor(.green)
                         .frame(alignment: .leading)
                         .padding(.leading, -180)
-                        .fontWeight(.bold)
 
                     SecureField("", text: $ViewModel1.password)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -106,7 +103,6 @@ struct SignUpView: View {
                         .foregroundColor(.green)
                         .frame(alignment: .leading)
                         .padding(.leading, -180)
-                        .fontWeight(.bold)
                     
 
                     VStack {

@@ -16,6 +16,7 @@
 		DB065EDA2B0962590013092C /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB065ED92B0962590013092C /* ChangePasswordView.swift */; };
 		DB10498F2B02B3EA004337E9 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB10498E2B02B3EA004337E9 /* APIManager.swift */; };
 		DB1049962B02BAFD004337E9 /* userViewModel1.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1049952B02BAFD004337E9 /* userViewModel1.swift */; };
+		DB13153B2B0B7FF900BBCD0D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB13153A2B0B7FF900BBCD0D /* ProfileViewModel.swift */; };
 		DB34428A2B028C4C002A7E2F /* MailChangingPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3442892B028C4C002A7E2F /* MailChangingPasswordView.swift */; };
 		DB5C789B2B0531B1002AE4A0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5C789A2B0531B1002AE4A0 /* LoginViewModel.swift */; };
 		DB8A59CD2AF962A300D97E35 /* ProjetMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8A59CC2AF962A300D97E35 /* ProjetMobileApp.swift */; };
@@ -57,6 +58,7 @@
 		DB065ED92B0962590013092C /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		DB10498E2B02B3EA004337E9 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DB1049952B02BAFD004337E9 /* userViewModel1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userViewModel1.swift; sourceTree = "<group>"; };
+		DB13153A2B0B7FF900BBCD0D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DB3442892B028C4C002A7E2F /* MailChangingPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailChangingPasswordView.swift; sourceTree = "<group>"; };
 		DB5C789A2B0531B1002AE4A0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DB8A59C92AF962A300D97E35 /* ProjetMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjetMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +108,7 @@
 			children = (
 				DB1049952B02BAFD004337E9 /* userViewModel1.swift */,
 				DB5C789A2B0531B1002AE4A0 /* LoginViewModel.swift */,
+				DB13153A2B0B7FF900BBCD0D /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				DB8A59CF2AF962A300D97E35 /* Persistence.swift in Sources */,
 				224C49292AFAB35000DB4175 /* ForgotPasswordView.swift in Sources */,
 				224C492B2AFAB7D700DB4175 /* User.swift in Sources */,
+				DB13153B2B0B7FF900BBCD0D /* ProfileViewModel.swift in Sources */,
 				DB8A5A0E2AF99AA400D97E35 /* GetStartedView.swift in Sources */,
 				DB065ED42B08EB6C0013092C /* CheckCodeView.swift in Sources */,
 				DB1049962B02BAFD004337E9 /* userViewModel1.swift in Sources */,

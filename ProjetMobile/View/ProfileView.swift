@@ -1,8 +1,13 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @ObservedObject var viewModel2 = ProfileViewModel()
+    
+    @State private var userFullName : String?
+    @State private var userEmail : String?
+    @State private var userPhone : String?
     @State private var navigateToLocation = false
-
+    
     var body: some View {
         NavigationStack{
             VStack {
@@ -22,7 +27,11 @@ struct ProfileView: View {
                         .font(.headline)
                         .padding()
                     
-                    Text("Issam Guezmir")
+                    if let userFullName = userFullName {
+                        Text(userFullName)
+                    } else {
+                        Text("Issam Guezmir")
+                    }
                     
                 }
                 HStack{
@@ -30,15 +39,21 @@ struct ProfileView: View {
                     Text("Email :")
                         .font(.headline)
                         .padding()
-                    
-                    Text("guezmir.issam@esprit.tn")
+                    if let userEmail = userEmail {
+                        Text(userEmail)
+                    } else {
+                        Text("guezmir.issam@esprit.tn")
+                    }
                 }
                 HStack{
                     Text("Phone Number:")
                         .font(.headline)
                         .padding()
-                    
-                    Text("+21658257761")
+                    if let userPhone = userPhone{
+                        Text(userPhone)
+                    } else {
+                        Text("+21658257761")
+                    }
                 }
                 
                 
@@ -89,38 +104,44 @@ struct ProfileView: View {
             .padding()
             .navigationBarTitle("Profile", displayMode: .inline)
         }
-        }
-}
-
-struct ProfileButton: View {
-    var imageName: String
-    var buttonText: String
-    var action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            VStack {
-                Image(systemName: imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40, height: 40)
-                Text(buttonText)
-                    .font(.caption)
-                    .foregroundColor(.black)
+        .onReceive(viewModel2.$isNavigationActive) { value in
+            if value {
+                userFullName = UserDefaults.standard.object(forKey: "userFullName") as? String
+                userEmail = UserDefaults.standard.object(forKey: "userEmail") as? String
+                userPhone = UserDefaults.standard.object(forKey: "userPhone") as? String
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(Color.green)
-        .foregroundColor(.white)
-        .cornerRadius(10)
-        .shadow(radius: 5)
+    }
+    
+    struct ProfileButton: View {
+        var imageName: String
+        var buttonText: String
+        var action: () -> Void
+        
+        var body: some View {
+            Button(action: action) {
+                VStack {
+                    Image(systemName: imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 40, height: 40)
+                    Text(buttonText)
+                        .font(.caption)
+                        .foregroundColor(.black)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.green)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .shadow(radius: 5)
+            
+        }
         
     }
     
 }
-
-
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
