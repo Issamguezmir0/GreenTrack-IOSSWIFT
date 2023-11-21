@@ -24,7 +24,7 @@ struct TransportCalculatorView: View {
                     .padding()
                 
                 HStack {
-                    Text("Distance parcourue (km) :")
+                    Text("Distance traveled (km) :")
                     TextField("Entrez la distance", value: $distance, formatter: NumberFormatter())
                         .padding()
                         .background(Color.white.opacity(0.4))
@@ -39,7 +39,7 @@ struct TransportCalculatorView: View {
                     }
                     .alert(isPresented: $distanceInfoAlert) {
                         Alert(title: Text("Information"),
-                              message: Text("La distance parcourue représente le nombre de kilomètres que vous avez parcourus pendant la période spécifiée."),
+                              message: Text("Distance traveled represents the number of kilometers you traveled during the specified time period."),
                               dismissButton: .default(Text("OK")))
                     }
                 }
@@ -63,7 +63,7 @@ struct TransportCalculatorView: View {
                 
                 Spacer()
                 
-                Text("Votre empreinte carbone : \(calculateCarbonFootprint()) kg CO2")
+                Text("Your carbon footprint: \(calculateCarbonFootprint()) kg CO2")
                     .font(.headline)
                     .padding()
                 

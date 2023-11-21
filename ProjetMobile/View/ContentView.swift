@@ -28,7 +28,7 @@ struct ContentView: View {
                     .font(.title)
                     .padding()
                 VStack {
-                    Text("Total empreinte")
+                    Text("Total footprint")
                         .font(.headline)
                         .foregroundColor(Color.green)
                     Text(String(format: "%.2f kg CO2", totalEmissions))
@@ -44,11 +44,11 @@ struct ContentView: View {
                 }
                 .padding()
 
-                Text("Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2")
+                Text("Home energy: \(String(format: "%.2f", energyConsumption)) kg CO2")
                     .padding()
                 Text("Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
                     .padding()
-                Text("Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
+                Text("Waste: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
                     .padding()
 
                 HStack(spacing: 20) {
@@ -109,7 +109,14 @@ struct ContentView: View {
                 }
                 .padding()
 
+                
                 Spacer()
+                Text("The carbon footprint measures the total amount of greenhouse gases, expressed in CO2 equivalent, emitted directly or indirectly by an activity, an individual, an organization, or a product.")
+                    .font(.body)
+                    .padding(16)
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+
             }
             .padding()
             .navigationBarBackButtonHidden(true)

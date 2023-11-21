@@ -13,12 +13,12 @@ struct EnergyCalculatorView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text(" Énergie Domestique")
+                Text(" Home Energy")
                     .font(.largeTitle)
                     .padding()
                 
                 HStack {
-                    Text("Consommation d'électricité (kWh) :")
+                    Text("Consumption of electricity (kWh) :")
                     TextField("Entrez la consommation", value: $electricityConsumption, formatter: NumberFormatter())
                         .padding()
                         .background(Color.white.opacity(0.4))
@@ -33,14 +33,14 @@ struct EnergyCalculatorView: View {
                     }
                     .alert(isPresented: $electricityInfoAlert) {
                         Alert(title: Text("Information"),
-                              message: Text("La consommation d'électricité représente la quantité d'électricité utilisée en kilowattheures (kWh) pendant la période spécifiée. Utilisez votre facture d'électricité pour obtenir cette information."),
+                              message: Text("Electricity consumption represents the amount of electricity used in kilowatt hours (kWh) during the specified period. Use your electric bill to get this information."),
                               dismissButton: .default(Text("OK")))
                     }
                 }
                 .padding()
 
                 HStack {
-                    Text("Consommation de gaz (m³) :")
+                    Text("Gas consumption (m³) :")
                     TextField("Entrez la consommation", value: $gasConsumption, formatter: NumberFormatter())
                         .padding()
                         .background(Color.white.opacity(0.4))
@@ -55,7 +55,7 @@ struct EnergyCalculatorView: View {
                     }
                     .alert(isPresented: $gasInfoAlert) {
                         Alert(title: Text("Information"),
-                              message: Text("La consommation de gaz représente la quantité de gaz naturel utilisée en mètres cubes (m³) pendant la période spécifiée. Utilisez votre facture de gaz pour obtenir cette information."),
+                              message: Text("Gas consumption represents the amount of natural gas used in cubic meters (m³) during the specified period. Use your gas bill to get this information."),
                               dismissButton: .default(Text("OK")))
                     }
                 }
@@ -78,7 +78,7 @@ struct EnergyCalculatorView: View {
                     .padding()
                 Spacer()
                 
-                Text("Votre empreinte carbone : \(calculateCarbonFootprint()) kg CO2")
+                Text("Your carbon footprint: \(calculateCarbonFootprint()) kg CO2")
                     .font(.headline)
                     .padding(-5)
                 

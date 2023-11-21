@@ -19,12 +19,12 @@ struct WasteCalculatorView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text(" Déchets")
+                Text(" Waste")
                     .font(.largeTitle)
                     .padding()
 
                 HStack {
-                    Text("Poids des déchets (kg) :")
+                    Text("Weight of waste (kg) :")
                     TextField("Entrez le poids", value: $wasteWeight, formatter: NumberFormatter())
                         .padding()
                         .background(Color.white.opacity(0.4))
@@ -39,7 +39,7 @@ struct WasteCalculatorView: View {
                     }
                     .alert(isPresented: $wasteWeightInfoAlert) {
                         Alert(title: Text("Information"),
-                              message: Text("Le poids des déchets représente la quantité totale de déchets générés pendant la période spécifiée."),
+                              message: Text("Waste weight represents the total amount of waste generated during the specified period."),
                               dismissButton: .default(Text("OK")))
                     }
                 }
@@ -63,7 +63,7 @@ struct WasteCalculatorView: View {
 
                 Spacer()
 
-                Text("Votre empreinte carbone : \(calculateCarbonFootprint()) kg CO2")
+                Text("Your carbon footprint: \(calculateCarbonFootprint()) kg CO2")
                     .font(.headline)
                     .padding()
 
