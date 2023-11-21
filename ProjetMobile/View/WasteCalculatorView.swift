@@ -54,6 +54,7 @@ struct WasteCalculatorView: View {
                 .padding()
                 .background(Color.white.opacity(0.4))
                 .cornerRadius(10)
+                
 
                 Image("trash") // Utilisez le nom du fichier d'image sans l'extension
                     .resizable()
@@ -92,6 +93,9 @@ struct WasteCalculatorView: View {
                     }
                 }
                 .padding()
+                
+                
+                
             }
             .padding()
             .navigationBarBackButtonHidden(true)

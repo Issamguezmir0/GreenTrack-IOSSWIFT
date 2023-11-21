@@ -14,20 +14,20 @@ struct TransportCalculatorView: View {
     @State private var transportModeInfoAlert = false
     
     let transportModes = ["Car", "Bike", "Public Transport", "Walking", "Motorcycle"]
-    let daysInMonth: Double = 30.44 // Moyenne de jours dans un mois
+    let daysInMonth: Double = 30.44 // Average days in a month
     
     var body: some View {
         NavigationStack {
             VStack {
-                Text("Transport")
+                Text("Transport Calculator")
                     .font(.largeTitle)
                     .padding()
                 
                 HStack {
-                    Text("Distance traveled (km) :")
-                    TextField("Entrez la distance", value: $distance, formatter: NumberFormatter())
+                    Text("Distance traveled (km):")
+                    TextField("Enter the distance", value: $distance, formatter: NumberFormatter())
                         .padding()
-                        .background(Color.white.opacity(0.4))
+                        .background(Color.white.opacity(0.8))
                         .cornerRadius(10)
 
                     Button(action: {
@@ -35,7 +35,6 @@ struct TransportCalculatorView: View {
                     }) {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
-                            .padding(.leading, 5)
                     }
                     .alert(isPresented: $distanceInfoAlert) {
                         Alert(title: Text("Information"),
@@ -45,17 +44,17 @@ struct TransportCalculatorView: View {
                 }
                 .padding()
 
-                Picker("Mode de transport :", selection: $selectedTransportMode) {
+                Picker("Mode of Transport:", selection: $selectedTransportMode) {
                     ForEach(transportModes, id: \.self) {
                         Text($0)
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
-                .background(Color.white.opacity(0.4))
+                .background(Color.white.opacity(0.8))
                 .cornerRadius(10)
                 
-                Image("transport") // Utilisez le nom du fichier d'image sans l'extension
+                Image("transport")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250, height: 250)
@@ -77,10 +76,7 @@ struct TransportCalculatorView: View {
                             .cornerRadius(10)
                     }
                     Button(action: {
-                        // Enregistrez le calcul dans la base de données ici
                         saveToDatabase()
-                        
-                        // Remettez les valeurs à zéro
                         resetValues()
                     }) {
                         Text("Save")
@@ -94,8 +90,9 @@ struct TransportCalculatorView: View {
                 .padding()
             }
             .padding()
+            .background(Color(.systemBackground)) // Set your desired background color
             .navigationBarBackButtonHidden(true)
-        }.navigationBarBackButtonHidden(true)
+        }
     }
     
     func calculateCarbonFootprint() -> Double {

@@ -23,109 +23,162 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Text(formattedDate)
-                    .font(.title)
-                    .padding()
+            ZStack {
+                Color.gray.opacity(0.1).ignoresSafeArea()
+
                 VStack {
-                    Text("Total footprint")
-                        .font(.headline)
-                        .foregroundColor(Color.green)
-                    Text(String(format: "%.2f kg CO2", totalEmissions))
+                    Text(formattedDate)
                         .font(.title)
-                        .foregroundColor(.white)
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.green)
-                                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        )
-                        .cornerRadius(15)
+
+                    VStack {
+                        Text("Total footprint")
+                            .font(.headline)
+                            .foregroundColor(Color.green)
+
+                        Text(String(format: "%.2f kg CO2", totalEmissions))
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.green)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )
+                            .cornerRadius(15)
+                    }
+                    .padding()
+
+                    VStack(spacing: -15) {
+                        Text("Home Energy:")
+                            .font(.headline)
+                            .foregroundColor(.green)
+
+                        Text("\(String(format: "%.2f", energyConsumption)) kg CO2")
+                            .font(.title)
+                            .foregroundColor(.primary)
+                            .padding()
+                            //.background(
+                              //  RoundedRectangle(cornerRadius: 15)
+                                //    .fill(Color.green)
+                                //    .shadow(color: //Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                           // )
+                            
+                    }
+
+                    VStack(spacing: -15) {
+                        Text("Transport:")
+                            .font(.headline)
+                            .foregroundColor(.green)
+
+                        Text("\(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
+                            .font(.title)
+                            .foregroundColor(.primary)
+                            .padding()
+                          /*  .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.green)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )*/
+                            
+                    }
+
+                    VStack(spacing: -15) {
+                        Text("Waste:")
+                            .font(.headline)
+                            .foregroundColor(.green)
+
+                        Text("\(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
+                            .font(.title)
+                            .foregroundColor(.primary)
+                            .padding()
+                          /*  .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.green)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )*/
+                            
+                    }
+
+
+                    // Block of text with carbon footprint information
+                    Text("The carbon footprint measures the total quantity of greenhouse gases, expressed in CO2 equivalent, emitted directly or indirectly by an activity, an individual, an organization or a product.")
+                        .font(.body)
+                        .padding()
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
+
+                    HStack(spacing: 40) {
+                        NavigationLink(destination: EnergyCalculatorView()) {
+                            Image(systemName: "house")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color.green)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                )
+                        }
+
+                        NavigationLink(destination: TransportCalculatorView()) {
+                            Image(systemName: "car")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color.green)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                )
+                        }
+
+                        NavigationLink(destination: WasteCalculatorView()) {
+                            Image(systemName: "trash")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color.green)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                )
+                        }
+                    }
+
+                    Button(action: {
+                        self.isShareSheetPresented.toggle()
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(Color.green)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.white)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )
+                    }
+                    .sheet(isPresented: $isShareSheetPresented) {
+                        ShareSheet(activityItems: [shareableContent])
+                    }
+                    .padding()
+
+                    Spacer()
                 }
                 .padding()
-
-                Text("Home energy: \(String(format: "%.2f", energyConsumption)) kg CO2")
-                    .padding()
-                Text("Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
-                    .padding()
-                Text("Waste: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
-                    .padding()
-
-                HStack(spacing: 20) {
-                    NavigationLink(destination: EnergyCalculatorView()) {
-                        Image(systemName: "house")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.green)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.white)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                            )
-                    }
-                    NavigationLink(destination: TransportCalculatorView()) {
-                        Image(systemName: "car")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.green)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.white)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                            )
-                    }
-                    NavigationLink(destination: WasteCalculatorView()) {
-                        Image(systemName: "trash")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.green)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.white)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                            )
-                    }
-                }
-
-                Button(action: {
-                    self.isShareSheetPresented.toggle()
-                }) {
-                    Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(Color.green)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        )
-                }
-                .sheet(isPresented: $isShareSheetPresented) {
-                    ShareSheet(activityItems: [shareableContent])
-                }
-                .padding()
-
-                
-                Spacer()
-                Text("The carbon footprint measures the total amount of greenhouse gases, expressed in CO2 equivalent, emitted directly or indirectly by an activity, an individual, an organization, or a product.")
-                    .font(.body)
-                    .padding(16)
-                    .foregroundColor(.gray)
-                    .multilineTextAlignment(.center)
-
+                .navigationBarBackButtonHidden(true)
             }
-            .padding()
-            .navigationBarBackButtonHidden(true)
+            .onAppear {
+                // Fetch initial data when the view appears
+                self.refreshData()
+            }
         }
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            // Fetch initial data when the view appears
-            self.refreshData()
-        }
     }
 
     var shareableContent: String {
@@ -159,7 +212,7 @@ struct ContentView: View {
 
                     // Imprimez pour vous assurer que les valeurs sont correctes
                     print("\(type) total: \(total)")
-                    
+
                     self.refreshTotalEmissions()
                 case .failure(let error):
                     print("Error calculating total for \(type): \(error)")
@@ -167,13 +220,12 @@ struct ContentView: View {
                 }
             }
         }
-        
 
         viewModel.calculateTotalForDay { result in
             switch result {
             case .success(let totalForDay):
                 print("Total empreinte for the day: \(totalForDay)")
-               
+
                 viewModel.totalForDay = totalForDay
             case .failure(let error):
                 print("Error calculating total for the day: \(error)")
