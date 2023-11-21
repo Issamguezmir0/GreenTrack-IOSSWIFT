@@ -107,6 +107,7 @@ struct ContentView: View {
                         .padding()
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
 
                     HStack(spacing: 40) {
                         NavigationLink(destination: EnergyCalculatorView()) {
