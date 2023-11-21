@@ -79,7 +79,7 @@ struct ProfileView: View {
                     }
 
                     VStack {
-                        NavigationLink(destination: ChangePasswordView(), isActive: $viewModel2.isNavigationActive) { }
+                        NavigationLink(destination: ChangePasswordView(ViewModel: ChangePassViewModel()), isActive: $viewModel2.isNavigationActive) { }
 
                         ProfileButton(imageName: "arrow.counterclockwise.circle.fill", buttonText: "Reset Pass") {
                             viewModel2.isNavigationActive = true

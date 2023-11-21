@@ -6,6 +6,8 @@ struct ChangePasswordView: View {
     @State private var passwordChangeStatus: PasswordChangeStatus? = nil
 @State private var currentPassword  = ""
     @State private var newPasswordPassword  = ""
+    @ObservedObject var ViewModel: ChangePassViewModel
+
 
     enum PasswordChangeStatus {
         case idle, changing, success, failure
@@ -15,8 +17,8 @@ struct ChangePasswordView: View {
         NavigationView {
             Form {
                 Section(header: Text("Change Password")) {
-                    SecureField("Current Password", text: $currentPassword)
-                    SecureField("New Password", text: $newPasswordPassword)
+                    SecureField("Current Password", text: $ViewModel.currentPassword)
+                    SecureField("New Password", text: $ViewModel.newPassword)
                 }
 
                 Section {
@@ -50,18 +52,13 @@ struct ChangePasswordView: View {
     }
 
     func changePassword() {
-        // Implement logic to change the password
-        // You should check if the current password is correct,
-        // if the new password is valid, and if it matches the verification password.
-        // Update passwordChangeStatus accordingly.
-
-        // For illustration purposes, let's assume a simple logic here:
+        ViewModel.send()
      
     }
 }
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePasswordView()
+        ChangePasswordView(ViewModel: ChangePassViewModel())
     }
 }

@@ -11,7 +11,7 @@ struct MailChangingPasswordView: View {
     @State private var password = ""
     @State private var verifyPassword = ""
     @State private var arePasswordEqual = true
-
+    @ObservedObject var ViewModel: MailChangeViewModel
     @State private var isPasswordValid = true
 
    
@@ -22,7 +22,7 @@ struct MailChangingPasswordView: View {
                    
 
                        VStack {
-                           SecureField("Please Enter your new Password", text: $password)
+                           SecureField("Please Enter your new Password", text: $ViewModel.num_tel)
                                .textFieldStyle(RoundedBorderTextFieldStyle())
                                .onChange(of: password, perform: { newValue in
                                    isPasswordValid = isValidPassword(newValue)
@@ -36,7 +36,7 @@ struct MailChangingPasswordView: View {
                        }
 
                        VStack {
-                           SecureField("Verify your new Password", text: $verifyPassword)
+                           SecureField("Verify your new Password", text: $ViewModel.newPassword)
                                .textFieldStyle(RoundedBorderTextFieldStyle())
                                .onChange(of: verifyPassword, perform: { newValue in
                                    
@@ -51,7 +51,12 @@ struct MailChangingPasswordView: View {
 
                        VStack {
                            Button("Change password") {
-                               // Ajoutez ici le code pour changer le mot de passe
+                           action: do {
+                               ViewModel.send()
+                               //viewModel2.authenticateUserProfile()
+                              // navigateToLocation = true
+                           }
+                             
                            }
                            .font(.title2)
                            .fontWeight(.bold)
@@ -79,6 +84,6 @@ struct MailChangingPasswordView: View {
 
 struct MailChangingPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        MailChangingPasswordView()
+        MailChangingPasswordView(ViewModel: MailChangeViewModel())
     }
 }

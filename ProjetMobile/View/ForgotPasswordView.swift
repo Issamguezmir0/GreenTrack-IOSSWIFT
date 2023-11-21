@@ -13,6 +13,8 @@ struct ForgotPasswordView: View {
     @State private var password = ""
     @State private var isPhoneNumberValid = true
     @State private var navigateToLocation = false
+    @ObservedObject var ViewModel: ForgetViewModel
+
 
     
     var body: some View {
@@ -26,7 +28,7 @@ struct ForgotPasswordView: View {
             }
             
             VStack {
-                TextField("+216", text: $num_tel)
+                TextField("+216", text: $ViewModel.num_tel)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .onChange(of: num_tel, perform: { newValue in
                         isPhoneNumberValid = isValidPhoneNumber(newValue)
@@ -39,11 +41,15 @@ struct ForgotPasswordView: View {
             }
             
             VStack {
-                NavigationLink( destination: CheckCodeView(), isActive: $navigateToLocation){
+                NavigationLink( destination: CheckCodeView(ViewModel: CheckViewModel()), isActive: $navigateToLocation){
                     
                 }
                 Button("Send") {
-                    // Implement the action to send the password reset request
+                action: do {
+                    ViewModel.send()
+                    //viewModel2.authenticateUserProfile()
+                    navigateToLocation = true
+                }
                 }
                 .font(.title2)
                 .fontWeight(.bold)
@@ -65,7 +71,7 @@ struct ForgotPasswordView: View {
 
 struct ForgotPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPasswordView()
+        ForgotPasswordView(ViewModel: ForgetViewModel())
     }
 }
 

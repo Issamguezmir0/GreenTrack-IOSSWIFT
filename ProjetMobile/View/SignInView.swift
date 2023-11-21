@@ -77,7 +77,7 @@ struct SignInView: View {
                     HStack{
                         Spacer()
 
-                        NavigationLink(destination: ForgotPasswordView()){
+                        NavigationLink(destination: ForgotPasswordView(ViewModel: ForgetViewModel())){
                             Text(" Forgot Password ? ")
                                 .font(.callout)
                                 .foregroundColor(.gray)
