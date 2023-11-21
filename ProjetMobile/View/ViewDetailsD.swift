@@ -22,7 +22,7 @@ struct ViewDetailsD: View {
     @State private var showCommentView = false
     
     @State private var isDetailsExpanded = false
-    
+    @State private var isJoined = false
     
     var event: Event
     
@@ -133,18 +133,19 @@ struct ViewDetailsD: View {
                     
                     
                     HStack {
-                        
                         Button(action: {
-                            self.isDetailsExpanded.toggle()
-                        }){
-                            Text("Join")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(5)
-                        }
-                        .padding(.horizontal)
+                                  isJoined.toggle()
+                                   print(isJoined ? "Joined" : "Not Joined")
+                                }) {
+                                    Text(isJoined ? "Joined" : "Join")
+                                        .frame(maxWidth: .infinity)
+                                                                    .padding()
+                                                                    .background(Color.green)
+                                                                    .foregroundColor(.white)
+                                                                    .cornerRadius(5)
+                                                                .padding(.horizontal)
+                               }
+
                         
                         Button(action: {
                             self.showCommentView = true
@@ -256,16 +257,15 @@ struct ViewDetailsD: View {
         
 //        struct ViewDetailsD_Previews: PreviewProvider {
 //            static var previews: some View {
-//                let sampleFreeEvent = Event(title: "Green Wear", date: "November 30, 2023", location: "123 Main St, Cityville", description: "Join us Join Join us for a networking event to connect with professionals in the industry. ", isFree: true, participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"],details: "Join us Join Join us for a networking event to connect!!!!! with professionals")
-//                let samplePaidEvent = Event(title: "Conference", date: "December 15, 2023", location: "456 Park Ave, Townsville", description: "A conference on the latest industry trends.", isFree: false,participants: ["John Doe", "Jane Smith"], organisateur: ["John Doe"], details: "Join us Join Join us for a networking event to connect with professionals in")
+//                var event: Event
 //
 //                return Group {
-//                    ViewDetailsD(event: sampleFreeEvent)
-//                    ViewDetailsD(event: samplePaidEvent)
+//                    ViewDetailsD(event:Event)
+//
 //                }
 //
 //
 //            }
 //        }
-//
+
  
