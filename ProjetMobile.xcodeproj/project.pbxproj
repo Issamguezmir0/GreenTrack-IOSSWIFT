@@ -10,6 +10,9 @@
 		8606FB2A2B0C0CE900E8E8C1 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8606FB292B0C0CE900E8E8C1 /* AppConfig.swift */; };
 		A8D604862B053D48002AF406 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D604852B053D48002AF406 /* EventViewModel.swift */; };
 		A8D604882B053D79002AF406 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D604872B053D79002AF406 /* Event.swift */; };
+		B822095D2B0D4D81002D6767 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822095C2B0D4D81002D6767 /* PaymentButton.swift */; };
+		B822095F2B0D616B002D6767 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B822095E2B0D616B002D6767 /* CartManager.swift */; };
+		B82209612B0D62DB002D6767 /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82209602B0D62DB002D6767 /* PaymentHandler.swift */; };
 		B8F72B502AFAA57D00388C04 /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F72B4F2AFAA57D00388C04 /* ChallengeView.swift */; };
 		B8F72B522AFAA5FD00388C04 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F72B512AFAA5FD00388C04 /* HomeView.swift */; };
 		B8F72B542AFAAFB400388C04 /* AddChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F72B532AFAAFB400388C04 /* AddChallengeView.swift */; };
@@ -46,6 +49,9 @@
 		8606FB292B0C0CE900E8E8C1 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		A8D604852B053D48002AF406 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		A8D604872B053D79002AF406 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		B822095C2B0D4D81002D6767 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
+		B822095E2B0D616B002D6767 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		B82209602B0D62DB002D6767 /* PaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHandler.swift; sourceTree = "<group>"; };
 		B8F72B4F2AFAA57D00388C04 /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
 		B8F72B512AFAA5FD00388C04 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B8F72B532AFAAFB400388C04 /* AddChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChallengeView.swift; sourceTree = "<group>"; };
@@ -138,6 +144,8 @@
 				DB8A59D72AF962A400D97E35 /* ProjetMobile.entitlements */,
 				DB8A59D02AF962A300D97E35 /* ProjetMobile.xcdatamodeld */,
 				DB8A59D82AF962A400D97E35 /* Preview Content */,
+				B822095E2B0D616B002D6767 /* CartManager.swift */,
+				B82209602B0D62DB002D6767 /* PaymentHandler.swift */,
 				8606FB292B0C0CE900E8E8C1 /* AppConfig.swift */,
 			);
 			path = ProjetMobile;
@@ -176,6 +184,7 @@
 				B8F72B512AFAA5FD00388C04 /* HomeView.swift */,
 				B8F72B532AFAAFB400388C04 /* AddChallengeView.swift */,
 				B8F72B552AFACC0D00388C04 /* ViewDetailsD.swift */,
+				B822095C2B0D4D81002D6767 /* PaymentButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,7 +319,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B822095D2B0D4D81002D6767 /* PaymentButton.swift in Sources */,
+				B822095F2B0D616B002D6767 /* CartManager.swift in Sources */,
 				B8F72B542AFAAFB400388C04 /* AddChallengeView.swift in Sources */,
+				B82209612B0D62DB002D6767 /* PaymentHandler.swift in Sources */,
 				A8D604882B053D79002AF406 /* Event.swift in Sources */,
 				8606FB2A2B0C0CE900E8E8C1 /* AppConfig.swift in Sources */,
 				DB8A59D22AF962A300D97E35 /* ProjetMobile.xcdatamodeld in Sources */,

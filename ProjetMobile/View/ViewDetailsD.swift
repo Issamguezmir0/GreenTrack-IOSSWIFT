@@ -116,10 +116,14 @@ struct ViewDetailsD: View {
                                 .font(.subheadline)
                                 .foregroundColor(.green)
                         } else {
-                            Text("Paid Event : \(event.price )")
+                            Text("Paid Event : \(event.price ) DT")
                                 .font(.subheadline)
                                 .foregroundColor(.red)
+                            PaymentButton(action: {})
+                                                    .padding()
+                                                
                         }
+                        
                     } else {
                         // Handle the case when isFree is nil
                         // You might want to provide a default behavior or display an error message
