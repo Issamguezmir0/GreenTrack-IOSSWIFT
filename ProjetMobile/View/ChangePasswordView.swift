@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct ChangePasswordView: View {
-    @ObservedObject var viewModel : resetPasswordViewModel
+  //  @ObservedObject var viewModel : resetPasswordViewModel
     @State private var verifyNewPassword = ""
     @State private var passwordChangeStatus: PasswordChangeStatus? = nil
+@State private var currentPassword  = ""
+    @State private var newPasswordPassword  = ""
 
     enum PasswordChangeStatus {
         case idle, changing, success, failure
@@ -13,8 +15,8 @@ struct ChangePasswordView: View {
         NavigationView {
             Form {
                 Section(header: Text("Change Password")) {
-                    SecureField("Current Password", text: $viewModel.newPassword)
-                    SecureField("New Password", text: $viewModel.verifyPassword)
+                    SecureField("Current Password", text: $currentPassword)
+                    SecureField("New Password", text: $newPasswordPassword)
                 }
 
                 Section {
@@ -60,6 +62,6 @@ struct ChangePasswordView: View {
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePasswordView(viewModel: resetPasswordViewModel())
+        ChangePasswordView()
     }
 }

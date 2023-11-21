@@ -15,9 +15,13 @@ class LoginViewModel: ObservableObject {
     func login() {
         // Assume you retrieve the token after a successful login
                 let retrievedToken = "your_retrieved_token_value"
+        let retrievedId = "your_retrieved_id_value"
 
                 // Store the token in UserDefaults
                 UserDefaults.standard.set(retrievedToken, forKey: "token")
+        UserDefaults.standard.set(retrievedId, forKey: "id")
+
+
 
                 // Assign the token to the published variable for other view models to observe
                 //token = retrievedToken

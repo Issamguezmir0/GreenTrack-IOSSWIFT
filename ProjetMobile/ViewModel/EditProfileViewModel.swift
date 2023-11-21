@@ -20,7 +20,7 @@ class EditProfileViewModel: ObservableObject {
     
     @Published var isNavigationActive: Bool = false
     func fillUserFromUserDefaults() {
-        guard let userId = UserDefaults.standard.string(forKey: "userId") else {
+        guard let id = UserDefaults.standard.string(forKey: "userId") else {
             return print("Error getting user ID from UserDefaults")
         }
         

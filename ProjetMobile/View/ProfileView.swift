@@ -23,34 +23,31 @@ struct ProfileView: View {
                     .padding()
 
                 HStack {
-                    Text("Fullname :")
-                        .font(.headline)
-                        .padding()
-                    if let userFullname = userFullname {
-                    Text(userFullname)
-                            .font(Font.custom("Nimbus Sans L", size: 20).weight(.bold))
-                    } else {
-                    // Handle the case where the user's full name is nil
-                    Text("test")
-                    }
-                    
-                    
-                    
-                    // Utilisez la valeur directement depuis le viewModel
-                }
+                                    Text("Fullname:")
+                                        .font(.headline)
+                                        .padding()
+
+                                    if let userFullname = viewModel2.fullname {
+                                        Text(userFullname)
+                                            .font(Font.custom("Nimbus Sans L", size: 20).weight(.bold))
+                                    } else {
+                                        Text("Loading...")
+                                            .font(Font.custom("Nimbus Sans L", size: 20).weight(.bold))
+                                            .foregroundColor(.red) // Change color or add loading indicator as needed
+                                    }
+                                }
 
                 HStack {
                     Text("Email :")
                         .font(.headline)
                         .padding()
-                    if let userEmail = userEmail {
-                    Text(userEmail)
-                    .font(Font.custom("Nimbus Sans L", size: 20).weight(.bold))
-            
-             
+                    if let userEmail = viewModel2.email {
+                        Text(userEmail)
+                            .font(Font.custom("Nimbus Sans L", size: 20).weight(.bold))
                     } else {
-                    // Handle the case where the user's full name is nil
-                    Text("test")
+                        Text("Loading...")
+                            .font(Font.custom("Nimbus Sans L", size: 20).weight(.bold))
+                            .foregroundColor(.red) // Change color or add loading indicator as needed
                     }
                     
                     
@@ -82,7 +79,7 @@ struct ProfileView: View {
                     }
 
                     VStack {
-                        NavigationLink(destination: ChangePasswordView(viewModel: resetPasswordViewModel()), isActive: $viewModel2.isNavigationActive) { }
+                        NavigationLink(destination: ChangePasswordView(), isActive: $viewModel2.isNavigationActive) { }
 
                         ProfileButton(imageName: "arrow.counterclockwise.circle.fill", buttonText: "Reset Pass") {
                             viewModel2.isNavigationActive = true
@@ -114,10 +111,10 @@ struct ProfileView: View {
                                    if value {
                                        userFullname = UserDefaults.standard.object(forKey: "userfullname") as? String
                                        userEmail = UserDefaults.standard.object(forKey: "useremail") as? String
-                                       userPhone = UserDefaults.standard.object(forKey: "userphone") as? String
+                                       //userPhone = UserDefaults.standard.object(forKey: "userphone") as? String
 
-                                      // print(userEmail)
-                                      // print(userFullname)
+                                       print(userEmail)
+                                       print(userFullname)
                                        
                                    }
                 

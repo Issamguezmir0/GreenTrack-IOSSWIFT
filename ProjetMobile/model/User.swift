@@ -11,7 +11,7 @@ import CoreData
 
 struct User : Codable{
     
-    var idUser : Int
+    var id : String
     var fullname : String
     var email : String
     var password : String
