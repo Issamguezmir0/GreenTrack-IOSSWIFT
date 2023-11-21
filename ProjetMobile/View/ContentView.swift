@@ -49,22 +49,66 @@ struct ContentView: View {
                     }
                     .padding()
 
-                    Text("Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2")
-                        .padding()
+                    VStack(spacing: -15) {
+                        Text("Énergie:")
+                            .font(.headline)
+                            .foregroundColor(.green)
 
-                    Text("Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
-                        .padding()
+                        Text("\(String(format: "%.2f", energyConsumption)) kg CO2")
+                            .font(.title)
+                            .foregroundColor(.primary)
+                            .padding()
+                            //.background(
+                              //  RoundedRectangle(cornerRadius: 15)
+                                //    .fill(Color.green)
+                                //    .shadow(color: //Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                           // )
+                            
+                    }
 
-                    Text("Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
-                        .padding()
+                    VStack(spacing: -15) {
+                        Text("Transport:")
+                            .font(.headline)
+                            .foregroundColor(.green)
+
+                        Text("\(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
+                            .font(.title)
+                            .foregroundColor(.primary)
+                            .padding()
+                          /*  .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.green)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )*/
+                            
+                    }
+
+                    VStack(spacing: -15) {
+                        Text("Déchets:")
+                            .font(.headline)
+                            .foregroundColor(.green)
+
+                        Text("\(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
+                            .font(.title)
+                            .foregroundColor(.primary)
+                            .padding()
+                          /*  .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.green)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )*/
+                            
+                    }
+
 
                     // Block of text with carbon footprint information
                     Text("L'empreinte carbone mesure la quantité totale de gaz à effet de serre, exprimée en équivalent CO2, émise directement ou indirectement par une activité, un individu, une organisation ou un produit.")
                         .font(.body)
                         .padding(.horizontal, 16)
+                        .padding(.vertical , 40)
                         .foregroundColor(.gray)
 
-                    HStack(spacing: 20) {
+                    HStack(spacing: 40) {
                         NavigationLink(destination: EnergyCalculatorView()) {
                             Image(systemName: "house")
                                 .resizable()
