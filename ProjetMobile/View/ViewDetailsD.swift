@@ -30,12 +30,30 @@ struct ViewDetailsD: View {
        
             ScrollView{
                 VStack(alignment: .leading, spacing: 20) {
-                    Rectangle()
-                        .frame(width: 360, height: 210)
-                        .foregroundColor(.clear)
-                        .background(Image("Rectangle 33"))
-                        .cornerRadius(30)
-                        .offset(x: 0, y: 0)
+                    
+                    if let eventImage = event.image{  AsyncImage(
+                    
+                        url: URL(string: "\(AppConfig.apiUrl)\(eventImage)")) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 360, height: 210)
+                            .cornerRadius(30)
+                            .offset(x: 0, y: 0)
+                    }placeholder: {
+                     
+                        Image("Rectangle 56")
+                                         .resizable()
+                                         .aspectRatio(contentMode: .fill)
+                                         .frame(width: 360, height: 210)
+                                                                 .foregroundColor(.clear)
+                                                                 .background(Image("Rectangle 33"))
+                                                                 .cornerRadius(30)
+                                                                 .offset(x: 0, y: 0)
+                    }
+                       
+                    }
+
                     Text(event.title )
                         .font(.title)
                         .fontWeight(.bold)
@@ -98,7 +116,7 @@ struct ViewDetailsD: View {
                                 .font(.subheadline)
                                 .foregroundColor(.green)
                         } else {
-                            Text("Paid Event")
+                            Text("Paid Event\(event.price )")
                                 .font(.subheadline)
                                 .foregroundColor(.red)
                         }

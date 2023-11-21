@@ -300,13 +300,44 @@ import SwiftUI
 
 struct ChallengeView: View {
     @ObservedObject var eventsViewModel = EventViewModel()
-
+    @State private var randomEventImage: String?
+    
     var body: some View {
+       
         NavigationView {
             ScrollView {
+                VStack {
+                    Image("Rectangle 33") // Replace with your wide image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 200) // Adjust the height as needed
+                        .clipped()
+                    //                    if let randomImage = randomEventImage {
+                    //                                     Image(randomImage) // Replace with your wide image
+                    //                                         .resizable()
+                    //                                         .aspectRatio(contentMode: .fill)
+                    //                                         .frame(height: 200) // Adjust the height as needed
+                    //                                         .clipped()
+                    //                                         .onAppear {
+                    //                                             randomEventImage = eventsViewModel.randomEventImage()
+                    //                                         }
+                    //                                 } else {
+                    //                                     Text("Loading...") // Placeholder while image is loading
+                    //                                 }
+                   
+                        Text("Join us now")
+                            .font(Font.custom("Poppins", size: 20).weight(.semibold))
+                            .foregroundColor(Color.black)
+                            .padding()
+                            .background(Color.white.opacity(0.3)) // Customize the background color if needed
+                            .cornerRadius(8)
+                            .padding(.top, -30) // Adjust the top padding as needed
+                            .padding(.bottom, 20)
+                            .shadow(radius: 3)
+                    }
                 VStack(spacing: 20) {
                     // Add a wide image and a button at the top
-                    WideImageView()
+                    
 
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 30), GridItem(.flexible(), spacing: 30)], spacing: 40) {
                         ForEach(eventsViewModel.events, id: \.id) { event in
@@ -317,34 +348,15 @@ struct ChallengeView: View {
                 .padding()
             }
             .onAppear {
-                // Call the getEvents function when the view appears
+              
                 eventsViewModel.getEvents()
+                //randomEventImage = eventsViewModel.randomEventImage()
             }
-            .navigationBarHidden(true) // Hide the navigation bar
+            .navigationBarHidden(true)
         }
     }
 }
-struct WideImageView: View {
-    var body: some View {
-        VStack {
-            Image("Rectangle 33") // Replace with your wide image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 200) // Adjust the height as needed
-                .clipped()
 
-            Text("Join us!")
-                .font(Font.custom("Poppins", size: 20).weight(.semibold))
-                .foregroundColor(Color.black)
-                .padding()
-                .background(Color.white.opacity(0.3)) // Customize the background color if needed
-                .cornerRadius(8)
-                .padding(.top, -30) // Adjust the top padding as needed
-                .padding(.bottom, 20)
-                .shadow(radius: 3)
-        }
-    }
-}
 
 
 struct ChallengeCard: View {
@@ -363,6 +375,7 @@ struct ChallengeCard: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 80, height: 80)
                         .cornerRadius(12)
+                        .offset(x: 0, y: -27.50)
                         
 
                 } placeholder: {
@@ -399,11 +412,13 @@ struct ChallengeCard: View {
             .cornerRadius(16)
             .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.1), radius: 5)
         }
+        Spacer()
     }
 }
 
 struct ChallengeView_Previews: PreviewProvider {
-    static var previews: some View {
+  
+                static var previews: some View {
         ChallengeView()
     }
 }

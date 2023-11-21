@@ -1,11 +1,5 @@
 import SwiftUI
 
-//extension Image {
-//    func toData() -> Data? {
-//        guard let uiImage = UIImage(named: "yourImageName") else { return nil }
-//              return uiImage.jpegData(compressionQuality: 1.0)
-//    }
-//}
 
 struct AddChallengeView: View {
     @State private var title = ""
@@ -16,9 +10,10 @@ struct AddChallengeView: View {
     @State private var date = Date()
     @State private var selectedImage: UIImage?
     @State private var showImagePicker = false
-    @State private var isFree = true // Initially assuming it's a free event
-    @State private var priceInDinars = ""
+    @State private var isFree = true
+    @State private var price = ""
     @State private var imageUrl :String?
+    
     
     var body: some View {
         NavigationView {
@@ -44,9 +39,9 @@ struct AddChallengeView: View {
                         ImagePicker(selectedImage: $selectedImage,imageUrl:$imageUrl)
                     }
                     
-                    Toggle("Is it a paid event?", isOn: $isFree)
+                    Toggle("Is it a free event?", isOn: $isFree)
                     if !isFree {
-                        TextField("Price in Dinars Tunisian", text: $priceInDinars)
+                        TextField("Price in Dinars Tunisian", text: $price)
                     }
                 }
                 
@@ -65,22 +60,17 @@ struct AddChallengeView: View {
     }
     
     func saveEvent() {
-        // Vérifiez si une image a été sélectionnée
-//        guard let selectedImageData = selectedImage?.toData() else {
-//            print("No image selected")
-//            return
-//        }
+
         
         
-        
-        // Convertissez l'URL de votre API
+       
         guard let apiUrl = URL(string: "\(AppConfig.apiUrl)/challenge/events") else {
             print("Invalid URL")
             return
         }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd" // Ajustez ce format selon le format de date attendu par votre backend
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
         let userData: [String: Any] = [
             "title": title,
@@ -91,7 +81,7 @@ struct AddChallengeView: View {
             "participants": "",
             "organiser": organiser,
             "details": details,
-            "priceInDinars": priceInDinars, // Incluez le prix en dinars s'il ne s'agit pas d'un événement gratuit
+            "price": price,
         ]
         
         do {
