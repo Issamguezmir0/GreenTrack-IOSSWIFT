@@ -116,7 +116,7 @@ struct ViewDetailsD: View {
                                 .font(.subheadline)
                                 .foregroundColor(.green)
                         } else {
-                            Text("Paid Event\(event.price )")
+                            Text("Paid Event : \(event.price )")
                                 .font(.subheadline)
                                 .foregroundColor(.red)
                         }
