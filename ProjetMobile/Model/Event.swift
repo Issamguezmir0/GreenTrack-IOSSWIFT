@@ -2,7 +2,7 @@
 //  Video.swift
 //  projetMobile
 //
-//  Created by Bechir Kefi on 5/11/2023.
+//
 //
 
 import Foundation

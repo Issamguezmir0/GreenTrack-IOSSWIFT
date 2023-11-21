@@ -20,7 +20,7 @@ enum Tab {
 struct ViewDetailsD: View {
     
     @State private var showCommentView = false
-    
+    @State private var participants = [String]()
     @State private var isDetailsExpanded = false
     @State private var isJoined = false
     
@@ -134,10 +134,12 @@ struct ViewDetailsD: View {
                     
                     HStack {
                         Button(action: {
-                                  isJoined.toggle()
-                                   print(isJoined ? "Joined" : "Not Joined")
-                                }) {
-                                    Text(isJoined ? "Joined" : "Join")
+                                   if !isJoined {
+                                       isJoined = true
+                                       participants.append("User \(participants.count + 1)")
+                                   }
+                               }) {
+                                   Text(isJoined ? "Joined" : "Join")
                                         .frame(maxWidth: .infinity)
                                                                     .padding()
                                                                     .background(Color.green)
@@ -145,6 +147,7 @@ struct ViewDetailsD: View {
                                                                     .cornerRadius(5)
                                                                 .padding(.horizontal)
                                }
+                        
 
                         
                         Button(action: {
