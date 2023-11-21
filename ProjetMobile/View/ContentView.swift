@@ -51,6 +51,12 @@ struct ContentView: View {
                 Text("Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
                     .padding()
 
+                // Block of text with carbon footprint information
+                Text("L'empreinte carbone mesure la quantité totale de gaz à effet de serre, exprimée en équivalent CO2, émise directement ou indirectement par une activité, un individu, une organisation ou un produit.")
+                    .font(.body)
+                    .padding(.horizontal, 16)
+                    .foregroundColor(.gray)
+
                 HStack(spacing: 20) {
                     NavigationLink(destination: EnergyCalculatorView()) {
                         Image(systemName: "house")
@@ -152,7 +158,7 @@ struct ContentView: View {
 
                     // Imprimez pour vous assurer que les valeurs sont correctes
                     print("\(type) total: \(total)")
-                    
+
                     self.refreshTotalEmissions()
                 case .failure(let error):
                     print("Error calculating total for \(type): \(error)")
@@ -160,13 +166,12 @@ struct ContentView: View {
                 }
             }
         }
-        
 
         viewModel.calculateTotalForDay { result in
             switch result {
             case .success(let totalForDay):
                 print("Total empreinte for the day: \(totalForDay)")
-               
+
                 viewModel.totalForDay = totalForDay
             case .failure(let error):
                 print("Error calculating total for the day: \(error)")
