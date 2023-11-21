@@ -23,108 +23,118 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Text(formattedDate)
-                    .font(.title)
-                    .padding()
+            ZStack {
+                Color.gray.opacity(0.1).ignoresSafeArea()
+
                 VStack {
-                    Text("Total empreinte")
-                        .font(.headline)
-                        .foregroundColor(Color.green)
-                    Text(String(format: "%.2f kg CO2", totalEmissions))
+                    Text(formattedDate)
                         .font(.title)
-                        .foregroundColor(.white)
                         .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 15)
-                                .fill(Color.green)
-                                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        )
-                        .cornerRadius(15)
+
+                    VStack {
+                        Text("Total empreinte")
+                            .font(.headline)
+                            .foregroundColor(Color.green)
+
+                        Text(String(format: "%.2f kg CO2", totalEmissions))
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.green)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )
+                            .cornerRadius(15)
+                    }
+                    .padding()
+
+                    Text("Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2")
+                        .padding()
+
+                    Text("Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
+                        .padding()
+
+                    Text("Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
+                        .padding()
+
+                    // Block of text with carbon footprint information
+                    Text("L'empreinte carbone mesure la quantité totale de gaz à effet de serre, exprimée en équivalent CO2, émise directement ou indirectement par une activité, un individu, une organisation ou un produit.")
+                        .font(.body)
+                        .padding(.horizontal, 16)
+                        .foregroundColor(.gray)
+
+                    HStack(spacing: 20) {
+                        NavigationLink(destination: EnergyCalculatorView()) {
+                            Image(systemName: "house")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color.green)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                )
+                        }
+
+                        NavigationLink(destination: TransportCalculatorView()) {
+                            Image(systemName: "car")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color.green)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                )
+                        }
+
+                        NavigationLink(destination: WasteCalculatorView()) {
+                            Image(systemName: "trash")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .foregroundColor(Color.green)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                                )
+                        }
+                    }
+
+                    Button(action: {
+                        self.isShareSheetPresented.toggle()
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(Color.green)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.white)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
+                            )
+                    }
+                    .sheet(isPresented: $isShareSheetPresented) {
+                        ShareSheet(activityItems: [shareableContent])
+                    }
+                    .padding()
+
+                    Spacer()
                 }
                 .padding()
-
-                Text("Énergie: \(String(format: "%.2f", energyConsumption)) kg CO2")
-                    .padding()
-                Text("Transport: \(String(format: "%.2f", viewModel.transportEmissions)) kg CO2")
-                    .padding()
-                Text("Déchets: \(String(format: "%.2f", viewModel.wasteEmissions)) kg CO2")
-                    .padding()
-
-                // Block of text with carbon footprint information
-                Text("L'empreinte carbone mesure la quantité totale de gaz à effet de serre, exprimée en équivalent CO2, émise directement ou indirectement par une activité, un individu, une organisation ou un produit.")
-                    .font(.body)
-                    .padding(.horizontal, 16)
-                    .foregroundColor(.gray)
-
-                HStack(spacing: 20) {
-                    NavigationLink(destination: EnergyCalculatorView()) {
-                        Image(systemName: "house")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.green)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.white)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                            )
-                    }
-                    NavigationLink(destination: TransportCalculatorView()) {
-                        Image(systemName: "car")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.green)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.white)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                            )
-                    }
-                    NavigationLink(destination: WasteCalculatorView()) {
-                        Image(systemName: "trash")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(Color.green)
-                            .background(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.white)
-                                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                            )
-                    }
-                }
-
-                Button(action: {
-                    self.isShareSheetPresented.toggle()
-                }) {
-                    Image(systemName: "square.and.arrow.up")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(Color.green)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.white)
-                                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 5)
-                        )
-                }
-                .sheet(isPresented: $isShareSheetPresented) {
-                    ShareSheet(activityItems: [shareableContent])
-                }
-                .padding()
-
-                Spacer()
+                .navigationBarBackButtonHidden(true)
             }
-            .padding()
-            .navigationBarBackButtonHidden(true)
+            .onAppear {
+                // Fetch initial data when the view appears
+                self.refreshData()
+            }
         }
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            // Fetch initial data when the view appears
-            self.refreshData()
-        }
     }
 
     var shareableContent: String {
