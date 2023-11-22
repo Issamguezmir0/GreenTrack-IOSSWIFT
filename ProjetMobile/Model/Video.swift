@@ -28,7 +28,7 @@ struct Videos: Codable {
 
 struct VideoPlayers: Identifiable, Codable {
     var id: String?
-    var title: String
+    var title: String?
     var url: String?
     var likes: Int?
    // var name: String?

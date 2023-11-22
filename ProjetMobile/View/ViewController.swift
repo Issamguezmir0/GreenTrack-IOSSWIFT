@@ -55,6 +55,7 @@ struct ConteView: View {
                             }
                         }
                     }
+                    
                 }
                 .onAppear {
                     fetchVideoNames()
@@ -69,6 +70,9 @@ struct ConteView: View {
             }
             .padding()
             .foregroundColor(.blue)
+            
+            FloatingMenu()
+                .padding()
         }
     }
 

@@ -505,7 +505,7 @@ struct VideoSheetView: View {
 
     init(video: VideoPlayers, player: Binding<AVPlayer?>, showError: Binding<Bool>, onSave: @escaping (String, String, DismissAction) -> Void) {
         self._showError = showError
-        self._title = State(initialValue: video.title)
+        self._title = State(initialValue: video.title!)
         self._url = State(initialValue: video.url!)
         self._player = player
         self.onSave = onSave
