@@ -20,7 +20,7 @@ struct Videos: Codable {
     var videos: [VideoPlayers]
     
     enum CodingKeys: String, CodingKey {
-        case message
+       case message
         case videos
     }
 }
@@ -28,15 +28,18 @@ struct Videos: Codable {
 
 struct VideoPlayers: Identifiable, Codable {
     var id: String?
-    var title: String? // Change to optional String
+    var title: String
     var url: String?
     var likes: Int?
+   // var name: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case url
         case likes
+      //  case name
     }
 }
+
 
