@@ -20,7 +20,7 @@ struct SignInView: View {
             ZStack {
                 VStack(alignment: .leading){
                     VStack{
-                        Text("Hi, Welcome back! 👋")
+                        Text("Hi, Welcome back!👋")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .padding(.bottom, 5)
@@ -73,6 +73,7 @@ struct SignInView: View {
                                 .padding(.top, 5)
                         }
                     }
+                    
 
                     HStack{
                         Spacer()
@@ -84,6 +85,8 @@ struct SignInView: View {
                         }
                         
                     }
+                    Spacer()
+                            .frame(height: 15)
 
                     VStack{
                         

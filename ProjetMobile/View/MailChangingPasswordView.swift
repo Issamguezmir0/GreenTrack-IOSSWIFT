@@ -22,7 +22,7 @@ struct MailChangingPasswordView: View {
                    
 
                        VStack {
-                           SecureField("Please Enter your new Password", text: $ViewModel.num_tel)
+                           TextField("Please Enter your Phone", text: $ViewModel.num_tel)
                                .textFieldStyle(RoundedBorderTextFieldStyle())
                                .onChange(of: password, perform: { newValue in
                                    isPasswordValid = isValidPassword(newValue)
@@ -36,7 +36,7 @@ struct MailChangingPasswordView: View {
                        }
 
                        VStack {
-                           SecureField("Verify your new Password", text: $ViewModel.newPassword)
+                           SecureField("Enter your new Password", text: $ViewModel.newPassword)
                                .textFieldStyle(RoundedBorderTextFieldStyle())
                                .onChange(of: verifyPassword, perform: { newValue in
                                    
@@ -48,7 +48,8 @@ struct MailChangingPasswordView: View {
                                    .foregroundColor(.red)
                            }
                        }
-
+                       Spacer()
+                               .frame(height: 30)
                        VStack {
                            Button("Change password") {
                            action: do {

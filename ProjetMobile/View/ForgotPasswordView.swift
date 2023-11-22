@@ -23,7 +23,6 @@ struct ForgotPasswordView: View {
                 Text("Enter your phone number please ")
                     .font(.title3)
                     .foregroundColor(.green)
-                    .fontWeight(.bold)
                     .frame(alignment: .leading)
             }
             
@@ -39,6 +38,8 @@ struct ForgotPasswordView: View {
                         .foregroundColor(.red)
                 }
             }
+            Spacer()
+                    .frame(height: 30)
             
             VStack {
                 NavigationLink( destination: CheckCodeView(ViewModel: CheckViewModel()), isActive: $navigateToLocation){

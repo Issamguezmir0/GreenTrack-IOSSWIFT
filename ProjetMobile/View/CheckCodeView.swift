@@ -22,7 +22,6 @@ struct CheckCodeView: View {
                 Text("Enter Your Phone Number :")
                     .font(.title3)
                     .foregroundColor(.green)
-                    .fontWeight(.bold)
                     .frame(alignment: .leading)
                     .padding()
                 
@@ -43,7 +42,6 @@ struct CheckCodeView: View {
                 Text("Code sent by SMS :")
                     .font(.title3)
                     .foregroundColor(.green)
-                    .fontWeight(.bold)
                     .frame(alignment: .leading)
                     .padding()
                 

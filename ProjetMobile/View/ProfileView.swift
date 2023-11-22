@@ -11,7 +11,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Image("issam")
+                Image("profil")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 100, height: 100)

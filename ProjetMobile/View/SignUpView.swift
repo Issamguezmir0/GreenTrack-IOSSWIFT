@@ -126,7 +126,8 @@ struct SignUpView: View {
                     NavigationLink(destination: SignInView(ViewModel: LoginViewModel()), isActive: $navigateToLocation) {
                         
                     }
-                    Divider()
+                    Spacer()
+                            .frame(height: 20)
                     Button("Sign Up") {
                        
                     action: do {
@@ -191,9 +192,9 @@ struct SignUpView: View {
                 Spacer()
                 HStack {
                     Text("Already have an account ?")
-                    
+                        .font(.caption)
                     NavigationLink(destination: SignInView(ViewModel: LoginViewModel())){ Text("Login")
-                            .font(.title3)
+                            .font(.caption)
                             .foregroundColor(.green)
                     }
                     
